@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export default async function Home() {
   return (
     <div className='max-w-6xl mx-auto mt-10'>
