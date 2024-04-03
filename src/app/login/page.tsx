@@ -2,7 +2,7 @@ import EmailAuth from '@/components/login/EmailAuth';
 import GoogleAuth from '@/components/login/GoogleAuth';
 
 type TypeParams = {
-  searchParams: { message: string };
+  searchParams: { error: string };
 };
 
 export default function Login({ searchParams }: TypeParams) {
