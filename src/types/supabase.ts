@@ -3,6 +3,41 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      content_creations: {
+        Row: {
+          created_at: string;
+          id: string;
+          results: Json | null;
+          style: string;
+          topic: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          results?: Json | null;
+          style: string;
+          topic: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          results?: Json | null;
+          style?: string;
+          topic?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'content_creations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       users: {
         Row: {
           avatar_url: string | null;
