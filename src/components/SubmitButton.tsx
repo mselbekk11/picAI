@@ -17,7 +17,7 @@ export function SubmitButton({ loaderColor, children, ...props }: Props) {
 
   return (
     <Button {...props} type='submit' aria-disabled={pending}>
-      {!isPending ? <BarLoader height={1} color={loaderColor ?? 'white'} /> : children}
+      {isPending ? <BarLoader height={1} color={loaderColor ?? 'white'} /> : children}
     </Button>
   );
 }
