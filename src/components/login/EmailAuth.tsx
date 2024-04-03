@@ -70,11 +70,9 @@ const EmailAuth: FC<EmailAuthProps> = ({ searchParams }) => {
         />
       </InputWrapper>
 
-      <SubmitButton formAction={signIn} pendingText='Signing In...'>
-        Sign In
-      </SubmitButton>
+      <SubmitButton formAction={signIn}>Sign In</SubmitButton>
       <SeparatorOr />
-      <SubmitButton formAction={signUp} variant='outline' pendingText='Signing Up...'>
+      <SubmitButton formAction={signUp} variant='outline' loaderColor='black'>
         Sign Up
       </SubmitButton>
       {searchParams?.error && (

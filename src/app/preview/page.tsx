@@ -70,9 +70,7 @@ export default async function Home({ searchParams }: TypesParams) {
           <Input id='style' name='style' placeholder='Educational, Facts, Opportunities' />
         </InputWrapper>
 
-        <SubmitButton formAction={createContentFn} pendingText='Generating...'>
-          Generate
-        </SubmitButton>
+        <SubmitButton formAction={createContentFn}>Generate</SubmitButton>
 
         {searchParams?.error && (
           <p className='mt-4 py-2.5 bg-foreground/10 rounded text-xs text-red-700 text-center'>
