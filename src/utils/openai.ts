@@ -1,31 +1,25 @@
 import OpenAI from 'openai';
 
-async function openaiCreateContent(topic: string, style: string) {
+async function openaiGenerateImage(imageDescription: string) {
   const openai = new OpenAI();
 
-  const prompt = `
-  Generate 5 social media contents on the topic: ${topic}.
-  Make sure the style of the content is around ${style}.
+  const prompt = `I want you to generate an image for the given Image Description: ${imageDescription}`;
 
-  The content should be at least 500 characters in length.
-  Please format the result as JSON, following this example:
-  {outputs: [{"title": "TITLE", "content": "CONTENT"}]}`;
+  console.log('Generating image...');
 
-  console.log('Generating contents...');
-
-  const response = await openai.chat.completions.create({
-    messages: [{ role: 'user', content: prompt }],
-    model: 'gpt-4-0125-preview',
-    max_tokens: 1000,
-    temperature: 0.9,
-    response_format: {
-      type: 'json_object',
-    },
+  const response = await openai.images.generate({
+    prompt,
+    model: 'dall-e-3',
+    quality: 'hd',
+    size: '1024x1024',
+    style: 'vivid',
+    response_format: 'url',
   });
 
-  const results = response.choices[0].message.content;
+  // const results = response.data[0].b64_json;
+  const imageUrl = response.data[0].url;
 
-  return JSON.parse(results!);
+  return imageUrl;
 }
 
-export default openaiCreateContent;
+export default openaiGenerateImage;

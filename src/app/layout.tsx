@@ -9,18 +9,18 @@ const font = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   metadataBase: new URL('https://aiboilerplate.com'),
   title: 'AI Boilerplate',
-  description: 'Boilerplate for AI Content Writer',
+  description: 'Boilerplate for AI Image Generation',
   openGraph: {
     type: 'website',
     title: 'AI Boilerplate',
-    description: 'Boilerplate for AI Content Writer',
+    description: 'Boilerplate for AI Image Generation',
     images: '/og-image.png',
     url: 'https://aiboilerplate.com',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'AI Boilerplate',
-    description: 'Boilerplate for AI Content Writer',
+    description: 'Boilerplate for AI Image Generation',
     images: '/og-image.png',
   },
 };

@@ -38,6 +38,38 @@ export type Database = {
           },
         ];
       };
+      image_generations: {
+        Row: {
+          created_at: string;
+          id: string;
+          image_description: string;
+          image_url: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          image_description: string;
+          image_url: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          image_description?: string;
+          image_url?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'image_generations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       users: {
         Row: {
           avatar_url: string | null;
@@ -65,6 +97,38 @@ export type Database = {
             foreignKeyName: 'users_id_fkey';
             columns: ['id'];
             isOneToOne: true;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      voice_transcriptions: {
+        Row: {
+          created_at: string;
+          id: string;
+          summary: string;
+          transcription: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          summary: string;
+          transcription: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          summary?: string;
+          transcription?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'voice_transcriptions_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
             referencedRelation: 'users';
             referencedColumns: ['id'];
           },
