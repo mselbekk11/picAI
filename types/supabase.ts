@@ -41,23 +41,44 @@ export type Database = {
       image_generations: {
         Row: {
           created_at: string;
+          error: string | null;
+          guidance: string;
           id: string;
-          image_description: string;
-          image_url: string;
+          image_urls: string[] | null;
+          inference: string;
+          model: string;
+          negative_prompt: string | null;
+          no_of_outputs: string;
+          prediction_id: string;
+          prompt: string;
           user_id: string;
         };
         Insert: {
           created_at?: string;
+          error?: string | null;
+          guidance: string;
           id?: string;
-          image_description: string;
-          image_url: string;
+          image_urls?: string[] | null;
+          inference: string;
+          model: string;
+          negative_prompt?: string | null;
+          no_of_outputs: string;
+          prediction_id: string;
+          prompt: string;
           user_id: string;
         };
         Update: {
           created_at?: string;
+          error?: string | null;
+          guidance?: string;
           id?: string;
-          image_description?: string;
-          image_url?: string;
+          image_urls?: string[] | null;
+          inference?: string;
+          model?: string;
+          negative_prompt?: string | null;
+          no_of_outputs?: string;
+          prediction_id?: string;
+          prompt?: string;
           user_id?: string;
         };
         Relationships: [
@@ -127,6 +148,41 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: 'voice_transcriptions_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      youtube_chats: {
+        Row: {
+          chat: Json | null;
+          created_at: string;
+          id: string;
+          transcription: Json;
+          url: string;
+          user_id: string;
+        };
+        Insert: {
+          chat?: Json | null;
+          created_at?: string;
+          id?: string;
+          transcription: Json;
+          url: string;
+          user_id: string;
+        };
+        Update: {
+          chat?: Json | null;
+          created_at?: string;
+          id?: string;
+          transcription?: Json;
+          url?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'youtube_chats_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';

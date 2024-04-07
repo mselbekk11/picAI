@@ -1,11 +1,12 @@
 import InputWrapper from '@/components/InputWrapper';
 import { SubmitButton } from '@/components/SubmitButton';
 import { Input } from '@/components/ui/input';
-import openaiGenerateImage from '@/utils/openai';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
-import { revalidatePath } from 'next/cache';
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { imageModels } from './models';
+import { startGeneration } from '@/utils/replicate';
 
 type TypesParams = {
   searchParams: { error: string };
@@ -25,9 +26,14 @@ export default async function Home({ searchParams }: TypesParams) {
   const generateImageFn = async (formData: FormData) => {
     'use server';
 
-    const imageDescription = formData.get('image-description') as string;
+    const model = formData.get('model') as string;
+    const prompt = formData.get('prompt') as string;
+    const negativePrompt = formData.get('neg-prompt') as string;
+    const noOfOutputs = formData.get('no-of-outputs') as string;
+    const guidance = formData.get('guidance') as string;
+    const inference = formData.get('inference') as string;
 
-    if (!imageDescription) {
+    if (!prompt) {
       return redirect(`/preview?error=Please enter Image Description.`);
     }
 
@@ -38,20 +44,34 @@ export default async function Home({ searchParams }: TypesParams) {
       return redirect(`/preview?error=Please login to Generate Image.`);
     }
 
+    const formattedNoOfOutputs = Number(noOfOutputs) ?? 1;
+    const formattedGuidance = Number(guidance) ?? 7.5;
+    const formattedInference = Number(inference) ?? 50;
+
     try {
-      const imageResponse = await openaiGenerateImage(imageDescription);
+      const predictionId = await startGeneration({
+        modelVersion: model,
+        prompt,
+        negativePrompt,
+        guidance: formattedNoOfOutputs,
+        inference: formattedGuidance,
+        noOfOutputs: formattedInference,
+      });
 
       const { error } = await supabase.from('image_generations').insert({
         user_id: user.id,
-        image_description: imageDescription,
-        image_url: imageResponse!,
+        model,
+        prompt,
+        negative_prompt: negativePrompt,
+        no_of_outputs: formattedNoOfOutputs.toString(),
+        guidance: formattedGuidance.toString(),
+        inference: formattedInference.toString(),
+        prediction_id: predictionId,
       });
 
       if (error) {
         throw new Error(error.message);
       }
-
-      revalidatePath('/preview');
     } catch (error) {
       console.error(`${error}`);
       return redirect(`/preview?error=${error}`);
@@ -63,13 +83,38 @@ export default async function Home({ searchParams }: TypesParams) {
       <h1 className='text-2xl font-medium text-center mb-14'>AI Image Generation</h1>
 
       <form className='animate-in flex flex-col w-2/5 mx-auto justify-center gap-2 text-foreground'>
-        <InputWrapper id='image-description' label='Image Description' className='mb-4'>
-          <Input
-            id='image-description'
-            name='image-description'
-            placeholder='An image of a lion in anime style standing on top of a huge rock as a king.'
-          />
+        <InputWrapper label='Select Model' className='mb-4'>
+          <Select name='model' defaultValue={imageModels[0].value}>
+            <SelectTrigger className='w-full'>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {imageModels.map((model) => (
+                <SelectItem key={model.value} value={model.value}>
+                  {model.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </InputWrapper>
+        <InputWrapper id='prompt' label='Prompt' className='mb-4'>
+          <Input id='prompt' name='prompt' placeholder='Image Prompt' />
+        </InputWrapper>
+        <InputWrapper id='neg-prompt' label='Negative Prompt' className='mb-4'>
+          <Input id='neg-prompt' name='neg-prompt' placeholder='Negative Prompt' />
+        </InputWrapper>
+
+        <div className='flex gap-2 mb-6'>
+          <InputWrapper id='no-of-outputs' label='Number of Outputs' description='(min: 1, max: 4)'>
+            <Input min={1} max={4} id='no-of-outputs' name='no-of-outputs' defaultValue={1} />
+          </InputWrapper>
+          <InputWrapper id='guidance' label='Guidance' description='(min: 1, max: 50)'>
+            <Input min={1} max={50} id='guidance' name='guidance' defaultValue={10} />
+          </InputWrapper>
+          <InputWrapper id='inference' label='Inference' description='(min: 1, max: 500)'>
+            <Input min={1} max={500} id='inference' name='inference' defaultValue={50} />
+          </InputWrapper>
+        </div>
 
         <SubmitButton formAction={generateImageFn}>Generate</SubmitButton>
 
@@ -81,18 +126,21 @@ export default async function Home({ searchParams }: TypesParams) {
       </form>
 
       <div className='w-3/4 mx-auto grid md:grid-cols-2 gap-3 my-12'>
-        {data?.map((item) => (
-          <Image
-            key={item.id}
-            src={item.image_url}
-            alt=''
-            width={512}
-            height={512}
-            className='border rounded-md'
-            placeholder='blur'
-            blurDataURL={blurImageDataUrl}
-          />
-        ))}
+        {data?.map(
+          (item) =>
+            item.image_urls && (
+              <Image
+                key={item.id}
+                src={item.image_urls[0]}
+                alt=''
+                width={512}
+                height={512}
+                className='border rounded-md'
+                placeholder='blur'
+                blurDataURL={blurImageDataUrl}
+              />
+            )
+        )}
       </div>
     </div>
   );

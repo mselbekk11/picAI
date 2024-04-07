@@ -37,9 +37,9 @@ const InputWrapper: FC<InputWrapperProps> = ({
             {infoPopover && <div className='ml-auto h-4'>{infoPopover}</div>}
           </div>
         </label>
-        {description && <div className='text-xs font-light text-gray-500'>{description}</div>}
       </div>
       {children}
+      {description && <div className='text-xs font-light text-gray-500 mt-1'>{description}</div>}
       {error && (
         <div className='text-xs mt-1 text-red-500 flex items-center gap-1.5'>
           <MdErrorOutline />
