@@ -1,5 +1,4 @@
 import { supabaseAdmin } from '@/utils/supabase/admin';
-import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request): Promise<NextResponse> {
@@ -16,8 +15,6 @@ export async function POST(req: Request): Promise<NextResponse> {
     }
 
     await supabaseAdmin.from('image_generations').update(updateData).eq('prediction_id', prediction.id);
-
-    revalidatePath('/preview');
 
     return NextResponse.json({ message: 'Webhook Received.' }, { status: 200 });
   } catch (err: any) {

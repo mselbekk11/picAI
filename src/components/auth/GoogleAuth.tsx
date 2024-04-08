@@ -20,7 +20,10 @@ export default function GoogleAuth() {
           variables: {
             default: {
               colors: {
-                defaultButtonText: 'black',
+                defaultButtonText: 'white',
+                defaultButtonBackground: '#FFFFFF2B',
+                defaultButtonBackgroundHover: '#FFFFFF30',
+                defaultButtonBorder: '#FFFFFF2B',
               },
               radii: {
                 borderRadiusButton: '6px',

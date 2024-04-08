@@ -2,25 +2,25 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
-import Navbar from '@/components/Navbar';
+import { Toaster } from '@/components/ui/toaster';
 
 const font = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://aiboilerplate.com'),
   title: 'AI Boilerplate',
-  description: 'Boilerplate for AI Image Generation',
+  description: 'Boilerplate for AI Content Writer',
   openGraph: {
     type: 'website',
     title: 'AI Boilerplate',
-    description: 'Boilerplate for AI Image Generation',
+    description: 'Boilerplate for AI Content Writer',
     images: '/og-image.png',
     url: 'https://aiboilerplate.com',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'AI Boilerplate',
-    description: 'Boilerplate for AI Image Generation',
+    description: 'Boilerplate for AI Content Writer',
     images: '/og-image.png',
   },
 };
@@ -46,10 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <html lang='en'>
         <body className={font.className}>
-          <main>
-            <Navbar />
-            <div className='max-w-6xl mx-auto mt-10'>{children}</div>
-          </main>
+          <main>{children}</main>
+          <Toaster />
         </body>
       </html>
     </>
