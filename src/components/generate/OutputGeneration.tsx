@@ -22,14 +22,14 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ data, isPending, generati
 
   return (
     <div className='w-full md:w-1/2 ml-0 md:ml-10'>
-      <Tabs defaultValue='output' value={currentTab} className='w-full md:h-[550px]'>
+      <Tabs defaultValue='output' value={currentTab} className='w-full h-[550px]'>
         <div className='flex justify-center mb-6'>
           <TabsList className='rounded-full p-1'>
             <TabsTrigger onClick={() => setCurrentTab('output')} className='rounded-full' value='output'>
               Output
             </TabsTrigger>
             <TabsTrigger onClick={() => setCurrentTab('history')} className='rounded-full' value='history'>
-              All Images
+              Images
             </TabsTrigger>
           </TabsList>
         </div>
