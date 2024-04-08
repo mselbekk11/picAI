@@ -11,6 +11,7 @@ import { toast } from '../ui/use-toast';
 import { generateImageFn } from '@/app/(main)/generate/actions';
 import { imageModels } from '@/app/(main)/generate/models';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
+import { useRouter } from 'next/navigation';
 
 type FormInputProps = {
   data: TypeImageGeneration[];
@@ -37,10 +38,12 @@ const initialData: FormFields = {
 const FormInput: FC<FormInputProps> = ({ data }) => {
   const supabase = supabaseBrowserClient();
 
-  const [isPending, isIsPending] = useState<boolean>(false);
+  const [isPending, setIsPending] = useState<boolean>(false);
   const [predictionId, setPredictionId] = useState<string>();
   const [generation, setGeneration] = React.useState<TypeImageGeneration>();
   const [formData, setFormData] = useState<FormFields>(initialData);
+
+  const router = useRouter();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,12 +54,12 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
   };
 
   const handleGeneration = async (data: FormData) => {
-    isIsPending(true);
+    setIsPending(true);
 
     const response = await generateImageFn(data);
     if (typeof response == 'string') {
       toast({ description: response, variant: 'destructive' });
-      isIsPending(false);
+      setIsPending(false);
     } else {
       setPredictionId(response.id);
     }
@@ -75,7 +78,8 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
         async (payload) => {
           if (payload.new.prediction_id === predictionId && payload.new.image_urls) {
             setGeneration(payload.new as TypeImageGeneration);
-            isIsPending(false);
+            setIsPending(false);
+            router.refresh();
           }
         }
       )
@@ -85,7 +89,7 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
       await supabase.removeChannel(channel);
     };
     return () => {};
-  }, [predictionId, supabase]);
+  }, [predictionId, supabase, router]);
 
   return (
     <div className='p-5 xl:p-0 h-auto md:h-auto '>
