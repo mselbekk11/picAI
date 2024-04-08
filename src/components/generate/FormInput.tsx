@@ -51,13 +51,14 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
   };
 
   const handleGeneration = async (data: FormData) => {
-    try {
-      isIsPending(true);
-      const id = await generateImageFn(data);
-      setPredictionId(id);
-    } catch (error) {
-      toast({ description: (error as Error).toString(), variant: 'destructive' });
+    isIsPending(true);
+
+    const response = await generateImageFn(data);
+    if (typeof response == 'string') {
+      toast({ description: response, variant: 'destructive' });
       isIsPending(false);
+    } else {
+      setPredictionId(response);
     }
   };
 

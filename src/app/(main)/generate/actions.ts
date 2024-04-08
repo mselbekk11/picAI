@@ -9,7 +9,7 @@ export async function generateImageFn(formData: FormData) {
 
   try {
     if (user == null) {
-      throw new Error('Please login to Generate Images.');
+      throw 'Please login to Generate Images.';
     }
 
     const model = formData.get('model') as string;
@@ -20,7 +20,7 @@ export async function generateImageFn(formData: FormData) {
     const inference = formData.get('inference') as string;
 
     if (!prompt) {
-      throw new Error('Please enter prompt for the image.');
+      throw 'Please enter prompt for the image.';
     }
 
     const formattedNoOfOutputs = Number(noOfOutputs) ?? 1;
@@ -48,11 +48,11 @@ export async function generateImageFn(formData: FormData) {
     });
 
     if (error) {
-      throw new Error(error.message);
+      throw error.message;
     }
 
     return predictionId;
   } catch (error) {
-    throw new Error(`${error}`);
+    return `${error}`;
   }
 }
