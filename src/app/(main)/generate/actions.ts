@@ -51,7 +51,7 @@ export async function generateImageFn(formData: FormData) {
       throw error.message;
     }
 
-    return predictionId;
+    return { id: predictionId };
   } catch (error) {
     return `${error}`;
   }
