@@ -11,7 +11,8 @@ export async function POST(req: Request): Promise<NextResponse> {
     if (prediction.status === 'failed') {
       updateData = { error: prediction.error };
     } else {
-      updateData = { image_urls: prediction.output };
+      const result = typeof prediction.output === 'string' ? [prediction.output] : prediction.output;
+      updateData = { image_urls: result };
     }
 
     await supabaseAdmin.from('image_generations').update(updateData).eq('prediction_id', prediction.id);
