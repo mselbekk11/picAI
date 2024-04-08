@@ -58,7 +58,7 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
       toast({ description: response, variant: 'destructive' });
       isIsPending(false);
     } else {
-      setPredictionId(response);
+      setPredictionId(response.id);
     }
   };
 
