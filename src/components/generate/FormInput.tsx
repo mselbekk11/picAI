@@ -16,17 +16,44 @@ type FormInputProps = {
   data: TypeImageGeneration[];
 };
 
+type FormFields = {
+  model: string;
+  prompt: string;
+  'neg-prompt': string;
+  'no-of-outputs': string;
+  guidance: string;
+  inference: string;
+};
+
+const initialData: FormFields = {
+  model: imageModels[0].value,
+  prompt: '',
+  'neg-prompt': '',
+  'no-of-outputs': '1',
+  guidance: '10',
+  inference: '50',
+};
+
 const FormInput: FC<FormInputProps> = ({ data }) => {
   const supabase = supabaseBrowserClient();
 
   const [isPending, isIsPending] = useState<boolean>(false);
   const [predictionId, setPredictionId] = useState<string>();
   const [generation, setGeneration] = React.useState<TypeImageGeneration>();
+  const [formData, setFormData] = useState<FormFields>(initialData);
 
-  const handleGeneration = async (formData: FormData) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleGeneration = async (data: FormData) => {
     try {
       isIsPending(true);
-      const id = await generateImageFn(formData);
+      const id = await generateImageFn(data);
       setPredictionId(id);
     } catch (error) {
       toast({ description: (error as Error).toString(), variant: 'destructive' });
@@ -70,7 +97,10 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
           <form className='md:h-[545px] flex flex-col justify-between'>
             <div className='flex flex-col gap-6 mb-5'>
               <InputWrapper label='Select Model'>
-                <Select name='model' defaultValue={generation?.model ?? imageModels[0].value}>
+                <Select
+                  name='model'
+                  value={formData.model}
+                  onValueChange={(value) => setFormData({ ...formData, model: value })}>
                   <SelectTrigger className='w-full'>
                     <SelectValue />
                   </SelectTrigger>
@@ -90,7 +120,8 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
                   name='prompt'
                   placeholder='Image Prompt'
                   autoFocus
-                  defaultValue={generation?.prompt ?? ''}
+                  value={formData.prompt}
+                  onChange={handleInputChange}
                 />
               </InputWrapper>
 
@@ -99,36 +130,43 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
                   id='neg-prompt'
                   name='neg-prompt'
                   placeholder='Negative Prompt'
-                  defaultValue={generation?.negative_prompt ?? ''}
+                  value={formData['neg-prompt']}
+                  onChange={handleInputChange}
                 />
               </InputWrapper>
 
               <div className='flex flex-col md:flex-row gap-6 md:gap-2'>
                 <InputWrapper id='no-of-outputs' label='Number of Outputs' description='(min: 1, max: 4)'>
                   <Input
+                    type='number'
                     min={1}
                     max={4}
                     id='no-of-outputs'
                     name='no-of-outputs'
-                    defaultValue={generation?.no_of_outputs ?? 1}
+                    value={formData['no-of-outputs']}
+                    onChange={handleInputChange}
                   />
                 </InputWrapper>
                 <InputWrapper id='guidance' label='Guidance' description='(min: 1, max: 50)'>
                   <Input
+                    type='number'
                     min={1}
                     max={50}
                     id='guidance'
                     name='guidance'
-                    defaultValue={generation?.guidance ?? 10}
+                    value={formData.guidance}
+                    onChange={handleInputChange}
                   />
                 </InputWrapper>
                 <InputWrapper id='inference' label='Inference' description='(min: 1, max: 500)'>
                   <Input
+                    type='number'
                     min={1}
                     max={500}
                     id='inference'
                     name='inference'
-                    defaultValue={generation?.inference ?? 50}
+                    value={formData.inference}
+                    onChange={handleInputChange}
                   />
                 </InputWrapper>
               </div>
@@ -144,7 +182,17 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
           data={data}
           isPending={isPending}
           generation={generation}
-          onSelectItem={(value) => setGeneration(value)}
+          onSelectItem={(value) => {
+            setGeneration(value);
+            setFormData({
+              model: value.model,
+              prompt: value.prompt,
+              'neg-prompt': value.negative_prompt ?? '',
+              'no-of-outputs': value.no_of_outputs,
+              guidance: value.guidance,
+              inference: value.inference,
+            });
+          }}
         />
       </div>
     </div>
