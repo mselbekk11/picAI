@@ -10,17 +10,6 @@ export async function startGeneration(inputs: TypeGenerationInput): Promise<stri
 
   const origin = headers().get('origin');
 
-  console.log({
-    width: 1024,
-    height: 1024,
-    prompt,
-    negative_prompt: negativePrompt ?? '',
-    guidance_scale: guidance ?? 7.5,
-    num_inference_steps: inference ?? 50,
-    num_outputs: noOfOutputs ?? 1,
-    apply_watermark: false,
-  });
-
   const prediction = await replicate.predictions.create({
     version: modelVersion,
     input: {
