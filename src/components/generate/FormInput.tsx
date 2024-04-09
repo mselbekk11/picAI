@@ -7,7 +7,7 @@ import { Input } from '../ui/input';
 import OutputGeneration from './OutputGeneration';
 import { TypeQrCodeGeneration } from '../../../types/utils';
 import { toast } from '../ui/use-toast';
-import { generateQrCodeFn } from '@/app/(main)/generate/actions';
+import { generateQrCodeFn } from '@/app/generate/actions';
 import { useRouter } from 'next/navigation';
 import { Textarea } from '../ui/textarea';
 import { Button } from '../ui/button';

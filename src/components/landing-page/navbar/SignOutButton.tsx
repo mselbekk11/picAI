@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 
