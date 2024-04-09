@@ -91,6 +91,44 @@ export type Database = {
           },
         ];
       };
+      qr_code_generations: {
+        Row: {
+          created_at: string;
+          error: string | null;
+          id: string;
+          image_url: string | null;
+          prompt: string;
+          url: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          error?: string | null;
+          id?: string;
+          image_url?: string | null;
+          prompt: string;
+          url: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          error?: string | null;
+          id?: string;
+          image_url?: string | null;
+          prompt?: string;
+          url?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'qr_code_generations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       users: {
         Row: {
           avatar_url: string | null;

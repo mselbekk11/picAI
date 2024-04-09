@@ -1,3 +1,3 @@
 import { Database } from './supabase';
 
-export type TypeImageGeneration = Database['public']['Tables']['image_generations']['Row'];
+export type TypeQrCodeGeneration = Database['public']['Tables']['qr_code_generations']['Row'];

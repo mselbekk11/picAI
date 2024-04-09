@@ -2,22 +2,20 @@
 
 import React, { FC } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { TypeImageGeneration } from '../../../types/utils';
+import { TypeQrCodeGeneration } from '../../../types/utils';
 import Image from 'next/image';
-import { LuLoader } from 'react-icons/lu';
 import { cn } from '@/utils/utils';
 
 type OutputGenerationProps = {
-  data: TypeImageGeneration[];
-  isPending: boolean;
-  generation?: TypeImageGeneration;
-  onSelectItem: (value: TypeImageGeneration) => void;
+  data: TypeQrCodeGeneration[];
+  generation?: TypeQrCodeGeneration;
+  onSelectItem: (value: TypeQrCodeGeneration) => void;
 };
 
 const blurImageDataUrl =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEXSURBVHgBVZDPSsNAEMa//dP8WVOheFToJejBKh7E4hMIXn0FwcfwrQSvPoFevFQUIdrE0NBTXRPTcbJrxc4yLHzz229nRtzd3lCy2YdJ+og5oyiG1hpSKwhICAEXWrGgdYBeEPLdg1TKp5AOEL8kaxqqc+Ci4tr8PcP11SUuzs/+IO/YAdq70HeLx4d7JIMBtmyNpq4RhKEHheQ+GArDCDGL6f4I6egQL08TlHmO7eHQg0RLgLgHfmCbBvOiwPQtg+2K/NMqZFM3WLYtiAgbxiCvKuzs7kGsBmETZ0RuIp6CtS+7wPHJGCaKYGLTkcz4o4/Gp8wIB05fn5FNuLfyA0VZIl0cwNpPtzZRzWYknDthPVj5J/0AA1VXn/cQBtkAAAAASUVORK5CYII=';
 
-const OutputGeneration: FC<OutputGenerationProps> = ({ data, isPending, generation, onSelectItem }) => {
+const OutputGeneration: FC<OutputGenerationProps> = ({ data, generation, onSelectItem }) => {
   const [currentTab, setCurrentTab] = React.useState('output');
 
   return (
@@ -29,34 +27,25 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ data, isPending, generati
               Output
             </TabsTrigger>
             <TabsTrigger onClick={() => setCurrentTab('history')} className='rounded-full' value='history'>
-              Images
+              QR Codes
             </TabsTrigger>
           </TabsList>
         </div>
 
         <TabsContent value='output' className='h-full bg-[#9f9f9f]/5'>
-          <div
-            className={cn(
-              'h-full grid md:justify-between gap-2 border border-black/5 rounded-lg px-5 py-4 overflow-auto',
-              !isPending ? 'md:grid-cols-2' : 'grid-cols-1'
-            )}>
-            {isPending ? (
-              <LuLoader className='animate-[spin_3s_linear_infinite] m-auto' size={24} />
-            ) : generation ? (
-              generation.image_urls?.map((url, index) => (
-                <Image
-                  key={index}
-                  src={url}
-                  alt=''
-                  width={250}
-                  height={250}
-                  className='border rounded-md mx-auto'
-                  placeholder='blur'
-                  blurDataURL={blurImageDataUrl}
-                />
-              ))
+          <div className={cn('h-full border border-black/5 rounded-lg px-5 py-4 overflow-auto')}>
+            {generation ? (
+              <Image
+                src={generation.image_url!}
+                alt=''
+                width={512}
+                height={512}
+                className='border rounded-md mx-auto'
+                placeholder='blur'
+                blurDataURL={blurImageDataUrl}
+              />
             ) : (
-              <p className='text-sm text-[#B9B9B9]'>See the generated image here...</p>
+              <p className='text-sm text-[#B9B9B9]'>See the generated QR codes here...</p>
             )}
           </div>
         </TabsContent>
@@ -81,7 +70,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ data, isPending, generati
                 </div>
               ))
             ) : (
-              <p className='text-sm text-[#B9B9B9]'>No generation found.</p>
+              <p className='text-sm text-[#B9B9B9]'>No QR Code found.</p>
             )}
           </div>
         </TabsContent>

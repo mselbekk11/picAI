@@ -5,10 +5,10 @@ export default async function Home() {
   const supabase = supabaseServerClient();
 
   const { data } = await supabase
-    .from('image_generations')
+    .from('qr_code_generations')
     .select()
     .order('created_at', { ascending: false })
-    .not('image_urls', 'is', null);
+    .not('image_url', 'is', null);
 
   return (
     <div className='max-w-6xl mx-auto pt-14'>

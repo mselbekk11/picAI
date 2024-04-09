@@ -1,41 +1,28 @@
 import Replicate from 'replicate';
-import { headers } from 'next/headers';
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
-export async function startGeneration(inputs: TypeGenerationInput): Promise<string> {
-  const { modelVersion, prompt, negativePrompt, guidance, inference, noOfOutputs } = inputs;
+export async function startGeneration(url: string, prompt: string): Promise<string> {
+  const output = await replicate.run(
+    'zylim0702/qr_code_controlnet:628e604e13cf63d8ec58bd4d238474e8986b054bc5e1326e50995fdbc851c557',
+    {
+      input: {
+        url,
+        prompt,
+        qr_conditioning_scale: 2,
+        num_inference_steps: 30,
+        guidance_scale: 5,
+        negative_prompt:
+          'Longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, blurry',
+      },
+    }
+  );
 
-  const origin = headers().get('origin');
+  if (!output) {
+    throw new Error('Failed to generate QR code');
+  }
 
-  const prediction = await replicate.predictions.create({
-    version: modelVersion,
-    input: {
-      width: 1024,
-      height: 1024,
-      prompt,
-      negative_prompt: negativePrompt ?? '',
-      guidance_scale: guidance ?? 7.5,
-      num_inference_steps: inference ?? 50,
-      num_outputs: noOfOutputs ?? 1,
-      apply_watermark: false,
-    },
-    webhook: `${origin}/webhooks/replicate`,
-    webhook_events_filter: ['completed'],
-  });
-
-  console.log(`Generation started with Prediction Id: ${prediction.id}`);
-
-  return prediction.id;
+  return (output as string[])[0];
 }
-
-export type TypeGenerationInput = {
-  modelVersion: string;
-  prompt: string;
-  negativePrompt: string;
-  guidance?: number;
-  inference?: number;
-  noOfOutputs?: number;
-};

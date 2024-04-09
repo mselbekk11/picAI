@@ -3,55 +3,44 @@
 import { startGeneration } from '@/utils/replicate';
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
 
-export async function generateImageFn(formData: FormData) {
+export async function generateQrCodeFn(formData: FormData) {
   const supabase = supabaseServerClient();
   const user = await getUserDetails();
 
   try {
     if (user == null) {
-      throw 'Please login to Generate Images.';
+      throw 'Please login to Generate Qr Code.';
     }
 
-    const model = formData.get('model') as string;
+    const url = formData.get('url') as string;
     const prompt = formData.get('prompt') as string;
-    const negativePrompt = formData.get('neg-prompt') as string;
-    const noOfOutputs = formData.get('no-of-outputs') as string;
-    const guidance = formData.get('guidance') as string;
-    const inference = formData.get('inference') as string;
 
-    if (!prompt) {
-      throw 'Please enter prompt for the image.';
+    if (!prompt || !url) {
+      throw 'Missing required fields.';
     }
 
-    const formattedNoOfOutputs = Number(noOfOutputs) ?? 1;
-    const formattedGuidance = Number(guidance) ?? 7.5;
-    const formattedInference = Number(inference) ?? 50;
+    // const startTime = performance.now();
+    const imageUrl = await startGeneration(url, prompt);
+    // const endTime = performance.now();
+    // const durationMS = endTime - startTime;
+    // console.log(durationMS);
 
-    const predictionId = await startGeneration({
-      modelVersion: model,
-      prompt,
-      negativePrompt,
-      noOfOutputs: formattedNoOfOutputs,
-      guidance: formattedGuidance,
-      inference: formattedInference,
-    });
-
-    const { error } = await supabase.from('image_generations').insert({
-      user_id: user.id,
-      model,
-      prompt,
-      negative_prompt: negativePrompt,
-      no_of_outputs: formattedNoOfOutputs.toString(),
-      guidance: formattedGuidance.toString(),
-      inference: formattedInference.toString(),
-      prediction_id: predictionId,
-    });
+    const { data, error } = await supabase
+      .from('qr_code_generations')
+      .insert({
+        user_id: user.id,
+        url,
+        prompt,
+        image_url: imageUrl,
+      })
+      .select()
+      .single();
 
     if (error) {
       throw error.message;
     }
 
-    return { id: predictionId };
+    return data;
   } catch (error) {
     return `${error}`;
   }
