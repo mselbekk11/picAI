@@ -1,16 +1,11 @@
 import { cn } from '@/utils/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '../../ui/button';
+
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { HiBars3 } from 'react-icons/hi2';
-<<<<<<<< HEAD:src/components/landing-page/Navbar.tsx
 import ButtonCta from './ButtonCta';
-========
-import { getUserDetails } from '@/utils/supabase/server';
-import ButtonCta from '../ButtonCta';
-import SignOutButton from './SignOutButton';
->>>>>>>> 5e9f38392ac7721f7cc855d3df70e1946cfa1292:src/components/landing-page/navbar/Navbar.tsx
+import { Button } from '../ui/button';
 
 const NavbarRoutes = [
   { label: 'Features', url: '/#features' },
@@ -21,11 +16,7 @@ const NavbarRoutes = [
 
 export default async function Navbar() {
   return (
-<<<<<<<< HEAD:src/components/landing-page/Navbar.tsx
     <div className='w-full text-white bg-[#031614]'>
-========
-    <div className='w-full text-white'>
->>>>>>>> 5e9f38392ac7721f7cc855d3df70e1946cfa1292:src/components/landing-page/navbar/Navbar.tsx
       <div className={cn('max-w-6xl mx-auto flex justify-between items-center p-4')}>
         <Link href='/'>
           <div className='flex items-center gap-1'>
