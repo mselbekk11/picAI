@@ -23,9 +23,9 @@ type FormFields = {
 
 const promptSuggestions = [
   'A thar desert',
-  'A beautiful sea beach',
-  'A mountain view with clouds',
-  'A forest overlooking a mountain',
+  'A tropical paradise beach',
+  'A misty mountain adventure',
+  'An urban skyline view',
 ];
 
 const FormInput: FC<FormInputProps> = ({ data }) => {
