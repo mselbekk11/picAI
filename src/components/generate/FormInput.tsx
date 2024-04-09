@@ -22,10 +22,10 @@ type FormFields = {
 };
 
 const promptSuggestions = [
-  'A city view with clouds',
-  'A beautiful glacier',
+  'A thar desert',
+  'A beautiful sea beach',
+  'A mountain view with clouds',
   'A forest overlooking a mountain',
-  'A saharan desert',
 ];
 
 const FormInput: FC<FormInputProps> = ({ data }) => {
@@ -80,7 +80,7 @@ const FormInput: FC<FormInputProps> = ({ data }) => {
                 <Textarea
                   id='prompt'
                   name='prompt'
-                  placeholder='QR Prompt'
+                  placeholder='Enter your prompt here'
                   rows={3}
                   value={formData.prompt}
                   onChange={handleInputChange}

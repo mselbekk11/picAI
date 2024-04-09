@@ -19,11 +19,7 @@ export async function generateQrCodeFn(formData: FormData) {
       throw 'Missing required fields.';
     }
 
-    // const startTime = performance.now();
     const imageUrl = await startGeneration(url, prompt);
-    // const endTime = performance.now();
-    // const durationMS = endTime - startTime;
-    // console.log(durationMS);
 
     const { data, error } = await supabase
       .from('qr_code_generations')
