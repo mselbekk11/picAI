@@ -4,7 +4,9 @@ import React, { FC } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TypeQrCodeGeneration } from '../../../types/utils';
 import Image from 'next/image';
-import { cn } from '@/utils/utils';
+import downloadQrCode, { cn } from '@/utils/utils';
+import { Button } from '../ui/button';
+import { TbDownload } from 'react-icons/tb';
 
 type OutputGenerationProps = {
   data: TypeQrCodeGeneration[];
@@ -35,15 +37,26 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ data, generation, onSelec
         <TabsContent value='output' className='h-full bg-[#9f9f9f]/5'>
           <div className={cn('h-full border border-black/5 rounded-lg px-5 py-4 overflow-auto')}>
             {generation ? (
-              <Image
-                src={generation.image_url!}
-                alt=''
-                width={512}
-                height={512}
-                className='border rounded-md mx-auto'
-                placeholder='blur'
-                blurDataURL={blurImageDataUrl}
-              />
+              <div className='relative group'>
+                <Image
+                  src={generation.image_url!}
+                  alt=''
+                  width={512}
+                  height={512}
+                  className='border rounded-md mx-auto'
+                  placeholder='blur'
+                  blurDataURL={blurImageDataUrl}
+                />
+                <div className='absolute inset-0 bg-black/30 flex justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                  <Button
+                    variant='outline'
+                    onClick={() => downloadQrCode(generation.image_url!, 'qr-code.png')}
+                    className='rounded-full'>
+                    <TbDownload className='mr-2' />
+                    Download
+                  </Button>
+                </div>
+              </div>
             ) : (
               <p className='text-sm text-[#B9B9B9]'>See the generated QR codes here...</p>
             )}
