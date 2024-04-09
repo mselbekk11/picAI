@@ -1,9 +1,9 @@
 'use client';
 
 import { FC } from 'react';
-import { Button } from '../ui/button';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
+import { Button } from '../ui/button';
 
 interface SignOutButtonProps {}
 
@@ -13,15 +13,14 @@ const SignOutButton: FC<SignOutButtonProps> = () => {
   const router = useRouter();
 
   return (
-    <>
-      <Button
-        onClick={async () => {
-          await supabase.auth.signOut();
-          router.refresh();
-        }}>
-        Sign Out
-      </Button>
-    </>
+    <Button
+      variant='outline'
+      onClick={async () => {
+        await supabase.auth.signOut();
+        router.refresh();
+      }}>
+      Sign Out
+    </Button>
   );
 };
 

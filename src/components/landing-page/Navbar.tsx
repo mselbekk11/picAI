@@ -4,9 +4,7 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { HiBars3 } from 'react-icons/hi2';
-import { getUserDetails } from '@/utils/supabase/server';
-import ButtonCta from '../landing-page/ButtonCta';
-import SignOutButton from './SignOutButton';
+import ButtonCta from './ButtonCta';
 
 const NavbarRoutes = [
   { label: 'Features', url: '/#features' },
@@ -16,10 +14,8 @@ const NavbarRoutes = [
 ];
 
 export default async function Navbar() {
-  const user = await getUserDetails();
-
   return (
-    <div className='w-full  text-white bg-[#031614]'>
+    <div className='w-full text-white bg-[#031614]'>
       <div className={cn('max-w-6xl mx-auto flex justify-between items-center p-4')}>
         <Link href='/'>
           <div className='flex items-center gap-1'>
@@ -35,7 +31,7 @@ export default async function Navbar() {
           ))}
         </ul>
 
-        {user ? <SignOutButton /> : <ButtonCta label='Sign In' />}
+        <ButtonCta label='Sign In' />
 
         <Sheet>
           <SheetTrigger className='block md:hidden'>
