@@ -1,42 +1,70 @@
 'use server';
 
-import { startGeneration } from '@/utils/replicate';
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
+import { headers } from 'next/headers';
+import axios from 'axios';
 
-export async function generateQrCodeFn(formData: FormData) {
+const ASTRIA_BASEURL = 'https://api.astria.ai';
+
+export async function finetuneModelFn(request: FormData) {
   const supabase = supabaseServerClient();
   const user = await getUserDetails();
 
+  const origin = headers().get('origin');
+
   try {
     if (user == null) {
-      throw 'Please login to Generate Qr Code.';
+      throw 'Please login to Generate a Headshot.';
     }
 
-    const url = formData.get('url') as string;
-    const prompt = formData.get('prompt') as string;
+    const title = request.get('title') as string;
+    const type = request.get('type') as string;
+    const images = request.getAll('images');
 
-    if (!prompt || !url) {
+    if (!title || !type) {
       throw 'Missing required fields.';
     }
 
-    const imageUrl = await startGeneration(url, prompt);
+    const formData = new FormData();
+    formData.append('tune[title]', title);
+    // Hard coded tune id of Realistic Vision v5.1 from - https://www.astria.ai/gallery/tunes/690204/prompts
+    formData.append('tune[base_tune_id]', '690204');
+    formData.append('tune[name]', type);
 
-    const { data, error } = await supabase
-      .from('qr_code_generations')
-      .insert({
-        user_id: user.id,
-        url,
-        prompt,
-        image_url: imageUrl,
-      })
-      .select()
-      .single();
+    images.forEach((file) => {
+      formData.append('tune[images][]', file);
+    });
+
+    const webhookUrl = `${origin}/webhooks/train-model?user_id=${user.id}`;
+    formData.append('tune[callback]', webhookUrl);
+
+    const response = await axios.post(`${ASTRIA_BASEURL}/tunes`, formData, {
+      headers: {
+        Authorization: `Bearer ${process.env.ASTRIA_API_KEY}`,
+      },
+    });
+
+    const { status, data: tune } = response;
+
+    if (status === 400) {
+      throw 'webhookUrl must be a URL address';
+    }
+    if (status === 402) {
+      throw 'Training models is only available on paid plans.';
+    }
+
+    const { error } = await supabase.from('headshot_models').insert({
+      model_id: tune.id,
+      user_id: user.id,
+      name: title,
+      type,
+      images: tune.orig_images,
+      eta: tune.eta,
+    });
 
     if (error) {
       throw error.message;
     }
-
-    return data;
   } catch (error) {
     return `${error}`;
   }

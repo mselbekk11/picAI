@@ -7,7 +7,7 @@ export type Database = {
         Row: {
           created_at: string;
           id: string;
-          results: Json | null;
+          results: string | null;
           style: string;
           topic: string;
           user_id: string;
@@ -15,7 +15,7 @@ export type Database = {
         Insert: {
           created_at?: string;
           id?: string;
-          results?: Json | null;
+          results?: string | null;
           style: string;
           topic: string;
           user_id: string;
@@ -23,7 +23,7 @@ export type Database = {
         Update: {
           created_at?: string;
           id?: string;
-          results?: Json | null;
+          results?: string | null;
           style?: string;
           topic?: string;
           user_id?: string;
@@ -31,6 +31,56 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: 'content_creations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      headshot_models: {
+        Row: {
+          created_at: string;
+          eta: string;
+          expires_at: string | null;
+          id: string;
+          images: string[];
+          model_id: string;
+          name: string;
+          status: string;
+          trained_at: string | null;
+          type: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          eta: string;
+          expires_at?: string | null;
+          id?: string;
+          images: string[];
+          model_id: string;
+          name: string;
+          status?: string;
+          trained_at?: string | null;
+          type: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          eta?: string;
+          expires_at?: string | null;
+          id?: string;
+          images?: string[];
+          model_id?: string;
+          name?: string;
+          status?: string;
+          trained_at?: string | null;
+          type?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'headshot_models_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';
@@ -84,6 +134,56 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: 'image_generations_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      interior_designs: {
+        Row: {
+          created_at: string;
+          error: string | null;
+          id: string;
+          image_urls: string[] | null;
+          negative_prompt: string | null;
+          no_of_outputs: string;
+          prediction_id: string;
+          prompt: string;
+          ref_image: string;
+          scale: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          error?: string | null;
+          id?: string;
+          image_urls?: string[] | null;
+          negative_prompt?: string | null;
+          no_of_outputs: string;
+          prediction_id: string;
+          prompt: string;
+          ref_image: string;
+          scale: number;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          error?: string | null;
+          id?: string;
+          image_urls?: string[] | null;
+          negative_prompt?: string | null;
+          no_of_outputs?: string;
+          prediction_id?: string;
+          prompt?: string;
+          ref_image?: string;
+          scale?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'interior_designs_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';

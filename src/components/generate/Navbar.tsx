@@ -13,7 +13,7 @@ export default async function Navbar() {
 
   return (
     <div className='w-full text-white bg-[#031614]'>
-      <div className={cn('max-w-6xl mx-auto flex justify-between items-center p-4')}>
+      <div className={cn('max-w-6xl mx-auto flex justify-between items-center py-4')}>
         <Link href='/'>
           <div className='flex items-center gap-1'>
             <Image src='/logo.svg' className='size-6 ' width={50} height={50} alt='logo' />
