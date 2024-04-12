@@ -52,13 +52,13 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
         return;
       }
 
-      // Check that in total images do not exceed a combined 4.5MB
+      // Check that in total images do not exceed a combined 10MB
       const totalSize = images.reduce((acc, file) => acc + file.size, 0);
       const newSize = newImages.reduce((acc, file) => acc + file.size, 0);
 
-      if (totalSize + newSize > 4.5 * 1024 * 1024) {
+      if (totalSize + newSize > 10 * 1024 * 1024) {
         errorToast(
-          'The total combined size of the images cannot exceed 4.5MB',
+          'The total combined size of the images cannot exceed 10MB',
           'Total images exceed size limit'
         );
         return;
@@ -106,11 +106,11 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
         {buttonText ?? 'Train Model'}
       </DialogTrigger>
       <DialogContent className='w-11/12 rounded-lg'>
-        <DialogHeader className='mb-4'>
+        <DialogHeader className='mb-2 md:mb-4'>
           <DialogTitle className='text-xl'>Finetune your Model</DialogTitle>
         </DialogHeader>
 
-        <form className='flex flex-col gap-6'>
+        <form className='flex flex-col gap-4 md:gap-6'>
           <InputWrapper
             id='title'
             label='Title'
@@ -142,14 +142,14 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                   'border-2 border-dashed border-gray-300 rounded-lg py-4 text-center cursor-pointer hover:border-primary'
                 )}>
                 <Input {...getInputProps()} />
-                <p className='text-sm opacity-50 h-full'>
+                <p className='text-xs md:text-sm opacity-50 h-full'>
                   <FaImages size={32} className='text-gray-700 mx-auto mb-2' />
-                  Drag 'n' drop an images here, or click to select an images
+                  Drag 'n' drop or upload the images
                 </p>
               </div>
             </InputWrapper>
             {images.length > 0 && (
-              <div className='flex gap-4 flex-wrap'>
+              <div className='max-h-32 md:max-h-56 flex gap-4 flex-wrap overflow-auto'>
                 {images.map((file) => (
                   <div key={file.name} className='flex flex-col gap-1'>
                     <Image
@@ -157,7 +157,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                       alt='model image'
                       height={24}
                       width={24}
-                      className='rounded-md size-24 object-cover'
+                      className='rounded-md size-20 md:size-24 object-cover'
                     />
                     <Button variant='outline' size={'sm'} className='w-full' onClick={() => removeFile(file)}>
                       Remove

@@ -55,8 +55,11 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     }
 
     return { id: data.id };
-  } catch (error) {
-    console.error(error);
-    return `${error}`;
+  } catch (error: any) {
+    let errorMessage = `${error}`;
+    if (error.response?.status === 422) {
+      errorMessage = error.response?.data?.text?.join(', ');
+    }
+    return errorMessage;
   }
 }

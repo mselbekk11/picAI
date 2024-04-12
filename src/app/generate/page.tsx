@@ -53,11 +53,7 @@ export default async function Home() {
                     </div>
                     {model.status === 'processing' ? (
                       <Badge variant='secondary' className='w-fit text-xs font-normal mt-2'>
-                        Getting your model ready{' '}
-                        {formatDistanceToNow(model.eta, {
-                          addSuffix: true,
-                          includeSeconds: true,
-                        })}
+                        Getting your model ready {formatDistanceToNow(model.eta)}
                       </Badge>
                     ) : (
                       <div className='text-sm'>
