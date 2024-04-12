@@ -5,6 +5,7 @@ import { headers } from 'next/headers';
 import axios from 'axios';
 
 const ASTRIA_BASEURL = 'https://api.astria.ai';
+const API_KEY = process.env.ASTRIA_API_KEY;
 
 export async function finetuneModelFn(request: FormData) {
   const supabase = supabaseServerClient();
@@ -40,7 +41,7 @@ export async function finetuneModelFn(request: FormData) {
 
     const response = await axios.post(`${ASTRIA_BASEURL}/tunes`, formData, {
       headers: {
-        Authorization: `Bearer ${process.env.ASTRIA_API_KEY}`,
+        Authorization: `Bearer ${API_KEY}`,
       },
     });
 
@@ -66,6 +67,7 @@ export async function finetuneModelFn(request: FormData) {
       throw error.message;
     }
   } catch (error) {
+    console.error(error);
     return `${error}`;
   }
 }
