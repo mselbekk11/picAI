@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { TypeHeadshotGeneration } from '@/types/utils';
+import { TypeHeadshotGeneration } from '@/types/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Image from 'next/image';
 import { LuLoader } from 'react-icons/lu';
