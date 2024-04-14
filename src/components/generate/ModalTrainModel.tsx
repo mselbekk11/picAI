@@ -52,13 +52,13 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
         return;
       }
 
-      // Check that in total images do not exceed a combined 10MB
+      // Check that in total images do not exceed a combined 4.5MB
       const totalSize = images.reduce((acc, file) => acc + file.size, 0);
       const newSize = newImages.reduce((acc, file) => acc + file.size, 0);
 
-      if (totalSize + newSize > 10 * 1024 * 1024) {
+      if (totalSize + newSize > 4.5 * 1024 * 1024) {
         errorToast(
-          'The total combined size of the images cannot exceed 10MB',
+          'The total combined size of the images cannot exceed 4.5MB',
           'Total images exceed size limit'
         );
         return;
