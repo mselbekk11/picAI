@@ -36,7 +36,7 @@ export async function finetuneModelFn(request: FormData) {
       formData.append('tune[images][]', file);
     });
 
-    const webhookUrl = `${origin}/webhooks/train-model?user_id=${user.id}`;
+    const webhookUrl = `${origin}/api/webhooks/train-model?user_id=${user.id}`;
     formData.append('tune[callback]', webhookUrl);
 
     const response = await axios.post(`${ASTRIA_BASEURL}/tunes`, formData, {

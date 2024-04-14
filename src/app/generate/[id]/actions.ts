@@ -31,7 +31,7 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     form.append('prompt[super_resolution]', 'true');
     form.append('prompt[face_correct]', 'true');
 
-    const webhookUrl = `${origin}/webhooks/generate-images?user_id=${user.id}`;
+    const webhookUrl = `${origin}/api/webhooks/generate-images?user_id=${user.id}`;
     form.append('prompt[callback]', webhookUrl);
 
     const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/${modelId}/prompts`, form, {
