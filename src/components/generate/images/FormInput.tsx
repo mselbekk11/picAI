@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { TypeHeadshotGeneration, TypeHeadshotModel } from '../../../../types/utils';
+import { TypeHeadshotGeneration, TypeHeadshotModel } from '@/types/utils';
 import InputWrapper from '../../InputWrapper';
 import { SubmitButton } from '../../SubmitButton';
 import { errorToast, sentenceCase } from '@/utils/utils';
