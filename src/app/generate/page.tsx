@@ -1,4 +1,4 @@
-import { supabaseServerClient } from '@/utils/supabase/server';
+import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
 import { FaImages } from 'react-icons/fa';
 import ModalTrainModel from '@/components/generate/ModalTrainModel';
 import { Card, CardContent } from '@/components/ui/card';
@@ -7,9 +7,16 @@ import { cn, sentenceCase } from '@/utils/utils';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
+import { redirect } from 'next/navigation';
 
 export default async function Home() {
   const supabase = supabaseServerClient();
+
+  const user = await getUserDetails();
+
+  if (user == null) {
+    redirect('/login');
+  }
 
   const { data: models } = await supabase
     .from('headshot_models')
@@ -17,7 +24,6 @@ export default async function Home() {
     .order('created_at', { ascending: false });
 
   return (
-    
     <div className='max-w-6xl mx-auto pt-14'>
       {models && models.length > 0 ? (
         <div className='flex flex-col gap-4'>

@@ -35,7 +35,7 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     form.append('prompt[callback]', webhookUrl);
 
     const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/${modelId}/prompts`, form, {
-      headers: { Authorization: `Bearer ${ API_KEY}` },
+      headers: { Authorization: `Bearer ${API_KEY}` },
     });
 
     const { data, error } = await supabase
