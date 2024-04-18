@@ -1,5 +1,6 @@
 'use server';
 
+import { getAstriaKeyFromCookie } from '@/utils/cookie-store';
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
 import axios from 'axios';
 import { headers } from 'next/headers';
@@ -12,6 +13,8 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
   const user = await getUserDetails();
 
   const origin = headers().get('origin');
+
+  const astriaUserKey = getAstriaKeyFromCookie();
 
   try {
     if (user == null) {
@@ -35,7 +38,7 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     form.append('prompt[callback]', webhookUrl);
 
     const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/${modelId}/prompts`, form, {
-      headers: { Authorization: `Bearer ${API_KEY}` },
+      headers: { Authorization: `Bearer ${astriaUserKey || API_KEY}` },
     });
 
     const { data, error } = await supabase

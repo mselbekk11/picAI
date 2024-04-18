@@ -3,6 +3,7 @@
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
 import { headers } from 'next/headers';
 import axios from 'axios';
+import { getAstriaKeyFromCookie } from '@/utils/cookie-store';
 
 const ASTRIA_BASEURL = 'https://api.astria.ai';
 const API_KEY = process.env.ASTRIA_API_KEY;
@@ -12,6 +13,8 @@ export async function finetuneModelFn(request: FormData) {
   const user = await getUserDetails();
 
   const origin = headers().get('origin');
+
+  const astriaUserKey = getAstriaKeyFromCookie();
 
   try {
     if (user == null) {
@@ -41,7 +44,7 @@ export async function finetuneModelFn(request: FormData) {
 
     const response = await axios.post(`${ASTRIA_BASEURL}/tunes`, formData, {
       headers: {
-        Authorization: `Bearer ${API_KEY}`,
+        Authorization: `Bearer ${astriaUserKey || API_KEY}`,
       },
     });
 
