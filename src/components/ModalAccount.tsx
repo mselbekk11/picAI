@@ -50,12 +50,6 @@ const ModalAccount: FC<ModalAccountProps> = ({ user, className }) => {
             Upgrade Plan <MdArrowOutward size={16} />
           </Button>
         </div>
-
-        <DialogClose>
-          <div className='absolute right-4 top-4 rounded-sm opacity-70 cursor-pointer'>
-            <Cross2Icon className='size-4 ' />
-          </div>
-        </DialogClose>
       </DialogContent>
     </Dialog>
   );

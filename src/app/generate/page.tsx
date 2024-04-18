@@ -17,6 +17,7 @@ export default async function Home() {
     .order('created_at', { ascending: false });
 
   return (
+    
     <div className='max-w-6xl mx-auto pt-14'>
       {models && models.length > 0 ? (
         <div className='flex flex-col gap-4'>
