@@ -12,7 +12,7 @@ export default async function Navbar() {
   const user = await getUserDetails();
 
   return (
-    <div className='w-full text-white bg-[#031614]'>
+    <div className='w-full text-white bg-[#111111]'>
       <div className={cn('max-w-6xl mx-auto flex justify-between items-center py-4')}>
         <Link href='/'>
           <div className='flex items-center gap-1'>
