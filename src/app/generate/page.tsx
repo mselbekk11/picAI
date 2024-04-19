@@ -21,7 +21,7 @@ export default async function Home() {
       {models && models.length > 0 ? (
         <div className='flex flex-col gap-4'>
           <div className='flex flex-row gap-4 w-full justify-between items-center text-center'>
-            <h1 className='text-2xl font-semibold'>Your models</h1>
+            <h1 className='text-2xl font-semibold text-white'>Your models</h1>
             <ModalTrainModel buttonText='Train New Model' />
           </div>
 
