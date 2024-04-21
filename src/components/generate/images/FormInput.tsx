@@ -82,13 +82,13 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
       <div className='block md:flex items-start space-y-10 md:space-y-0'>
         <div className='w-full md:w-1/2 md:border-r pr-0 md:pr-10'>
           <div className='mb-6'>
-            <p className='text-white text-xl font-bold leading-10'>AI Headshot Generation</p>
-            <p className='text-white font-semibold mt-6'>Model: {sentenceCase(model.name)}</p>
+            <p className='text-xl font-bold leading-10'>AI Headshot Generation</p>
+            <p className='font-semibold mt-6'>Model: {sentenceCase(model.name)}</p>
           </div>
 
           <form className='md:h-[500px] flex flex-col justify-between'>
             <div className='flex flex-col gap-6 mb-5'>
-              <InputWrapper className='text-white' id='prompt' label='Detailed Description'>
+              <InputWrapper id='prompt' label='Detailed Description'>
                 <Textarea
                   id='prompt'
                   name='prompt'
@@ -97,11 +97,11 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
                   autoFocus
                   value={formData.prompt}
                   onChange={handleInputChange}
-                  className='bg-[#1b1b1b80] border border-transparent'
+                  className='bg-[#9F9F9F]/20 dark:bg-[#1b1b1b80] border border-transparent'
                 />
               </InputWrapper>
 
-              <InputWrapper className='text-white' id='neg-prompt' label='Negative Prompt'>
+              <InputWrapper id='neg-prompt' label='Negative Prompt'>
                 <Textarea
                   id='neg-prompt'
                   name='neg-prompt'
@@ -109,12 +109,12 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
                   rows={3}
                   value={formData['neg-prompt']}
                   onChange={handleInputChange}
-                  className='bg-[#1b1b1b80] border border-transparent'
+                  className='bg-[#9F9F9F]/20 dark:bg-[#1b1b1b80] border border-transparent'
                 />
               </InputWrapper>
             </div>
 
-            <SubmitButton className='w-full bg-[#161616] rounded-2xl' formAction={handleGeneration}>
+            <SubmitButton className='w-full rounded-xl' variant='blue' formAction={handleGeneration}>
               Generate
             </SubmitButton>
           </form>
