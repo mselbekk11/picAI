@@ -25,7 +25,6 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ data, isPending, generate
       <Tabs defaultValue='output' value={currentTab} className='w-full h-[550px]'>
         <div className='flex justify-center mb-6'>
           <TabsList className='rounded-full p-1 bg-transparent border dark:border-[#272626]'>
-            {' '}
             <TabsTrigger onClick={() => setCurrentTab('output')} className='rounded-full' value='output'>
               Output
             </TabsTrigger>
