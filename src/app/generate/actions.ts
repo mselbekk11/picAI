@@ -1,3 +1,8 @@
+// Server-side function to submit user-provided images for model finetuning.
+// It requires user authentication and checks for necessary form fields before sending the data.
+// The function constructs a FormData object for a POST request to the AI service's API, handling the response and database interactions.
+// Errors are caught and returned, allowing for client-side handling.
+
 'use server';
 
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
@@ -7,6 +12,7 @@ import axios from 'axios';
 const ASTRIA_BASEURL = 'https://api.astria.ai';
 const API_KEY = process.env.ASTRIA_API_KEY;
 
+// This function is used for model finetuning based on user-provided images.
 export async function finetuneModelFn(request: FormData) {
   const supabase = supabaseServerClient();
   const user = await getUserDetails();
@@ -32,13 +38,16 @@ export async function finetuneModelFn(request: FormData) {
     formData.append('tune[base_tune_id]', '690204');
     formData.append('tune[name]', type);
 
+    // Appending images to the FormData object
     images.forEach((file) => {
       formData.append('tune[images][]', file);
     });
 
+    // Creating webhook URL for the Astria Api to send a POST request after the model training is complete
     const webhookUrl = `${origin}/api/webhooks/train-model?user_id=${user.id}`;
     formData.append('tune[callback]', webhookUrl);
 
+    // Making a POST request to the Astria API to train the model with the provided images
     const response = await axios.post(`${ASTRIA_BASEURL}/tunes`, formData, {
       headers: {
         Authorization: `Bearer ${API_KEY}`,
@@ -54,6 +63,7 @@ export async function finetuneModelFn(request: FormData) {
       throw 'Training models is only available on paid plans.';
     }
 
+    // Store the model id from the api response in the database with original images and user details
     const { error } = await supabase.from('headshot_models').insert({
       model_id: tune.id,
       user_id: user.id,

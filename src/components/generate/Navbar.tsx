@@ -1,3 +1,7 @@
+// This component serves as the navigation bar for the application, which appears across various pages.
+// It dynamically adjusts to display different links based on the user's authentication status and screen size.
+// The component uses both responsive and conditional rendering techniques for optimization across devices.
+
 import { cn } from '@/utils/utils';
 import Image from 'next/image';
 import Link from 'next/link';

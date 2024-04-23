@@ -1,3 +1,6 @@
+// This component renders a modal dialog for users to upload images and train a machine learning model through Astria API.
+// The component integrates with the 'react-dropzone' for handling image uploads and validations (e.g., max file size and count).
+
 'use client';
 
 import { FC, useCallback, useState } from 'react';
@@ -32,6 +35,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
 
   const router = useRouter();
 
+  // This function handles image uploads and validates the uploaded files.
   const handleImageUploads = useCallback(
     async (acceptedFiles: File[]) => {
       const newImages: File[] =
@@ -52,10 +56,12 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
         return;
       }
 
-      // Check that in total images do not exceed a combined 4.5MB
       const totalSize = images.reduce((acc, file) => acc + file.size, 0);
       const newSize = newImages.reduce((acc, file) => acc + file.size, 0);
 
+      // Check that in total images do not exceed a combined 4.5mb
+      // This limit is set by the Vercel, since they allow 4.5mb of request body size
+      // You can overcome this by handling the file upload in the client side itself, and sending the uploaded image url in the server
       if (totalSize + newSize > 4.5 * 1024 * 1024) {
         errorToast(
           'The total combined size of the images cannot exceed 4.5MB',
@@ -69,6 +75,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
     [images]
   );
 
+  // Function to remove a file from the list of uploaded images
   const removeFile = useCallback(
     (file: File) => {
       setImages(images.filter((f) => f.name !== file.name));
@@ -76,11 +83,16 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
     [images]
   );
 
+  // This function handles the form submission for training a machine learning model with uploaded images.
+  // It appends image files to FormData and sends a POST request to astria's finetuning API endpoint.
+  // The function also handles navigation and user feedback via toast messages.
+  // In case of API errors or successful training, it updates the UI and navigates as needed.
   const trainModel = async (inputData: FormData) => {
     images.forEach((file) => {
       inputData.append(`images`, file);
     });
 
+    // Calls the finetuneModelFn function from src/app/generate/actions.ts with images as input
     const response = await finetuneModelFn(inputData);
     if (response) {
       errorToast(response);
@@ -92,6 +104,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
     }
   };
 
+  // Retrieving funtions with configuration from react-dropzone to handle image uploads
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleImageUploads,
     accept: {
@@ -148,6 +161,8 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                 </p>
               </div>
             </InputWrapper>
+
+            {/* Section to show the uploaded (selected) files */}
             {images.length > 0 && (
               <div className='max-h-32 md:max-h-56 flex gap-4 flex-wrap overflow-auto'>
                 {images.map((file) => (

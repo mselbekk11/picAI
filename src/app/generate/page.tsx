@@ -1,3 +1,8 @@
+// This main component fetches and displays a list of headshot models previously generated from the database.
+// The UI is conditionally rendered based on whether any models are returned from the database.
+// The 'ModalTrainModel' component is used to provide a UI element for initiating the training of new models.
+// Each model is displayed in a 'Card' component, with a link to a detailed view.
+
 import { supabaseServerClient } from '@/utils/supabase/server';
 import { FaImages } from 'react-icons/fa';
 import ModalTrainModel from '@/components/generate/ModalTrainModel';
@@ -8,9 +13,10 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 
-export default async function Home() {
+export default async function TrainModel() {
   const supabase = supabaseServerClient();
 
+  // Get all the previously generated models from the database
   const { data: models } = await supabase
     .from('headshot_models')
     .select()
@@ -22,10 +28,12 @@ export default async function Home() {
         <div className='flex flex-col gap-4'>
           <div className='flex flex-row gap-4 w-full justify-between items-center text-center'>
             <h1 className='text-2xl font-semibold text-white'>Your models</h1>
+            {/* Button (modal) to generate a new model */}
             <ModalTrainModel buttonText='Train New Model' />
           </div>
 
           <div className='flex gap-6'>
+            {/* Display the generated models with status */}
             {models.map((model) => (
               <Card key={model.id}>
                 <CardContent className='p-2'>
@@ -74,6 +82,7 @@ export default async function Home() {
           </div>
         </div>
       ) : (
+        // Button (modal) to generate a new model if no models are found
         <div className='flex flex-col gap-4 items-center'>
           <FaImages size={64} className='text-gray-500' />
           <h1 className='text-2xl text-center px-4 mb-4'>Get started by training your first model.</h1>

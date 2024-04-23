@@ -1,35 +1,14 @@
+// This component is used to display the website's footer section.
+// It typically contains links to important pages, contact information, and social media icons.
+// This component is crucial for navigation and offers users a way to connect with the company on different platforms.
+
 import { CiTwitter } from 'react-icons/ci';
 import { FaDribbble, FaInstagram } from 'react-icons/fa';
 import { MdOutlineEmail } from 'react-icons/md';
 import Link from 'next/link';
 import ButtonCta from './ButtonCta';
 
-const footerItems = [
-  {
-    url: '/',
-    label: 'Home',
-  },
-  {
-    url: '/#pricing',
-    label: 'Pricing',
-  },
-  {
-    url: '/#faq',
-    label: 'FAQ',
-  },
-  {
-    url: '/refund-policy',
-    label: 'Refund Policy',
-  },
-  {
-    url: '/privacy-policy',
-    label: 'Privacy Policy',
-  },
-  {
-    url: '/terms-of-service',
-    label: 'Terms of Service',
-  },
-];
+const footerItems = ['Home', 'Pricing', 'FAQ', 'Changelog', 'License', 'Terms', 'Contact'];
 
 const socialMediaIcons = [
   { icon: <CiTwitter className='size-5 text-white' />, name: 'Twitter' },
@@ -66,7 +45,7 @@ const Footer = () => {
         <ul className='flex flex-col md:flex-row gap-5 justify-center text-[#A5ABB6]'>
           {footerItems.map((item, index) => (
             <li key={index} className='text-[#A5ABB6] text-base font-normal'>
-              <Link href={item.url}>{item.label}</Link>
+              {item}
             </li>
           ))}
         </ul>
