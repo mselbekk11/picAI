@@ -80,9 +80,9 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
   return (
     <div className='p-5 xl:p-0 h-auto md:h-auto '>
       <div className='block md:flex items-start space-y-10 md:space-y-0'>
-        <div className='w-full md:w-1/2 md:border-r pr-0 md:pr-10'>
+        <div className='w-full md:w-1/2 md:border-r border-[#ECECEC] dark:border-[#272626]border-[#ECECEC] dark:border-[#272626] pr-0 md:pr-10'>
           <div className='mb-6'>
-            <p className='text-[#27262B] text-xl font-bold leading-10'>AI Headshot Generation</p>
+            <p className='text-xl font-bold leading-10'>AI Headshot Generation</p>
             <p className='font-semibold mt-6'>Model: {sentenceCase(model.name)}</p>
           </div>
 
@@ -97,6 +97,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
                   autoFocus
                   value={formData.prompt}
                   onChange={handleInputChange}
+                  className='bg-bg-[#9F9F9F]/10 dark:bg-[#1b1b1b80] border border-transparent'
                 />
               </InputWrapper>
 
@@ -108,11 +109,12 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
                   rows={3}
                   value={formData['neg-prompt']}
                   onChange={handleInputChange}
+                  className='bg-bg-[#9F9F9F]/10 dark:bg-[#1b1b1b80] border border-transparent'
                 />
               </InputWrapper>
             </div>
 
-            <SubmitButton disabled={isPending} className='w-full' formAction={handleGeneration}>
+            <SubmitButton className='w-full rounded-xl' variant='blue' formAction={handleGeneration}>
               Generate
             </SubmitButton>
           </form>
