@@ -35,7 +35,7 @@ export default async function TrainModel() {
           <div className='flex gap-6'>
             {/* Display the generated models with status */}
             {models.map((model) => (
-              <Card key={model.id}>
+              <Card key={model.id} className='border dark:border-gray-500/30'>
                 <CardContent className='p-2'>
                   <Link href={`/generate/${model.model_id}`}>
                     <Image
@@ -55,7 +55,9 @@ export default async function TrainModel() {
                         <span>-</span>
                         <span>{model.images.length} Image</span>
                       </div>
-                      <Badge className={cn('capitalize', model.status === 'processing' && 'bg-orange-400')}>
+                      <Badge
+                        variant='blue'
+                        className={cn('capitalize', model.status === 'processing' && 'bg-orange-400')}>
                         {model.status}
                       </Badge>
                     </div>

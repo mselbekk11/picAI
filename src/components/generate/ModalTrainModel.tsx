@@ -115,7 +115,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger className={cn(buttonVariants({ variant: 'default' }), 'text-white hover:no-underline')}>
+      <DialogTrigger className={cn(buttonVariants({ variant: 'blue' }), 'text-white hover:no-underline')}>
         {buttonText ?? 'Train Model'}
       </DialogTrigger>
       <DialogContent className='w-11/12 rounded-lg'>

@@ -110,7 +110,6 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
                   autoFocus
                   value={formData.prompt}
                   onChange={handleInputChange}
-                  className='bg-bg-[#9F9F9F]/10 dark:bg-[#1b1b1b80] border border-transparent'
                 />
               </InputWrapper>
 
@@ -122,7 +121,6 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
                   rows={3}
                   value={formData['neg-prompt']}
                   onChange={handleInputChange}
-                  className='bg-bg-[#9F9F9F]/10 dark:bg-[#1b1b1b80] border border-transparent'
                 />
               </InputWrapper>
             </div>
