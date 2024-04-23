@@ -1,3 +1,8 @@
+// This component handles input for generating headshots using a predefined AI model.
+// It manages user input through a form, updating local state on each input change.
+// The form submission triggers an API call to generate headshots, and handles the response asynchronously.
+// Uses `useEffect` to listen for changes via a real-time database subscription and updates the UI accordingly.
+
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -31,6 +36,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
 
   const router = useRouter();
 
+  // Handle input change for the form fields and update the formData state with user input data
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -39,9 +45,12 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
     }));
   };
 
+  // Asynchronously triggered by form submission, this function sends data to the server to initiate headshot generation.
+  // It handles pre and post request states, displaying error messages or updating the generation ID upon success.
   const handleGeneration = async (data: FormData) => {
     setIsPending(true);
 
+    // Call the generateHeadshotFn function to generate headshots from server actions
     const response = await generateHeadshotFn(model.model_id, data);
     if (typeof response == 'string') {
       errorToast(response);
@@ -51,6 +60,8 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
     }
   };
 
+  // Realtime database subscription to listen for changes in the generated images.
+  // This subscription gets triggered only if the row is updated with new image URLs. It doesn't respond to insert or delete.
   useEffect(() => {
     const channel = supabase
       .channel('value-db-changes')
@@ -62,6 +73,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
           table: 'headshot_generations',
         },
         async (payload) => {
+          // Update images state if the generation ID matches the payload and the image URLs are present
           if (payload.new.id === generationId && payload.new.image_urls) {
             setGeneratedImages(payload.new.image_urls);
             setIsPending(false);
@@ -71,6 +83,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
       )
       .subscribe();
 
+    // Clear the channel subscription when the component unmounts
     return async () => {
       await supabase.removeChannel(channel);
     };
@@ -120,6 +133,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
           </form>
         </div>
 
+        {/* Section to show generated results. It has two tabs output data & history */}
         <OutputGeneration
           data={generations}
           isPending={isPending}

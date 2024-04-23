@@ -1,3 +1,7 @@
+// This component is used to provide navigation links across the website.
+// It is typically placed at the top of each page and includes links to major sections like Home, About, Services, and Contact.
+// The component also handles responsive adjustments to ensure navigation is accessible on different device sizes.
+
 import { cn } from '@/utils/utils';
 import Link from 'next/link';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
@@ -18,7 +22,6 @@ export default async function Navbar() {
     <div className='w-full text-white bg-[#031614]'>
       <div className={cn('max-w-6xl mx-auto flex justify-between items-center p-4')}>
         <Logo />
-
         <ul className='hidden md:flex items-center gap-6'>
           {NavbarRoutes.map((item, index) => (
             <li key={index} className='text-sm cursor-pointer font-medium leading-6'>

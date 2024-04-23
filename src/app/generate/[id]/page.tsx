@@ -1,3 +1,8 @@
+// This component is responsible for generating headshots based on a specific model.
+// It fetches model details and associated generation history from the database using the model ID.
+// The 'FormInput' component is then used to allow users to input positive & negative prompts and initiate new generations.
+// It is designed to respond dynamically to the 'id' parameter in the URL path, which represents the model ID.
+
 import FormInput from '@/components/generate/images/FormInput';
 import { supabaseServerClient } from '@/utils/supabase/server';
 

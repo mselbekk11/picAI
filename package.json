@@ -1,11 +1,11 @@
 {
-  "name": "ai-boilerplate",
+  "name": "builderkit",
   "version": "0.1.0",
   "private": true,
   "author": "@saddysk",
   "scripts": {
     "dev": "next dev",
-    "build": "next build && pnpm run lint",
+    "build": "next build && npm run lint",
     "start": "next start",
     "validate": "run-s format lint typecheck",
     "typecheck": "tsc --noEmit",
