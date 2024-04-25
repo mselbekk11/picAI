@@ -6,25 +6,24 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
-import { ThemeProvider } from '@/components/theme-provider';
 
 const font = Inter({ subsets: ['latin'] });
 
 // Metadata for SEO
 export const metadata: Metadata = {
   metadataBase: new URL('https://builderkit.ai'),
-  title: 'BuilderKit',
+  title: 'Headshot Generator - BuilderKit',
   description: 'Boilerplate for Headshot Generator',
   openGraph: {
     type: 'website',
-    title: 'BuilderKit',
+    title: 'Headshot Generator - BuilderKit',
     description: 'Boilerplate for Headshot Generator',
     images: '/og-image.png',
     url: 'https://builderkit.ai',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BuilderKit',
+    title: 'Headshot Generator - BuilderKit',
     description: 'Boilerplate for Headshot Generator',
     images: '/og-image.png',
   },
@@ -51,10 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       <html lang='en'>
         <body className={font.className}>
-          <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
-            <main>{children}</main>
-            <Toaster />
-          </ThemeProvider>
+          <main>{children}</main>
+          <Toaster />
         </body>
       </html>
     </>
