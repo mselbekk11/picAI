@@ -36,7 +36,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ data, isPending, generate
               Output
             </TabsTrigger>
             <TabsTrigger onClick={() => setCurrentTab('history')} className='rounded-full' value='history'>
-              Images
+              History
             </TabsTrigger>
           </TabsList>
         </div>
