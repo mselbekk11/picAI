@@ -50,10 +50,7 @@ export default async function Navbar() {
               <HiBars3 />
             </SheetTrigger>
             <SheetContent className=''>
-              <Link href='/' className='flex items-center gap-1 mb-10'>
-                <Image src='/logo.svg' className='size-6 ' width={50} height={50} alt='logo' />
-                <p className='text-2xl not-italic font-bold leading-6'>GenAI</p>
-              </Link>
+              <Logo />
 
               {user && (
                 <div className='space-y-6 mt-8'>
