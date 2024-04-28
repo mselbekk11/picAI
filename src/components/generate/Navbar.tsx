@@ -14,6 +14,8 @@ import { SelectTheme } from '../SelectTheme';
 import Logo from '../Logo';
 import { IoMdArrowBack } from 'react-icons/io';
 import { Button } from '../ui/button';
+import { User } from '@supabase/supabase-js';
+import { RxExternalLink } from 'react-icons/rx';
 
 export default async function Navbar() {
   const user = await getUserDetails();
@@ -48,29 +50,32 @@ export default async function Navbar() {
               <HiBars3 />
             </SheetTrigger>
             <SheetContent className=''>
-              <Link href='/' className='flex items-center gap-1 mb-10'>
-                <Image src='/logo.svg' className='size-6 ' width={50} height={50} alt='logo' />
-                <p className='text-2xl not-italic font-bold leading-6'>GenAI</p>
-              </Link>
+              <Logo />
 
               {user && (
-                <>
-                  <div className='space-y-6'>
-                    <ModalAccount user={user} className='font-medium' />
-                    <Link href='https://apps.builderkit.ai/' target='_blank'>
-                      <Button variant='outline' className='gap-3'>
-                        <IoMdArrowBack className='h-5 w-5' />
-                        Demo apps
-                      </Button>
-                    </Link>
-                    <ButtonSignout className='w-full' />
-                  </div>
-                </>
+                <div className='space-y-6 mt-8'>
+                  <NavItems user={user} />
+                </div>
               )}
             </SheetContent>
           </Sheet>
         </div>
       </div>
     </div>
+  );
+}
+
+function NavItems({ user }: { user: User }) {
+  return (
+    <>
+      <Link href='https://apps.builderkit.ai/' target='_blank' className='block w-full'>
+        <Button variant='outline' className='gap-3 w-full'>
+          Demo Apps
+          <RxExternalLink />
+        </Button>
+      </Link>
+      <ModalAccount user={user} />
+      <ButtonSignout className='w-full' />
+    </>
   );
 }
