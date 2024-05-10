@@ -96,7 +96,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
   }, [generationId, supabase, router]);
 
   return (
-    <div className='block lg:flex items-start space-y-10 lg:space-y-0'>
+    <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
       <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
         <div className='mb-6'>
           <p className='font-medium text-grey dark:text-white'>Model: {sentenceCase(model.name)}</p>

@@ -15,15 +15,9 @@ const NavTitle: FC<NavTitleProps> = () => {
         ? 'History'
         : pathname === '/pricing'
           ? 'Pricing'
-          : pathname === '/prompt-library'
-            ? 'Prompt Library'
-            : 'Headshot Generator';
+          : 'Headshot Generator';
 
-  return (
-    <>
-      <div className='text-lg font-semibold text-grey dark:text-white'>{title}</div>
-    </>
-  );
+  return <div className='text-lg font-semibold text-grey dark:text-white'>{title}</div>;
 };
 
 export default NavTitle;

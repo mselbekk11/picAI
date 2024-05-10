@@ -38,7 +38,7 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     form.append('prompt[face_correct]', 'true');
 
     // Creating webhook URL for the Astria Api to send a POST request after the image generation is complete
-    const webhookUrl = `${origin}/api/webhooks/generate-images?user_id=${user.id}`;
+    const webhookUrl = `${origin}/api/webhooks/home-images?user_id=${user.id}`;
     form.append('prompt[callback]', webhookUrl);
 
     // Making a POST request to the Astria API to generate images based on the user prompts and trained model

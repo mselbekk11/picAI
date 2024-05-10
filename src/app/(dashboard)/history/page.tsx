@@ -32,13 +32,13 @@ const page = async () => {
                     className='w-full h-[188px] object-cover rounded-md'
                   />
                 </Link>
-                <p className='font-semibold text-grey mt-2'>{sentenceCase(generation.prompt)}</p>
+                <p className='font-semibold text-grey dark:text-white mt-2'>{sentenceCase(generation.prompt)}</p>
               </CardContent>
             </Card>
           ))}
         </div>
       ) : (
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex flex-col justify-center items-center h-[calc(100vh-85px)]'>
           <Image src={EmptyState} alt='Empty-state' height={347} width={347} />
           <p className='text-center text-lg font-semibold text-gray-500'>No Generations Found</p>
         </div>

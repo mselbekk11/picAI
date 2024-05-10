@@ -65,7 +65,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
         ) : (
           <div>
             <div className='flex flex-col justify-center items-center'>
-              <p className='text-base font-medium text-center mb-16 mt-10 text-input-title dark:text-white'>
+              <p className='text-base font-medium text-center mb-5 mt-10 text-input-title dark:text-white'>
                 Your output will be displayed here
               </p>
               <Image src={EmptyState} alt='Empty-state' height={347} width={347} />
