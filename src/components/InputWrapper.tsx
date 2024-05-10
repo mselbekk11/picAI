@@ -42,13 +42,17 @@ const InputWrapper: FC<InputWrapperProps> = ({
 }) => {
   return (
     <div className={cn('w-full relative', className)}>
-      <div className='mb-2'>
+      <div>
         <label htmlFor={id} className='flex items-end gap-1 mb-1'>
           {/* Displays extra options, aligning them with the label. Mostly Icons to be shown before the Label. */}
           {extraOption && <div className='w-4'>{extraOption}</div>}
           <div className='flex items-end gap-1 w-full'>
             {/* Display the label text with small font size. */}
-            {label && <p className={cn('font-medium leading-none')}>{label}</p>}
+            {label && (
+              <p className={cn('text-sm leading-none font-semibold text-input-title dark:text-white')}>
+                {label}
+              </p>
+            )}
             {/* Comment text displayed next to the label. */}
             {comment && <p className='text-xs font-light text-gray-500'>({comment})</p>}
             {/* Info popover icon or component positioned on the far right. */}
@@ -59,7 +63,7 @@ const InputWrapper: FC<InputWrapperProps> = ({
       {/* Placeholder for form elements like input, textarea, etc. */}
       {children}
       {/* Description displayed below the children. */}
-      {description && <div className='text-xs font-light text-gray-500 mt-1'>{description}</div>}
+      {description && <div className='text-xs font-light text-[#83888B] mt-1'>{description}</div>}
       {/* Handles error message to be shown for the specified input */}
       {error && (
         <div className='text-xs mt-1 text-red-500 flex items-center gap-1.5'>

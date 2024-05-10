@@ -13,12 +13,13 @@ import { errorToast, sentenceCase } from '@/utils/utils';
 import { Textarea } from '../../ui/textarea';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
-import { generateHeadshotFn } from '@/app/generate/[id]/actions';
 import OutputGeneration from './OutputGeneration';
+import { Input } from '@/components/ui/input';
+import { generateHeadshotFn } from '@/app/(dashboard)/home/[...id]/actions';
 
 interface FormInputProps {
   model: TypeHeadshotModel;
-  generations: TypeHeadshotGeneration[];
+  generations?: TypeHeadshotGeneration[];
 }
 
 type FormFields = {
@@ -30,14 +31,17 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
   const supabase = supabaseBrowserClient();
 
   const [isPending, setIsPending] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormFields>({ prompt: '', 'neg-prompt': '' });
+  const [formData, setFormData] = useState<FormFields>({
+    prompt: generations?.[0].prompt ?? '',
+    'neg-prompt': generations?.[0].negative_prompt ?? '',
+  });
   const [generationId, setGenerationId] = useState<string>();
-  const [generatedImages, setGeneratedImages] = useState<string[]>();
+  const [generatedImages, setGeneratedImages] = useState<string[]>(generations?.[0].image_urls ?? []);
 
   const router = useRouter();
 
   // Handle input change for the form fields and update the formData state with user input data
-  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -77,6 +81,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
           if (payload.new.id === generationId && payload.new.image_urls) {
             setGeneratedImages(payload.new.image_urls);
             setIsPending(false);
+            router.replace(`/home/${model.model_id}/${payload.new.id}`);
             router.refresh();
           }
         }
@@ -91,60 +96,44 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
   }, [generationId, supabase, router]);
 
   return (
-    <div className='p-5 xl:p-0 h-auto md:h-auto '>
-      <div className='block md:flex items-start space-y-10 md:space-y-0'>
-        <div className='w-full md:w-1/2 md:border-r border-[#ECECEC] dark:border-[#272626]border-[#ECECEC] dark:border-[#272626] pr-0 md:pr-10'>
-          <div className='mb-6'>
-            <p className='text-xl font-bold leading-10'>AI Headshot Generation</p>
-            <p className='font-semibold mt-6'>Model: {sentenceCase(model.name)}</p>
-          </div>
-
-          <form className='md:h-[500px] flex flex-col justify-between'>
-            <div className='flex flex-col gap-6 mb-5'>
-              <InputWrapper id='prompt' label='Detailed Description'>
-                <Textarea
-                  id='prompt'
-                  name='prompt'
-                  placeholder='Write a detailed description of the image you want'
-                  rows={6}
-                  autoFocus
-                  value={formData.prompt}
-                  onChange={handleInputChange}
-                />
-              </InputWrapper>
-
-              <InputWrapper id='neg-prompt' label='Negative Prompt'>
-                <Textarea
-                  id='neg-prompt'
-                  name='neg-prompt'
-                  placeholder='Negative Prompt'
-                  rows={3}
-                  value={formData['neg-prompt']}
-                  onChange={handleInputChange}
-                />
-              </InputWrapper>
-            </div>
-
-            <SubmitButton className='w-full rounded-xl' variant='blue' formAction={handleGeneration}>
-              Generate
-            </SubmitButton>
-          </form>
+    <div className='block lg:flex items-start space-y-10 lg:space-y-0'>
+      <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
+        <div className='mb-6'>
+          <p className='font-medium text-grey dark:text-white'>Model: {sentenceCase(model.name)}</p>
         </div>
 
-        {/* Section to show generated results. It has two tabs output data & history */}
-        <OutputGeneration
-          data={generations}
-          isPending={isPending}
-          generatedImages={generatedImages}
-          onSelectItem={(value) => {
-            setGeneratedImages(value.image_urls!);
-            setFormData({
-              prompt: value.prompt,
-              'neg-prompt': value.negative_prompt ?? '',
-            });
-          }}
-        />
+        <form className='flex flex-col justify-between'>
+          <div className='flex flex-col gap-2 mb-8'>
+            <InputWrapper id='prompt' label='Describe the image to be generated'>
+              <Textarea
+                id='prompt'
+                name='prompt'
+                placeholder='Write a detailed description of the image you want to generate.'
+                rows={6}
+                value={formData.prompt}
+                onChange={handleInputChange}
+              />
+            </InputWrapper>
+
+            <InputWrapper id='neg-prompt' label='Negative Prompt'>
+              <Input
+                id='neg-prompt'
+                name='neg-prompt'
+                placeholder='Negative Prompt'
+                value={formData['neg-prompt']}
+                onChange={handleInputChange}
+              />
+            </InputWrapper>
+          </div>
+
+          <SubmitButton className='w-full' formAction={handleGeneration}>
+            Generate
+          </SubmitButton>
+        </form>
       </div>
+
+      {/* Section to show generated results. It has two tabs output data & history */}
+      <OutputGeneration isPending={isPending} generatedImages={generatedImages} />
     </div>
   );
 };

@@ -6,7 +6,9 @@
 import { FC, useCallback, useState } from 'react';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -19,11 +21,12 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useDropzone } from 'react-dropzone';
 import Image from 'next/image';
-import { FaImages } from 'react-icons/fa';
-import { SubmitButton } from '../SubmitButton';
-import { finetuneModelFn } from '@/app/generate/actions';
+import { IoCloudUploadOutline } from 'react-icons/io5';
+import { SubmitButton } from '../../SubmitButton';
+import { finetuneModelFn } from '@/app/(dashboard)/home/actions';
 import { useRouter } from 'next/navigation';
-import { toast } from '../ui/use-toast';
+import { toast } from '../../ui/use-toast';
+import { FaPlus } from 'react-icons/fa6';
 
 interface ModalTrainModelProps {
   buttonText?: string;
@@ -115,19 +118,19 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
 
   return (
     <Dialog open={openModal} onOpenChange={setOpenModal}>
-      <DialogTrigger className={cn(buttonVariants({ variant: 'blue' }), 'text-white hover:no-underline')}>
-        {buttonText ?? 'Train Model'}
+      <DialogTrigger className={cn(buttonVariants({ variant: 'default' }), 'w-full gap-2')}>
+        <FaPlus className='size-4' /> {buttonText ?? 'Train Model'}
       </DialogTrigger>
-      <DialogContent className='w-11/12 rounded-lg'>
-        <DialogHeader className='mb-2 md:mb-4'>
-          <DialogTitle className='text-xl'>Finetune your Model</DialogTitle>
+      <DialogContent className='rounded-lg'>
+        <DialogHeader>
+          <DialogTitle className='text-[#101828] font-semibold'>Finetune your model</DialogTitle>
+          <DialogDescription className='text-[#83888B] text-sm mt-2'>
+            Train your model with images to generate headshots.
+          </DialogDescription>
         </DialogHeader>
 
-        <form className='flex flex-col gap-4 md:gap-6'>
-          <InputWrapper
-            id='title'
-            label='Title'
-            description='Name of the subject or theme of training images'>
+        <form className='flex flex-col gap-6'>
+          <InputWrapper id='title' label='Title'>
             <Input id='title' name='title' placeholder='e.g. Natalie Headshots' autoFocus />
           </InputWrapper>
 
@@ -155,10 +158,14 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                   'border-2 border-dashed border-gray-300 rounded-lg py-4 text-center cursor-pointer hover:border-primary'
                 )}>
                 <Input {...getInputProps()} />
-                <p className='text-xs md:text-sm opacity-50 h-full'>
-                  <FaImages size={32} className='text-gray-700 mx-auto mb-2' />
-                  Drag 'n' drop or upload the images
-                </p>
+                <div className='my-4 flex flex-col items-center'>
+                  <IoCloudUploadOutline className='size-5 mb-4' />
+                  <div>
+                    <span className='font-semibold text-[#0F6FFF] mr-1'>Click to upload</span>
+                    <span className='text-[#475467] text-sm'>or drag and drop</span>
+                  </div>
+                  <div className='text-[#475467] text-xs mt-1'>PNG, JPG (max. 4MB)</div>
+                </div>
               </div>
             </InputWrapper>
 
@@ -183,8 +190,13 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             )}
           </div>
 
-          <DialogFooter className='sm:justify-start'>
-            <SubmitButton className='md:w-1/3' formAction={trainModel}>
+          <DialogFooter className='flex gap-4 sm:justify-start'>
+            <DialogClose className='w-full'>
+              <Button className='w-full' variant='outline'>
+                Cancel
+              </Button>
+            </DialogClose>
+            <SubmitButton className='w-full' formAction={trainModel}>
               Train
             </SubmitButton>
           </DialogFooter>
