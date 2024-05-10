@@ -21,7 +21,7 @@ const Pricing = () => {
   return (
     <div className='m-2'>
       <div className='flex my-14 justify-center'>
-        <p className='text-lg font-medium text-center tracking-tight max-w-2xl'>
+        <p className='md:text-lg font-medium text-center tracking-tight max-w-2xl'>
           Unlock the most powerful AI research assistant. Use Builder kit to go to the next level, upgraded AI
           models, unlimited file upload, and API credits.
         </p>

@@ -23,7 +23,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className='inline-block md:hidden'>
+        <div className='inline-flex md:hidden'>
           <MobileSidebar />
         </div>
       </div>
