@@ -1,5 +1,5 @@
 import Logo from '@/components/Logo';
-import SidebarItems from './SidebarItems';
+import SidebarItem from './SidebarItem';
 import UserButton from './UserButton';
 import SidebarUpgradePlan from './SidebarUpgradePlan';
 import ModalTrainModel from '@/components/dashboard/generate/ModalTrainModel';
@@ -12,11 +12,9 @@ const Sidebar = () => {
           <Logo />
         </div>
         <div className='mb-3'>
-          {/* <Link href='/home'> */}
           <ModalTrainModel buttonText='Train Model' />
-          {/* </Link> */}
         </div>
-        <SidebarItems />
+        <SidebarItem />
       </div>
 
       <div className='space-y-3'>

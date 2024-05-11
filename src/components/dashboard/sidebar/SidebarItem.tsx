@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { buttonVariants } from '@/components/ui/button';
 import { SidebarRoutes } from './content';
 
-const SidebarItems = () => {
+const SidebarItem = () => {
   const pathname = usePathname();
 
   return (
@@ -32,4 +32,4 @@ const SidebarItems = () => {
   );
 };
 
-export default SidebarItems;
+export default SidebarItem;

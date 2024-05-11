@@ -9,7 +9,7 @@ import Link from 'next/link';
 import React from 'react';
 import EmptyState from '../../../assets/images/profile.png';
 
-const ModalCard = async () => {
+const Models = async () => {
   const supabase = supabaseServerClient();
 
   // Get all the previously generated models from the database
@@ -22,7 +22,7 @@ const ModalCard = async () => {
     <div className=''>
       {models && models.length > 0 ? (
         <div className='flex flex-col gap-4'>
-          <div className='flex gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
             {/* Display the generated models with status */}
             {models.map((model) => (
               <Card key={model.id} className='border border-light dark:border-gray-500/10 relative'>
@@ -38,7 +38,7 @@ const ModalCard = async () => {
                   </Link>
 
                   <div className='flex flex-col mt-2'>
-                    <p className='text-lg font-semibold text-grey mb-2'>{sentenceCase(model.name)}</p>
+                    <p className='text-lg font-semibold text-grey dark:text-white mb-2'>{sentenceCase(model.name)}</p>
                     <div className='text-sm flex justify-between mb-1 '>
                       <div className='flex gap-2'>
                         <span className='capitalize'>{model.type}</span>
@@ -91,4 +91,4 @@ const ModalCard = async () => {
   );
 };
 
-export default ModalCard;
+export default Models;
