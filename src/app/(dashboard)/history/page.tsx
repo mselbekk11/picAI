@@ -32,7 +32,9 @@ const page = async () => {
                     className='w-full h-[188px] object-cover rounded-md'
                   />
                 </Link>
-                <p className='font-semibold text-grey dark:text-white mt-2'>{sentenceCase(generation.prompt)}</p>
+                <p className='font-semibold text-grey dark:text-white mt-2'>
+                  {sentenceCase(generation.prompt)}
+                </p>
               </CardContent>
             </Card>
           ))}
