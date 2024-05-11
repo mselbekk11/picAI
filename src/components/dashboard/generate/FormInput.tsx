@@ -93,17 +93,17 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
       await supabase.removeChannel(channel);
     };
     return () => {};
-  }, [generationId, supabase, router]);
+  }, [generationId, supabase, router, model.model_id]);
 
   return (
-    <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
+    <div className='block lg:flex items-start space-y-5 lg:space-y-0 px-2'>
       <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
         <div className='mb-6'>
-          <p className='font-medium text-grey dark:text-white'>Model: {sentenceCase(model.name)}</p>
+          <p className='font-semibold text-grey/70 dark:text-white'>Model: {sentenceCase(model.name)}</p>
         </div>
 
         <form className='flex flex-col justify-between'>
-          <div className='flex flex-col gap-2 mb-8'>
+          <div className='flex flex-col gap-4 mb-8'>
             <InputWrapper id='prompt' label='Describe the image to be generated'>
               <Textarea
                 id='prompt'

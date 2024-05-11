@@ -6,7 +6,7 @@ import NavTitle from './NavTitle';
 
 const Navbar = () => {
   return (
-    <div className='h-14 flex items-center justify-between mb-2.5'>
+    <div className='h-14 flex items-center justify-between mb-4'>
       <NavTitle />
 
       <div className='flex items-center gap-5'>

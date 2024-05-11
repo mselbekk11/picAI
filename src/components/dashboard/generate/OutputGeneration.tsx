@@ -29,7 +29,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
               <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
               <p className='text-base font-medium text-center  text-input-title dark:text-white mb-2'>
                 Your images will be ready in less than a minute. You can wait or find your generations later
-                in the Images tab.
+                in the Hostory.
               </p>
             </div>
             <Image src={EmptyState} alt='Empty-state' className='animate-pulse' height={347} width={347} />

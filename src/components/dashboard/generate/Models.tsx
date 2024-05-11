@@ -19,7 +19,7 @@ const Models = async () => {
     .order('created_at', { ascending: false });
 
   return (
-    <div className=''>
+    <div>
       {models && models.length > 0 ? (
         <div className='flex flex-col gap-4'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
@@ -38,7 +38,9 @@ const Models = async () => {
                   </Link>
 
                   <div className='flex flex-col mt-2'>
-                    <p className='text-lg font-semibold text-grey dark:text-white mb-2'>{sentenceCase(model.name)}</p>
+                    <p className='text-lg font-semibold text-grey dark:text-white mb-2'>
+                      {sentenceCase(model.name)}
+                    </p>
                     <div className='text-sm flex justify-between mb-1 '>
                       <div className='flex gap-2'>
                         <span className='capitalize'>{model.type}</span>

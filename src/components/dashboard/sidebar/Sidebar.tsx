@@ -3,6 +3,7 @@ import SidebarItem from './SidebarItem';
 import UserButton from './UserButton';
 import SidebarUpgradePlan from './SidebarUpgradePlan';
 import ModalTrainModel from '@/components/dashboard/generate/ModalTrainModel';
+import { SidebarRoutes } from './content';
 
 const Sidebar = () => {
   return (
@@ -14,7 +15,12 @@ const Sidebar = () => {
         <div className='mb-3'>
           <ModalTrainModel buttonText='Train Model' />
         </div>
-        <SidebarItem />
+
+        <div className='space-y-1'>
+          {SidebarRoutes.map((route, index) => (
+            <SidebarItem key={index} route={route} />
+          ))}
+        </div>
       </div>
 
       <div className='space-y-3'>

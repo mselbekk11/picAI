@@ -13,6 +13,7 @@ import { AiFillDollarCircle } from 'react-icons/ai';
 import Link from 'next/link';
 import ButtonSignout from './ButtonSignout';
 import AccountSettings from './AccountSettings';
+
 const UserButton = async () => {
   const user = await getUserDetails();
 
