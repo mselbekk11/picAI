@@ -33,7 +33,7 @@ const Models = async () => {
                       alt=''
                       width={320}
                       height={450}
-                      className='w-[256px] h-[188px] object-cover rounded-md'
+                      className='w-full h-[188px] object-cover rounded-md'
                     />
                   </Link>
 
