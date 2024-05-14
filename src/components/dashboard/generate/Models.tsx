@@ -58,7 +58,7 @@ const Models = async () => {
                     </div>
                     {model.status === 'processing' ? (
                       <Badge variant='secondary' className='w-fit text-xs font-normal mt-2'>
-                        Ready {formatDistanceToNow(model.eta)}
+                        Getting your model ready: {formatDistanceToNow(model.eta)}
                       </Badge>
                     ) : (
                       <div className='text-sm text-[#9E9E9E]'>
