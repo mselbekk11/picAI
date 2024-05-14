@@ -42,3 +42,16 @@ export default function downloadHeadshot(url: string, filename: string) {
     })
     .catch((e) => console.error(e));
 }
+
+export function formatDate(date: string) {
+  const formattedDate = new Date(date).toLocaleString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
+
+  return formattedDate;
+}

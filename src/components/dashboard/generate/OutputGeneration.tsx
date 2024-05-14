@@ -3,7 +3,7 @@
 // The component is reactive, showing loading indicators or images based on the current state.
 
 import { FC } from 'react';
-import EmptyState from '../../../assets/images/profile.png';
+import EmptyState from '@/assets/images/profile.png';
 import Image from 'next/image';
 import { LuLoader } from 'react-icons/lu';
 import { Button } from '@/components/ui/button';

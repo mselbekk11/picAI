@@ -7,7 +7,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import EmptyState from '../../../assets/images/profile.png';
+import EmptyState from '@/assets/images/profile.png';
 
 const Models = async () => {
   const supabase = supabaseServerClient();
@@ -50,15 +50,15 @@ const Models = async () => {
                       <Badge
                         variant='purple'
                         className={cn(
-                          'capitalize absolute top-4 left-4',
-                          model.status === 'processing' && 'bg-orange-400 text-white hover:bg-orange-300'
+                          'capitalize absolute top-4 left-4 rounded-xl',
+                          model.status === 'processing' && 'bg-orange-400/80 text-white'
                         )}>
                         {model.status}
                       </Badge>
                     </div>
                     {model.status === 'processing' ? (
                       <Badge variant='secondary' className='w-fit text-xs font-normal mt-2'>
-                        Getting your model ready {formatDistanceToNow(model.eta)}
+                        Getting your model ready: {formatDistanceToNow(model.eta)}
                       </Badge>
                     ) : (
                       <div className='text-sm text-[#9E9E9E]'>
@@ -80,12 +80,11 @@ const Models = async () => {
         </div>
       ) : (
         // Button (modal) to generate a new model if no models are found
-        <div className='flex flex-col gap-4 items-center justify-center h-[calc(100vh-85px)] max-w-lg mx-auto'>
-          <p className='text-lg text-grey text-center font-medium px-4 mb-4'>
+        <div className='flex flex-col items-center justify-center h-[calc(100vh-85px)] max-w-lg mx-auto'>
+          <p className='text-lg text-grey text-center font-medium px-4 mb-7'>
             Get started by training your first model.
           </p>
-          {/* <EmptyStateIcon /> */}
-          <Image src={EmptyState} alt='Empty-state' height={347} width={347} />
+          <Image src={EmptyState} alt='Empty-state' height={347} width={347} className='mb-14' />
           <ModalTrainModel />
         </div>
       )}
