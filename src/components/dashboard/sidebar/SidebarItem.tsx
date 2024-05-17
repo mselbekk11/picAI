@@ -1,17 +1,12 @@
 'use client';
 
-import { FC, ReactNode } from 'react';
 import { cn } from '@/utils/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { buttonVariants } from '@/components/ui/button';
+import { FC, ReactNode } from 'react';
 
 interface SidebarItemProps {
-  route: {
-    icon: ReactNode;
-    label: string;
-    path: string;
-  };
+  route: { icon: ReactNode; label: string; path: string };
 }
 
 const SidebarItem: FC<SidebarItemProps> = ({ route }) => {
@@ -23,12 +18,11 @@ const SidebarItem: FC<SidebarItemProps> = ({ route }) => {
     <Link
       href={route.path}
       className={cn(
-        buttonVariants({ variant: 'light-gray' }),
-        isActive &&
-          'border !border-[#E8E8E8] dark:!border-dark rounded-lg bg-light-white dark:bg-light-dark/10 !text-[#3E3E3E] dark:!text-white'
+        'w-full h-9 px-4 py-2 flex justify-start bg-transparent gap-2 text-sm font-semibold border border-transparent hover:border-border hover:bg-secondary rounded-lg text-subtle tracking-tight',
+        isActive && 'border-border rounded-lg !text-default bg-secondary'
       )}>
       <div>{route.icon}</div>
-      <span className='text-[14px]'>{route.label}</span>
+      <span className='text-sm'>{route.label}</span>
     </Link>
   );
 };

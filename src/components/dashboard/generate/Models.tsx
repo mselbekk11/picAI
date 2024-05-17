@@ -25,7 +25,7 @@ const Models = async () => {
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
             {/* Display the generated models with status */}
             {models.map((model) => (
-              <Card key={model.id} className='border border-light dark:border-gray-500/10 relative'>
+              <Card key={model.id} className='border relative'>
                 <CardContent className='p-2'>
                   <Link href={`/home/${model.model_id}`}>
                     <Image
@@ -38,9 +38,7 @@ const Models = async () => {
                   </Link>
 
                   <div className='flex flex-col mt-2'>
-                    <p className='text-lg font-semibold text-grey dark:text-white mb-2'>
-                      {sentenceCase(model.name)}
-                    </p>
+                    <p className='text-lg font-semibold text-default mb-2'>{sentenceCase(model.name)}</p>
                     <div className='text-sm flex justify-between mb-1 '>
                       <div className='flex gap-2'>
                         <span className='capitalize'>{model.type}</span>
@@ -61,7 +59,7 @@ const Models = async () => {
                         Getting your model ready: {formatDistanceToNow(model.eta)}
                       </Badge>
                     ) : (
-                      <div className='text-sm text-[#9E9E9E]'>
+                      <div className='text-sm text-subtle/70'>
                         <p>
                           <span className='font-medium mr-2'>Trained:</span>
                           {formatDistanceToNow(model.trained_at!)}
@@ -80,8 +78,8 @@ const Models = async () => {
         </div>
       ) : (
         // Button (modal) to generate a new model if no models are found
-        <div className='flex flex-col items-center justify-center h-[calc(100vh-85px)] max-w-lg mx-auto'>
-          <p className='text-lg text-grey text-center font-medium px-4 mb-7'>
+        <div className='flex flex-col items-center justify-center h-[calc(100vh-88px)] max-w-lg mx-auto'>
+          <p className='text-lg text-default text-center font-medium px-4 mb-7'>
             Get started by training your first model.
           </p>
           <Image src={EmptyState} alt='Empty-state' height={347} width={347} className='mb-14' />

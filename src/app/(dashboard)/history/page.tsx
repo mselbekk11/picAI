@@ -26,9 +26,9 @@ const page = async () => {
           ))}
         </div>
       ) : (
-        <div className='flex flex-col justify-center items-center h-[calc(100vh-85px)]'>
+        <div className='flex flex-col justify-center items-center h-[calc(100vh-88px)]'>
           <Image src={EmptyState} alt='Empty-state' height={330} width={347} className='mb-2' />
-          <p className='text-center text-lg font-semibold text-gray-500'>No Generations Found</p>
+          <p className='text-center text-lg font-semibold text-default'>No Generations Found</p>
         </div>
       )}
     </div>

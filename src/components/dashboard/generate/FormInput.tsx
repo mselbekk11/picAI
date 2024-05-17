@@ -99,7 +99,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
     <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
       <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
         <div className='mb-6'>
-          <p className='font-semibold text-grey/70 dark:text-white'>Model: {sentenceCase(model.name)}</p>
+          <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
         </div>
 
         <form className='flex flex-col justify-between'>

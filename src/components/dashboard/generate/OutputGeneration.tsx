@@ -21,13 +21,13 @@ const blurImageDataUrl =
 
 const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImages }) => {
   return (
-    <div className='w-full lg:w-1/2 pl-0 lg:pl-7 lg:border-l border-[#ECECEC] dark:border-[#272626]'>
+    <div className='w-full lg:w-1/2 pl-0 lg:pl-7 lg:border-l'>
       <div className='h-full'>
         {isPending ? (
           <div className='flex flex-col justify-center items-center mb-16 mt-10'>
             <div className='flex flex-col items-center justify-center'>
               <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
-              <p className='text-base font-medium text-center  text-input-title dark:text-white mb-2'>
+              <p className='text-base font-medium text-center text-default mb-2'>
                 Your images will be ready in less than a minute. You can wait or find your generations later
                 in the Hostory.
               </p>
@@ -36,7 +36,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
           </div>
         ) : generatedImages?.length ? (
           <div className=''>
-            <p className='text-input-title dark:text-white text-sm font-semibold mb-4'>Output</p>
+            <p className='text-default text-sm font-semibold mb-4'>Output</p>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 w-full'>
               {generatedImages?.map((imageUrl, index) => (
                 <div key={index} className='relative group'>
@@ -45,7 +45,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
                     alt=''
                     width={250}
                     height={250}
-                    className='border rounded-md mx-auto w-full dark:border-dark'
+                    className='border rounded-md mx-auto w-full'
                     placeholder='blur'
                     blurDataURL={blurImageDataUrl}
                   />
@@ -65,7 +65,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
         ) : (
           <div>
             <div className='flex flex-col justify-center items-center'>
-              <p className='text-base font-medium text-center mb-5 mt-10 text-input-title dark:text-white'>
+              <p className='text-base font-medium text-center mb-5 mt-10 text-default'>
                 Your output will be displayed here
               </p>
               <Image src={EmptyState} alt='Empty-state' height={347} width={347} />
