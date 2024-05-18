@@ -1,7 +1,7 @@
 import { RiLayoutGridFill } from 'react-icons/ri';
 import { MdHistory } from 'react-icons/md';
 
-export const SidebarRoutes = [
+export const sidebarRoutes = [
   {
     icon: <RiLayoutGridFill className='size-5' />,
     label: 'Home',

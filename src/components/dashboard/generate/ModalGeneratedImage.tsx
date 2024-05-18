@@ -78,7 +78,7 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
                 Cancel
               </Button>
             </DialogClose>
-            <Link href={`/home/${generation.model_id}`} className='w-full'>
+            <Link href={`/home/${generation.model_id}?form=true`} className='w-full'>
               <Button className='w-full'>Generate New</Button>
             </Link>
           </DialogFooter>

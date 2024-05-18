@@ -2,8 +2,8 @@ import Logo from '@/components/Logo';
 import SidebarItem from './SidebarItem';
 import DropdownAccount from './DropdownAccount';
 import SidebarUpgradePlan from './SidebarUpgradePlan';
-import ModalTrainModel from '@/components/dashboard/generate/ModalTrainModel';
-import { SidebarRoutes } from './content';
+import ModalTrainModel from '@/components/dashboard/model/ModalTrainModel';
+import { sidebarRoutes } from './content';
 
 const Sidebar = () => {
   return (
@@ -17,7 +17,7 @@ const Sidebar = () => {
         </div>
 
         <div className='space-y-1'>
-          {SidebarRoutes.map((route, index) => (
+          {sidebarRoutes.map((route, index) => (
             <SidebarItem key={index} route={route} />
           ))}
         </div>

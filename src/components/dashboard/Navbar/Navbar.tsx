@@ -1,4 +1,4 @@
-import { SelectTheme } from '../../SelectTheme';
+import { SelectTheme } from './SelectTheme';
 import MobileSidebar from '../sidebar/MobileSidebar';
 import { RxExternalLink } from 'react-icons/rx';
 import Link from 'next/link';

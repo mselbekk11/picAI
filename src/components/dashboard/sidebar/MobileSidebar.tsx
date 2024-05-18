@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { FaPlus } from 'react-icons/fa';
 import DropdownAccount from './DropdownAccount';
 import SidebarUpgradePlan from './SidebarUpgradePlan';
-import { SidebarRoutes } from './content';
+import { sidebarRoutes } from './content';
 import MobileSidebarItem from './MobileSidebarItem';
 
 const MobileSidebar = () => {
@@ -29,7 +29,7 @@ const MobileSidebar = () => {
             </Link>
 
             <div className='space-y-1'>
-              {SidebarRoutes.map((route, index) => (
+              {sidebarRoutes.map((route, index) => (
                 <MobileSidebarItem key={index} route={route} />
               ))}
             </div>

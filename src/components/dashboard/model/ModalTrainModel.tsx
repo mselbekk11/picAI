@@ -25,7 +25,7 @@ import { IoCloudUploadOutline } from 'react-icons/io5';
 import { SubmitButton } from '../../SubmitButton';
 import { finetuneModelFn } from '@/app/(dashboard)/home/actions';
 import { useRouter } from 'next/navigation';
-import { toast } from '../../ui/use-toast';
+import { toast } from '@/components/ui/use-toast';
 import { FaPlus } from 'react-icons/fa6';
 
 interface ModalTrainModelProps {

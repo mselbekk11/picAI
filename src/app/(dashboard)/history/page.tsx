@@ -1,7 +1,7 @@
 import { supabaseServerClient } from '@/utils/supabase/server';
 import EmptyState from '@/assets/images/profile.png';
 import Image from 'next/image';
-import ModalGeneratedImage from '@/components/dashboard/history/ModalGeneratedImage';
+import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedImage';
 
 const History = async () => {
   const supabase = supabaseServerClient();
