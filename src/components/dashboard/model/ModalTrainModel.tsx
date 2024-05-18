@@ -25,7 +25,7 @@ import { IoCloudUploadOutline } from 'react-icons/io5';
 import { SubmitButton } from '../../SubmitButton';
 import { finetuneModelFn } from '@/app/(dashboard)/home/actions';
 import { useRouter } from 'next/navigation';
-import { toast } from '../../ui/use-toast';
+import { toast } from '@/components/ui/use-toast';
 import { FaPlus } from 'react-icons/fa6';
 
 interface ModalTrainModelProps {
@@ -123,8 +123,8 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
       </DialogTrigger>
       <DialogContent className='rounded-lg'>
         <DialogHeader>
-          <DialogTitle className='text-[#101828] font-semibold'>Finetune your model</DialogTitle>
-          <DialogDescription className='text-[#83888B] text-sm mt-2'>
+          <DialogTitle className='text-default font-semibold'>Finetune your model</DialogTitle>
+          <DialogDescription className='text-subtle text-sm mt-2'>
             Train your model with images to generate headshots.
           </DialogDescription>
         </DialogHeader>
@@ -155,16 +155,16 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
               <div
                 {...getRootProps()}
                 className={cn(
-                  'border-2 border-dashed border-gray-300 rounded-lg py-4 text-center cursor-pointer hover:border-primary'
+                  'border-2 border-dashed rounded-lg py-4 text-center cursor-pointer hover:border-primary'
                 )}>
                 <Input {...getInputProps()} />
                 <div className='my-4 flex flex-col items-center'>
                   <IoCloudUploadOutline className='size-5 mb-4' />
                   <div>
-                    <span className='font-semibold text-[#0F6FFF] mr-1'>Click to upload</span>
-                    <span className='text-[#475467] text-sm'>or drag and drop</span>
+                    <span className='font-semibold text-primary mr-1'>Click to upload</span>
+                    <span className='text-subtle text-sm'>or drag and drop</span>
                   </div>
-                  <div className='text-[#475467] text-xs mt-1'>PNG, JPG (max. 4MB)</div>
+                  <div className='text-subtle text-xs mt-1'>PNG, JPG (max. 4MB)</div>
                 </div>
               </div>
             </InputWrapper>

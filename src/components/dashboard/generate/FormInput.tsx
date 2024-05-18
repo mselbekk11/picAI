@@ -6,20 +6,19 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { TypeHeadshotGeneration, TypeHeadshotModel } from '@/types/types';
-import InputWrapper from '../../InputWrapper';
-import { SubmitButton } from '../../SubmitButton';
+import { TypeHeadshotModel } from '@/types/types';
+import InputWrapper from '@/components/InputWrapper';
+import { SubmitButton } from '@/components/SubmitButton';
 import { errorToast, sentenceCase } from '@/utils/utils';
-import { Textarea } from '../../ui/textarea';
+import { Textarea } from '@/components/ui/textarea';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import OutputGeneration from './OutputGeneration';
 import { Input } from '@/components/ui/input';
-import { generateHeadshotFn } from '@/app/(dashboard)/home/[...id]/actions';
+import { generateHeadshotFn } from '@/app/(dashboard)/home/[id]/actions';
 
 interface FormInputProps {
   model: TypeHeadshotModel;
-  generations?: TypeHeadshotGeneration[];
 }
 
 type FormFields = {
@@ -27,16 +26,13 @@ type FormFields = {
   'neg-prompt': string;
 };
 
-const FormInput: FC<FormInputProps> = ({ model, generations }) => {
+const FormInput: FC<FormInputProps> = ({ model }) => {
   const supabase = supabaseBrowserClient();
 
   const [isPending, setIsPending] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormFields>({
-    prompt: generations?.[0].prompt ?? '',
-    'neg-prompt': generations?.[0].negative_prompt ?? '',
-  });
+  const [formData, setFormData] = useState<FormFields>({ prompt: '', 'neg-prompt': '' });
   const [generationId, setGenerationId] = useState<string>();
-  const [generatedImages, setGeneratedImages] = useState<string[]>(generations?.[0].image_urls ?? []);
+  const [generatedImages, setGeneratedImages] = useState<string[]>([]);
 
   const router = useRouter();
 
@@ -99,10 +95,10 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
     <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
       <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
         <div className='mb-6'>
-          <p className='font-semibold text-grey/70 dark:text-white'>Model: {sentenceCase(model.name)}</p>
+          <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
         </div>
 
-        <form className='flex flex-col justify-between'>
+        <form className='flex flex-col justify-between px-1'>
           <div className='flex flex-col gap-4 mb-8'>
             <InputWrapper id='prompt' label='Describe the image to be generated'>
               <Textarea

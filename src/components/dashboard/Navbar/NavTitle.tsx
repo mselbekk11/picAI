@@ -17,7 +17,7 @@ const NavTitle: FC<NavTitleProps> = () => {
           ? 'Pricing'
           : 'Headshot Generator';
 
-  return <div className='text-lg font-semibold text-grey dark:text-white'>{title}</div>;
+  return <div className='text-lg font-semibold text-default'>{title}</div>;
 };
 
 export default NavTitle;
