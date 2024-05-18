@@ -38,13 +38,6 @@ export default async function GenerateImage({ params }: { params: { id: string }
     );
   }
 
-  // const { data: generations } = await supabase
-  //   .from('headshot_generations')
-  //   .select()
-  //   .eq('model_id', params.id[0])
-  //   .not('image_urls', 'is', null)
-  //   .order('created_at', { ascending: false });
-
   return (
     <div>
       <FormInput model={model} />

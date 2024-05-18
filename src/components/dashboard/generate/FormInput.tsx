@@ -102,7 +102,7 @@ const FormInput: FC<FormInputProps> = ({ model, generations }) => {
           <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
         </div>
 
-        <form className='flex flex-col justify-between'>
+        <form className='flex flex-col justify-between px-1'>
           <div className='flex flex-col gap-4 mb-8'>
             <InputWrapper id='prompt' label='Describe the image to be generated'>
               <Textarea

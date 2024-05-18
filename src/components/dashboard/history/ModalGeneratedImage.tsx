@@ -11,7 +11,7 @@ import {
 import { TypeHeadshotGeneration } from '@/types/types';
 import Image from 'next/image';
 import { supabaseServerClient } from '@/utils/supabase/server';
-import { formatDate } from '@/utils/utils';
+import { formatDate, sentenceCase } from '@/utils/utils';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
@@ -43,7 +43,9 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
       </DialogTrigger>
       <DialogContent className='w-11/12 rounded-lg p-4'>
         <DialogHeader className='h-10 border-b'>
-          <DialogTitle className='text-lg font-medium line-clamp-1'>{generation.prompt}</DialogTitle>
+          <DialogTitle className='text-lg font-medium line-clamp-1'>
+            {sentenceCase(generation.prompt)}
+          </DialogTitle>
         </DialogHeader>
 
         <div className='space-y-5'>
@@ -57,7 +59,7 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
 
           <div>
             <p className='font-semibold'>Prompt</p>
-            <p className='text-sm line-clamp-2'>{generation.prompt}</p>
+            <p className='text-sm line-clamp-2'>{sentenceCase(generation.prompt)}</p>
           </div>
 
           <div className='flex items-start gap-6'>

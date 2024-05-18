@@ -1,7 +1,7 @@
 import React from 'react';
 import Models from '@/components/dashboard/generate/Models';
 
-const page = async () => {
+const Home = async () => {
   return (
     <div className='flex flex-col justify-between'>
       <Models />
@@ -9,4 +9,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Home;

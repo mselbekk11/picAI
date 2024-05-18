@@ -18,7 +18,7 @@ const SidebarItem: FC<SidebarItemProps> = ({ route }) => {
     <Link
       href={route.path}
       className={cn(
-        'w-full h-10 px-4 py-2 flex justify-start gap-2 text-sm font-semibold border border-transparent hover:border-border hover:bg-secondary rounded-lg text-subtle tracking-tight',
+        'w-full h-10 flex gap-2 px-4 py-2 text-sm font-medium border border-transparent hover:border-border rounded-lg text-subtle tracking-tight',
         isActive && 'border-border !text-default bg-secondary'
       )}>
       <div>{route.icon}</div>
