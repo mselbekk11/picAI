@@ -3,7 +3,7 @@
 
 'use client';
 
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import {
   Dialog,
   DialogClose,
@@ -27,6 +27,7 @@ import { finetuneModelFn } from '@/app/(dashboard)/home/actions';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { FaPlus } from 'react-icons/fa6';
+import { supabaseBrowserClient } from '@/utils/supabase/client';
 
 interface ModalTrainModelProps {
   buttonText?: string;
@@ -36,7 +37,30 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
 
+  // State to check if the user has reached the limit of content creations
+  const [limitExceeded, setIsLimitExceeded] = useState(false);
+
   const router = useRouter();
+
+  //function to check the limit of content creations and set the state accordingly
+  const limitUser = useCallback(async () => {
+    const supabase = supabaseBrowserClient();
+    const { error, count } = await supabase
+      .from('headshot_models')
+      .select('*', { count: 'exact', head: true });
+
+    if (error) {
+      return errorToast(error.message);
+    }
+    if (count && count >= 1) {
+      setIsLimitExceeded(true);
+    }
+  }, []);
+
+  //checking on load if the user has reached the limit of content creations
+  useEffect(() => {
+    limitUser();
+  }, [limitUser]);
 
   // This function handles image uploads and validates the uploaded files.
   const handleImageUploads = useCallback(
@@ -91,6 +115,12 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
   // The function also handles navigation and user feedback via toast messages.
   // In case of API errors or successful training, it updates the UI and navigates as needed.
   const trainModel = async (inputData: FormData) => {
+    if (limitExceeded) {
+      return errorToast(
+        'You have reached the limit of content creations. Please purchase a plan to continue.',
+        'Limit Exceeded'
+      );
+    }
     images.forEach((file) => {
       inputData.append(`images`, file);
     });

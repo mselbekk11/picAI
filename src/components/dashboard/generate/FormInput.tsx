@@ -5,7 +5,7 @@
 
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { TypeHeadshotModel } from '@/types/types';
 import InputWrapper from '@/components/InputWrapper';
 import { SubmitButton } from '@/components/SubmitButton';
@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import OutputGeneration from './OutputGeneration';
 import { Input } from '@/components/ui/input';
 import { generateHeadshotFn } from '@/app/(dashboard)/home/[id]/actions';
+import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceeded';
 
 interface FormInputProps {
   model: TypeHeadshotModel;
@@ -33,8 +34,29 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
   const [formData, setFormData] = useState<FormFields>({ prompt: '', 'neg-prompt': '' });
   const [generationId, setGenerationId] = useState<string>();
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
+  // State to check if the user has reached the limit of content creations
+  const [limitExceeded, setIsLimitExceeded] = useState(false);
 
   const router = useRouter();
+
+  //function to check the limit of content creations and set the state accordingly
+  const limitUser = useCallback(async () => {
+    const { error, count } = await supabase
+      .from('headshot_generations')
+      .select('*', { count: 'exact', head: true });
+
+    if (error) {
+      return errorToast(error.message);
+    }
+    if (count && count >= 5) {
+      setIsLimitExceeded(true);
+    }
+  }, []);
+
+  //checking on load if the user has reached the limit of content creations
+  useEffect(() => {
+    limitUser();
+  }, [limitUser]);
 
   // Handle input change for the form fields and update the formData state with user input data
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -93,6 +115,8 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
 
   return (
     <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
+      {limitExceeded && <ModalLimitExceeded isModalOpen={limitExceeded} />}
+
       <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
         <div className='mb-6'>
           <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
@@ -122,7 +146,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
             </InputWrapper>
           </div>
 
-          <SubmitButton className='w-full' formAction={handleGeneration}>
+          <SubmitButton className='w-full' formAction={handleGeneration} disabled={limitExceeded}>
             Generate
           </SubmitButton>
         </form>
