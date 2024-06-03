@@ -36,9 +36,7 @@ interface ModalTrainModelProps {
 const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
-
-  // State to check if the user has reached the limit of content creations
-  const [limitExceeded, setIsLimitExceeded] = useState(false);
+  const [hasLimitExceeded, setHasLimitExceeded] = useState(false);
 
   const router = useRouter();
 
@@ -53,7 +51,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
       return errorToast(error.message);
     }
     if (count && count >= 1) {
-      setIsLimitExceeded(true);
+      setHasLimitExceeded(true);
     }
   }, []);
 
@@ -115,7 +113,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
   // The function also handles navigation and user feedback via toast messages.
   // In case of API errors or successful training, it updates the UI and navigates as needed.
   const trainModel = async (inputData: FormData) => {
-    if (limitExceeded) {
+    if (hasLimitExceeded) {
       return errorToast(
         'You have reached the limit of content creations. Please purchase a plan to continue.',
         'Limit Exceeded'
@@ -226,7 +224,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                 Cancel
               </Button>
             </DialogClose>
-            <SubmitButton className='w-full' formAction={trainModel}>
+            <SubmitButton className='w-full' formAction={trainModel} disabled={hasLimitExceeded}>
               Train
             </SubmitButton>
           </DialogFooter>

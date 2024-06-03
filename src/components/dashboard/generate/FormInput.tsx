@@ -34,8 +34,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
   const [formData, setFormData] = useState<FormFields>({ prompt: '', 'neg-prompt': '' });
   const [generationId, setGenerationId] = useState<string>();
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
-  // State to check if the user has reached the limit of content creations
-  const [limitExceeded, setIsLimitExceeded] = useState(false);
+  const [hasLimitExceeded, setHasLimitExceeded] = useState(false);
 
   const router = useRouter();
 
@@ -49,9 +48,9 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
       return errorToast(error.message);
     }
     if (count && count >= 5) {
-      setIsLimitExceeded(true);
+      setHasLimitExceeded(true);
     }
-  }, []);
+  }, [supabase]);
 
   //checking on load if the user has reached the limit of content creations
   useEffect(() => {
@@ -115,7 +114,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
 
   return (
     <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
-      {limitExceeded && <ModalLimitExceeded isModalOpen={limitExceeded} />}
+      <ModalLimitExceeded isModalOpen={hasLimitExceeded} />
 
       <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
         <div className='mb-6'>
@@ -146,7 +145,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
             </InputWrapper>
           </div>
 
-          <SubmitButton className='w-full' formAction={handleGeneration} disabled={limitExceeded}>
+          <SubmitButton className='w-full' formAction={handleGeneration} disabled={hasLimitExceeded}>
             Generate
           </SubmitButton>
         </form>
