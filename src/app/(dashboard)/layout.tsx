@@ -27,7 +27,7 @@ export default async function Layout({ children }: Props) {
           <Sidebar />
         </div>
 
-        <div className='w-full overflow-auto'>
+        <div className='w-full max-w-7xl overflow-auto'>
           <Navbar />
           {children}
         </div>
