@@ -40,8 +40,6 @@ Ensure you have the following installed:
    ```sh
    cd [YOUR_APP_NAME]
 
-   git remote remove origin
-
    git checkout headshot-generator
    ```
 
