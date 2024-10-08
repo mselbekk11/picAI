@@ -1,13 +1,13 @@
 import Logo from '@/components/Logo';
 import SidebarItem from './SidebarItem';
 import DropdownAccount from './DropdownAccount';
-import SidebarUpgradePlan from './SidebarUpgradePlan';
+// import SidebarUpgradePlan from './SidebarUpgradePlan';
 import ModalTrainModel from '@/components/dashboard/model/ModalTrainModel';
 import { sidebarRoutes } from './content';
 
 const Sidebar = () => {
   return (
-    <div className='h-full border rounded-xl p-2.5 flex flex-col justify-between'>
+    <div className='h-full p-2.5 flex flex-col justify-between border-r'>
       <div>
         <div className='mb-6'>
           <Logo />
@@ -24,7 +24,7 @@ const Sidebar = () => {
       </div>
 
       <div className='space-y-3'>
-        <SidebarUpgradePlan />
+        {/* <SidebarUpgradePlan /> */}
         <DropdownAccount />
       </div>
     </div>

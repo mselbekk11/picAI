@@ -16,7 +16,8 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
   const supabase = supabaseServerClient();
   const user = await getUserDetails();
 
-  const origin = headers().get('origin');
+  // const origin = headers().get('origin');
+  const origin = 'https://09bb-2601-640-8001-b470-9199-dc5a-3f8d-73ab.ngrok-free.app';
 
   try {
     if (user == null) {

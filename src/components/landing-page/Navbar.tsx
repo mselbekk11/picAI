@@ -19,7 +19,7 @@ const NavbarRoutes = [
 
 export default async function Navbar() {
   return (
-    <div className='w-full text-white bg-lp-background'>
+    <div className='w-full text-white bg-black'>
       <div className={cn('max-w-6xl mx-auto flex justify-between items-center p-4')}>
         <Logo />
 

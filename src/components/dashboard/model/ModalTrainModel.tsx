@@ -50,7 +50,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
     if (error) {
       return errorToast(error.message);
     }
-    if (count && count >= 1) {
+    if (count && count >= 100) {
       setHasLimitExceeded(true);
     }
   }, []);

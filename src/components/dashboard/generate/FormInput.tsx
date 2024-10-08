@@ -47,7 +47,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
     if (error) {
       return errorToast(error.message);
     }
-    if (count && count >= 5) {
+    if (count && count >= 100) {
       setHasLimitExceeded(true);
     }
   }, [supabase]);

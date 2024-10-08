@@ -24,7 +24,8 @@ export default function Logo() {
   return (
     <Link href='https://www.builderkit.ai/#pricing'>
       <div className='flex items-center gap-2 w-fit'>
-        <Image src={logoSrc} width={150} height={128} alt='logo' />
+        {/* <Image src={logoSrc} width={150} height={128} alt='logo' /> */}
+        <h1 className='text-white text-2xl font-bold'>PicAI</h1>
       </div>
     </Link>
   );
