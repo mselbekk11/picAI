@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalTrainModel from '@/components/dashboard/model/ModalTrainModel';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabaseServerClient } from '@/utils/supabase/server';
 import { cn, sentenceCase } from '@/utils/utils';
 import { formatDistanceToNow } from 'date-fns';
@@ -30,50 +30,57 @@ const Models = async () => {
               {/* Display the generated models with status */}
               {models.map((model) => (
                 <Card key={model.id} className='border relative'>
-                  <CardContent className='p-2'>
+                  <CardContent className='p-0'>
                     <Link href={`/home/${model.model_id}`}>
                       <Image
                         src={model.images[0]}
                         alt=''
                         width={320}
                         height={450}
-                        className='w-full h-[188px] object-cover rounded-md'
+                        className='w-full h-[188px] object-cover rounded-t-lg'
                       />
                     </Link>
 
-                    <div className='flex flex-col mt-2'>
-                      <p className='text-lg font-semibold text-default mb-2'>{sentenceCase(model.name)}</p>
-                      <div className='text-sm flex justify-between mb-1 '>
-                        <div className='flex gap-2'>
-                          <span className='capitalize'>{model.type}</span>
-                          <span>-</span>
-                          <span>{model.images.length} Image</span>
+                    <div className='flex flex-col'>
+                      <CardHeader>
+                        <CardTitle>{sentenceCase(model.name)}</CardTitle>
+                        <div className='text-sm flex justify-between mb-1 '>
+                          <Badge
+                            variant='green'
+                            className={cn(
+                              'capitalize absolute top-4 left-4 rounded-lg',
+                              model.status === 'processing' && 'bg-orange-400/80 text-white'
+                            )}>
+                            {model.status}
+                          </Badge>
                         </div>
-                        <Badge
-                          variant='purple'
-                          className={cn(
-                            'capitalize absolute top-4 left-4 rounded-xl',
-                            model.status === 'processing' && 'bg-orange-400/80 text-white'
-                          )}>
-                          {model.status}
-                        </Badge>
-                      </div>
-                      {model.status === 'processing' ? (
-                        <Badge variant='secondary' className='w-fit text-xs font-normal mt-2'>
-                          Getting your model ready: {formatDistanceToNow(model.eta)}
-                        </Badge>
-                      ) : (
-                        <div className='text-sm text-subtle/70'>
-                          <p>
-                            <span className='font-medium mr-2'>Trained:</span>
-                            {formatDistanceToNow(model.trained_at!)}
-                          </p>
-                          <p>
-                            <span className='font-medium mr-2'>Expires:</span>
-                            {formatDistanceToNow(model.expires_at!)}
-                          </p>
-                        </div>
-                      )}
+                        {model.status === 'processing' ? (
+                          <Badge variant='secondary' className='w-fit text-xs font-normal mt-2'>
+                            Getting your model ready: {formatDistanceToNow(model.eta)}
+                          </Badge>
+                        ) : (
+                          <div className='flex flex-col gap-1'>
+                            <CardDescription className='text-gray-400 text-xs'>
+                              <span className=''>Gender: </span>
+                              <span className='capitalize'>{model.type}</span>
+                            </CardDescription>
+                            <CardDescription className='text-gray-400 text-xs'>
+                              <span className=''>Images: </span>
+                              <span>{model.images.length}</span>
+                            </CardDescription>
+
+                            <CardDescription className='text-gray-400 text-xs'>
+                              <span className=''>Trained: </span>
+                              {formatDistanceToNow(model.trained_at!)}
+                            </CardDescription>
+                            <CardDescription className='text-gray-400 text-xs'>
+                              <span className=''>Expires: </span>
+                              {formatDistanceToNow(model.expires_at!)}
+                            </CardDescription>
+                          </div>
+                        )}
+                      </CardHeader>
+                      {/* <p className='text-lg font-semibold text-default mb-2'>{sentenceCase(model.name)}</p> */}
                     </div>
                   </CardContent>
                 </Card>

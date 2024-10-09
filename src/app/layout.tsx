@@ -12,7 +12,7 @@ const font = Inter({ subsets: ['latin'] });
 // Metadata for SEO
 export const metadata: Metadata = {
   metadataBase: new URL('https://builderkit.ai'),
-  title: 'Headshot Generator - BuilderKit',
+  title: 'AI Photo Generator | PicAI',
   description: 'Boilerplate for Headshot Generator',
   openGraph: {
     type: 'website',

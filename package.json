@@ -29,6 +29,7 @@
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "lucide-react": "^0.451.0",
     "next": "latest",
     "next-themes": "^0.3.0",
     "postcss": "8.4.33",

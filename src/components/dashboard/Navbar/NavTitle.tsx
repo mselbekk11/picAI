@@ -10,9 +10,9 @@ const NavTitle: FC<NavTitleProps> = () => {
 
   const title =
     pathname === '/home'
-      ? 'Headshot Generator'
+      ? 'Models'
       : pathname === '/history'
-        ? 'History'
+        ? 'Images'
         : pathname === '/pricing'
           ? 'Pricing'
           : 'Headshot Generator';

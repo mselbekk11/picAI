@@ -23,11 +23,11 @@ export default async function Layout({ children }: Props) {
     // Wraps a ThemeProvider around the Navbar and children components. It allows user to switch between light and dark themes.
     <ThemeProvider attribute='class' defaultTheme='dark' enableSystem disableTransitionOnChange>
       <div className='h-screen flex'>
-        <div className='w-72 hidden md:flex flex-col'>
+        <div className='w-80 hidden md:flex flex-col'>
           <Sidebar />
         </div>
 
-        <div className='w-full max-w-7xl overflow-auto pl-4'>
+        <div className='w-full max-w-7xl overflow-auto px-4'>
           <Navbar />
           {children}
         </div>

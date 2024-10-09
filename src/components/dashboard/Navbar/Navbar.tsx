@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   return (
-    <div className='h-14 flex items-center justify-between mb-4'>
+    <div className='h-14 flex items-center justify-between my-4'>
       <NavTitle />
 
       <div className='flex items-center gap-5'>

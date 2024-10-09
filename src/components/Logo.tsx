@@ -8,6 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Aperture } from 'lucide-react';
 
 export default function Logo() {
   const [logoSrc, setLogoSrc] = useState<string>('/light-logo.png');
@@ -23,9 +24,10 @@ export default function Logo() {
 
   return (
     <Link href='https://www.builderkit.ai/#pricing'>
-      <div className='flex items-center gap-2 w-fit'>
+      <div className='flex items-center gap-2 w-full justify-center'>
         {/* <Image src={logoSrc} width={150} height={128} alt='logo' /> */}
-        <h1 className='text-white text-2xl font-bold'>PicAI</h1>
+        <Aperture />
+        <h1 className='text-2xl font-bold'>PicAI</h1>
       </div>
     </Link>
   );
