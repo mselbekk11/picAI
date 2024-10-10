@@ -11,11 +11,11 @@ const Navbar = () => {
       <NavTitle />
 
       <div className='flex items-center gap-5'>
-        <div className='flex items-center gap-5 mr-2'>
+        {/* <div className='flex items-center gap-5 mr-2'>
           <SelectTheme />
 
           <div className='hidden md:flex items-center gap-3'></div>
-        </div>
+        </div> */}
         <div className='inline-block md:hidden'>
           <MobileSidebar />
         </div>

@@ -26,7 +26,7 @@ const DropdownAccount = async () => {
         <div
           className={cn(
             buttonVariants({ variant: 'secondary', size: 'lg' }),
-            'flex justify-start px-1.5 py-2.5 !w-full gap-2 cursor-pointer'
+            'flex justify-start px-4 py-2 !w-full gap-2 cursor-pointer'
           )}>
           <Image
             src={user?.user_metadata?.avatar_url ?? '/avatar.png'}
@@ -58,30 +58,30 @@ const DropdownAccount = async () => {
 
         <DropdownMenuSeparator />
 
-        <a href='mailto:vatsal1811@gmail.com'>
+        {/* <a href='mailto:vatsal1811@gmail.com'>
           <DropdownMenuItem className='cursor-pointer text-default'>
             <AiOutlineQuestionCircle className='size-5 mr-2' />
             Support
           </DropdownMenuItem>
-        </a>
+        </a> */}
 
         <DropdownMenuSeparator />
-        <Link href='/pricing'>
+        {/* <Link href='/pricing'>
           <DropdownMenuItem className='cursor-pointer text-default'>
             <AiOutlineDollarCircle className='size-5 mr-2' />
             Pricing
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-        </Link>
+        </Link> */}
 
         <ButtonSignout />
 
-        <div className='flex items-center m-2 mt-2.5 text-xs text-subtle'>
+        {/* <div className='flex items-center m-2 mt-2.5 text-xs text-subtle'>
           <a href=''>
             <span className='border-b'> Privacy policy</span> ,
             <span className='border-b'> Terms & conditions</span>
           </a>
-        </div>
+        </div> */}
       </DropdownContentWrapper>
     </DropdownMenu>
   );

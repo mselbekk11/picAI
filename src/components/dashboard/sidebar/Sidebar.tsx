@@ -3,11 +3,12 @@ import SidebarItem from './SidebarItem';
 import DropdownAccount from './DropdownAccount';
 // import SidebarUpgradePlan from './SidebarUpgradePlan';
 import ModalTrainModel from '@/components/dashboard/model/ModalTrainModel';
-import { sidebarRoutes } from './content';
+import { sidebarRoutes, bottomSidebarRoutes } from './content';
+import LogoutButton from './LogoutButton';
 
 const Sidebar = () => {
   return (
-    <div className='h-full p-2.5 flex flex-col justify-between border-r'>
+    <div className='h-full p-4 flex flex-col justify-between border-r'>
       <div>
         <div className='my-6'>
           <Logo />
@@ -25,7 +26,11 @@ const Sidebar = () => {
 
       <div className='space-y-3'>
         {/* <SidebarUpgradePlan /> */}
-        <DropdownAccount />
+        {bottomSidebarRoutes.map((route, index) => (
+          <SidebarItem key={index} route={route} />
+        ))}
+        {/* <DropdownAccount /> */}
+        <LogoutButton />
       </div>
     </div>
   );

@@ -2,6 +2,7 @@
 // import { MdHistory } from 'react-icons/md';
 import { House } from 'lucide-react';
 import { Image } from 'lucide-react';
+import { Settings } from 'lucide-react';
 
 export const sidebarRoutes = [
   {
@@ -14,5 +15,14 @@ export const sidebarRoutes = [
     icon: <Image className='size-5' />,
     label: 'Images',
     path: '/history',
+  },
+];
+
+export const bottomSidebarRoutes = [
+  {
+    // icon: <RiLayoutGridFill className='size-5' />,
+    icon: <Settings className='size-5' />,
+    label: 'Account Settings',
+    path: '/settings',
   },
 ];

@@ -8,6 +8,7 @@ import DropdownAccount from './DropdownAccount';
 import SidebarUpgradePlan from './SidebarUpgradePlan';
 import { sidebarRoutes } from './content';
 import MobileSidebarItem from './MobileSidebarItem';
+import LogoutButton from './LogoutButton';
 
 const MobileSidebar = () => {
   return (
@@ -36,9 +37,10 @@ const MobileSidebar = () => {
           </div>
 
           <div className='space-y-3'>
-            <SidebarUpgradePlan />
+            {/* <SidebarUpgradePlan /> */}
 
-            <DropdownAccount />
+            {/* <DropdownAccount /> */}
+            <LogoutButton />
           </div>
         </div>
       </SheetContent>
