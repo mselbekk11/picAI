@@ -12,8 +12,8 @@ export default function Login() {
     <div className='h-screen flex'>
       <div className='w-full flex flex-col items-center justify-center px-6'>
         <div className='text-2xl md:text-4xl font-medium mb-6 text-center space-y-2'>
-          <p>Headshot Generator Tool </p>
-          <p className='text-lg'>by Builderkit.ai</p>
+          <p>AI Photo Generator </p>
+          <p className='text-lg'>by picAI.so</p>
         </div>
         <h2 className='text-default text-sm mt-3 mb-9 font-medium'>Login or register with your email</h2>
         <div className='w-full sm:max-w-md flex flex-col gap-6 items-center'>
