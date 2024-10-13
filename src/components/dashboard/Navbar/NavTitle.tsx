@@ -11,7 +11,7 @@ const NavTitle: FC<NavTitleProps> = () => {
   const title =
     pathname === '/home'
       ? 'Models'
-      : pathname === '/history'
+      : pathname === '/images'
         ? 'Images'
         : pathname === '/pricing'
           ? 'Pricing'

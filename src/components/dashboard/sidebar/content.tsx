@@ -14,7 +14,7 @@ export const sidebarRoutes = [
   {
     icon: <Image className='size-5' />,
     label: 'Images',
-    path: '/history',
+    path: '/images',
   },
 ];
 
