@@ -8,7 +8,7 @@ import NavCta from './NavCta';
 
 const Navbar = () => {
   return (
-    <div className='h-14 flex items-center justify-between my-4'>
+    <div className='flex items-center justify-between my-6'>
       <NavTitle />
 
       <div className='flex items-center gap-5'>

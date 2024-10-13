@@ -8,11 +8,12 @@ import LogoutButton from './LogoutButton';
 
 const Sidebar = () => {
   return (
-    <div className='h-full p-4 flex flex-col justify-between border-r'>
+    <div className='h-full px-4 pb-4 flex flex-col justify-between border-r'>
       <div>
         <div className='my-6'>
           <Logo />
         </div>
+
         <div className='mb-3'>
           <ModalTrainModel buttonText='Train Model' />
         </div>

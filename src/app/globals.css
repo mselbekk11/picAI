@@ -110,3 +110,28 @@
   background-color: #dfdfdf;
   border-radius: 10px;
 }
+
+.animate {
+  display: inline-block;
+  background-image: linear-gradient(-45deg, #d5cefe, #215dff, #a99ded, #482be0) !important;
+  background-size: 300% !important;
+  background-clip: text;
+  -webkit-background-clip: text;
+  text-fill-color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: Gradient 10s ease infinite !important;
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  to {
+    background-position: 0 50%;
+  }
+}
