@@ -14,6 +14,7 @@ import { supabaseServerClient } from '@/utils/supabase/server';
 import { formatDate, sentenceCase } from '@/utils/utils';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import DeleteImageButton from './DeleteImageButton';
 
 interface ModalGeneratedImageProps {
   index: number;
@@ -72,13 +73,9 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
               <p className='text-sm'>{formatDate(generation?.created_at)}</p>
             </div>
           </div>
-          <DialogFooter>
-            <DialogClose className='w-full'>
-              <Button variant='outline' className='w-full'>
-                Cancel
-              </Button>
-            </DialogClose>
-            <Link href={`/home/${generation.model_id}?form=true`} className='w-full'>
+          <DialogFooter className='grid grid-cols-2 gap-2'>
+            <DeleteImageButton generationId={generation.id} imageIndex={index} />
+            <Link href={`/home/${generation.model_id}?form=true`} className=''>
               <Button className='w-full'>Generate New</Button>
             </Link>
           </DialogFooter>
