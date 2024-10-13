@@ -3,7 +3,7 @@ import EmptyState from '@/assets/images/profile.png';
 import Image from 'next/image';
 import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedImage';
 
-const History = async () => {
+const Images = async () => {
   const supabase = supabaseServerClient();
 
   // Get all the previously generated models from the database
@@ -35,4 +35,4 @@ const History = async () => {
   );
 };
 
-export default History;
+export default Images;
