@@ -21,7 +21,7 @@ const blurImageDataUrl =
 
 const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImages }) => {
   return (
-    <div className='w-full lg:w-1/2 pl-0 lg:pl-7 lg:border-l'>
+    <div className='w-full pl-0'>
       <div className='h-full'>
         {isPending ? (
           <div className='flex flex-col justify-center items-center mb-16 mt-10'>
@@ -29,15 +29,15 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
               <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
               <p className='text-base font-medium text-center text-default mb-2'>
                 Your images will be ready in less than a minute. You can wait or find your generations later
-                in the History.
+                in images.
               </p>
             </div>
             <Image src={EmptyState} alt='Empty-state' className='animate-pulse' height={347} width={347} />
           </div>
         ) : generatedImages?.length ? (
           <div className=''>
-            <p className='text-default text-sm font-semibold mb-4'>Output</p>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 w-full'>
+            <p className='text-default text-lg font-semibold my-4'>Results</p>
+            <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 w-full'>
               {generatedImages?.map((imageUrl, index) => (
                 <div key={index} className='relative group'>
                   <Image

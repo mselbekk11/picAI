@@ -9,6 +9,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import EmptyState from '@/assets/images/profile.png';
 import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceeded';
+import { Button } from '@/components/ui/button';
+import DeleteModalButton from '@/components/dashboard/generate/DeleteModalButton';
 
 const Models = async () => {
   const supabase = supabaseServerClient();
@@ -43,7 +45,7 @@ const Models = async () => {
 
                     <div className='flex flex-col'>
                       <CardHeader>
-                        <CardTitle>{sentenceCase(model.name)}</CardTitle>
+                        <CardTitle className='pb-2'>{sentenceCase(model.name)}</CardTitle>
                         <div className='text-sm flex justify-between mb-1 '>
                           <Badge
                             variant='green'
@@ -59,24 +61,13 @@ const Models = async () => {
                             Getting your model ready: {formatDistanceToNow(model.eta)}
                           </Badge>
                         ) : (
-                          <div className='flex flex-col gap-1'>
-                            <CardDescription className='text-gray-400 text-xs'>
-                              <span className=''>Gender: </span>
-                              <span className='capitalize'>{model.type}</span>
-                            </CardDescription>
-                            <CardDescription className='text-gray-400 text-xs'>
-                              <span className=''>Images: </span>
-                              <span>{model.images.length}</span>
-                            </CardDescription>
-
-                            <CardDescription className='text-gray-400 text-xs'>
-                              <span className=''>Trained: </span>
-                              {formatDistanceToNow(model.trained_at!)}
-                            </CardDescription>
-                            <CardDescription className='text-gray-400 text-xs'>
-                              <span className=''>Expires: </span>
-                              {formatDistanceToNow(model.expires_at!)}
-                            </CardDescription>
+                          <div className='grid grid-cols-2 gap-2'>
+                            <Link href={`/home/${model.model_id}`}>
+                              <Button variant='outline' className='w-full'>
+                                View
+                              </Button>
+                            </Link>
+                            <DeleteModalButton modelId={model.model_id} />
                           </div>
                         )}
                       </CardHeader>

@@ -8,6 +8,9 @@ import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedI
 import { supabaseServerClient } from '@/utils/supabase/server';
 import { IoMdAdd } from 'react-icons/io';
 import Link from 'next/link';
+import { CardDescription } from '@/components/ui/card';
+import { formatDistanceToNow } from 'date-fns';
+import { sentenceCase } from '@/utils/utils';
 
 type TypeParams = {
   params: { id: string };
@@ -16,6 +19,12 @@ type TypeParams = {
 
 export default async function GenerateImage({ params, searchParams }: TypeParams) {
   const supabase = supabaseServerClient();
+
+  // Get all the previously generated models from the database
+  const { data: models } = await supabase
+    .from('headshot_models')
+    .select()
+    .order('created_at', { ascending: false });
 
   const { data: model } = await supabase.from('headshot_models').select().eq('model_id', params.id).single();
 
@@ -33,21 +42,31 @@ export default async function GenerateImage({ params, searchParams }: TypeParams
       {searchParams?.form === 'true' ? (
         <FormInput model={model} />
       ) : (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mr-2'>
-          <Link href='?form=true'>
-            <div className='w-full h-[188px] flex items-center justify-center gap-1 bg-secondary border rounded-md'>
-              <IoMdAdd />
-              <p className='text-sm font-medium'>Generate headshot</p>
-            </div>
-          </Link>
+        <div>
+          <div className='flex mb-6'>
+            <h2 className='text-md font-semibold mr-2'>
+              Model: <span>{sentenceCase(model.name)}</span>
+            </h2>
+            <h2 className='text-gray-400 text-md font-semibold'>
+              (Expires: <span>{formatDistanceToNow(model.expires_at!)})</span>
+            </h2>
+          </div>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mr-2'>
+            <Link href='?form=true'>
+              <div className='w-full h-[188px] flex items-center justify-center gap-1 bg-secondary border rounded-md'>
+                <IoMdAdd />
+                <p className='text-sm font-medium'>Generate headshot</p>
+              </div>
+            </Link>
 
-          {generations?.map((generation) => (
-            <>
-              {generation.image_urls?.map((_, index) => (
-                <ModalGeneratedImage key={index} index={index} generation={generation} />
-              ))}
-            </>
-          ))}
+            {generations?.map((generation) => (
+              <>
+                {generation.image_urls?.map((_, index) => (
+                  <ModalGeneratedImage key={index} index={index} generation={generation} />
+                ))}
+              </>
+            ))}
+          </div>
         </div>
       )}
     </div>

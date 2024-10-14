@@ -16,7 +16,7 @@ const Images = async () => {
   return (
     <div>
       {generations && generations.length > 0 ? (
-        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mr-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-4'>
           {generations.map((generation) => (
             <>
               {generation.image_urls?.map((_, index) => (

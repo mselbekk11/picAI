@@ -17,6 +17,7 @@ import OutputGeneration from './OutputGeneration';
 import { Input } from '@/components/ui/input';
 import { generateHeadshotFn } from '@/app/(dashboard)/home/[id]/actions';
 import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceeded';
+import { Card } from '@/components/ui/card';
 
 interface FormInputProps {
   model: TypeHeadshotModel;
@@ -93,13 +94,13 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
           schema: 'public',
           table: 'headshot_generations',
         },
-        async (payload) => {
+        async (payload: { new: { id: string; image_urls?: string[] } }) => {
           // Update images state if the generation ID matches the payload and the image URLs are present
           if (payload.new.id === generationId && payload.new.image_urls) {
             setGeneratedImages(payload.new.image_urls);
             setIsPending(false);
-            router.replace(`/home/${model.model_id}/${payload.new.id}`);
-            router.refresh();
+            // router.replace(`/home/${model.model_id}/${payload.new.id}`);
+            // router.refresh();
           }
         }
       )
@@ -110,46 +111,48 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
       await supabase.removeChannel(channel);
     };
     return () => {};
-  }, [generationId, supabase, router, model.model_id]);
+  }, [generationId, supabase, model.model_id]);
 
   return (
-    <div className='block lg:flex items-start space-y-5 lg:space-y-0'>
+    <div className=''>
       <ModalLimitExceeded isModalOpen={hasLimitExceeded} />
 
-      <div className='w-full lg:w-1/2 mr-0 lg:mr-7'>
-        <div className='mb-6'>
-          <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
-        </div>
-
-        <form className='flex flex-col justify-between px-1'>
-          <div className='flex flex-col gap-4 mb-8'>
-            <InputWrapper id='prompt' label='Describe the image to be generated'>
-              <Textarea
-                id='prompt'
-                name='prompt'
-                placeholder='Write a detailed description of the image you want to generate.'
-                rows={6}
-                value={formData.prompt}
-                onChange={handleInputChange}
-              />
-            </InputWrapper>
-
-            <InputWrapper id='neg-prompt' label='Negative Prompt'>
-              <Input
-                id='neg-prompt'
-                name='neg-prompt'
-                placeholder='Negative Prompt'
-                value={formData['neg-prompt']}
-                onChange={handleInputChange}
-              />
-            </InputWrapper>
+      <Card className='p-6'>
+        <div className=''>
+          <div className='mb-6'>
+            <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
           </div>
 
-          <SubmitButton className='w-full' formAction={handleGeneration} disabled={hasLimitExceeded}>
-            Generate
-          </SubmitButton>
-        </form>
-      </div>
+          <form className='flex flex-col justify-between px-1'>
+            <div className='flex flex-col gap-4 mb-8'>
+              <InputWrapper id='prompt' label='Describe the image to be generated'>
+                <Textarea
+                  id='prompt'
+                  name='prompt'
+                  placeholder='Write a detailed description of the image you want to generate.'
+                  rows={6}
+                  value={formData.prompt}
+                  onChange={handleInputChange}
+                />
+              </InputWrapper>
+
+              <InputWrapper id='neg-prompt' label='Negative Prompt'>
+                <Input
+                  id='neg-prompt'
+                  name='neg-prompt'
+                  placeholder='Negative Prompt'
+                  value={formData['neg-prompt']}
+                  onChange={handleInputChange}
+                />
+              </InputWrapper>
+            </div>
+
+            <SubmitButton className='md:max-w-xs' formAction={handleGeneration} disabled={hasLimitExceeded}>
+              Generate
+            </SubmitButton>
+          </form>
+        </div>
+      </Card>
 
       {/* Section to show generated results. It has two tabs output data & history */}
       <OutputGeneration isPending={isPending} generatedImages={generatedImages} />
