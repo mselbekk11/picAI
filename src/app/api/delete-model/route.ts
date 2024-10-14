@@ -9,10 +9,7 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: 'Model ID is required' }, { status: 400 });
   }
 
-  const { error } = await supabase
-    .from('headshot_models')
-    .delete()
-    .eq('model_id', modelId);
+  const { error } = await supabase.from('headshot_models').delete().eq('model_id', modelId);
 
   if (error) {
     console.error('Error deleting model:', error);
