@@ -17,8 +17,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Failed to fetch generation' }, { status: 500 });
   }
 
-  // Remove the specified image URL
-  const updatedImageUrls = generation.image_urls.filter((_, i) => i !== imageIndex);
+  // Add a null check before accessing image_urls
+  const updatedImageUrls = generation.image_urls?.filter((_: string, i: number) => i !== imageIndex) ?? [];
 
   // Update the database
   const { error: updateError } = await supabase
