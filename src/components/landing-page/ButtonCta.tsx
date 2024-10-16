@@ -21,11 +21,7 @@ const ButtonCta: FC<ButtonCtaProps> = async ({ className, label }) => {
   return (
     <Link
       href={user == null ? '/login' : '/home'}
-      className={cn(
-        buttonVariants({ variant: 'default' }),
-        'rounded-lg border border-lp-border green-btn-gradient',
-        className
-      )}>
+      className={cn(buttonVariants({ variant: 'default' }), 'rounded-lg bg-[#5454EC] ', className)}>
       {buttonLabel}
     </Link>
   );

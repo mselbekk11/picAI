@@ -3,11 +3,16 @@
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { Bricolage_Grotesque } from 'next/font/google';
 import './globals.css';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
+import { cn } from '@/utils/utils';
+import NavbarTwo from '@/components/landing-page/NavbarTwo';
 
 const font = Inter({ subsets: ['latin'] });
+
+const bg = Bricolage_Grotesque({ subsets: ['latin'] });
 
 // Metadata for SEO
 export const metadata: Metadata = {
@@ -49,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Script>
 
       <html lang='en'>
-        <body className={font.className}>
+        <body className={cn(bg.className, 'bg-black')}>
           <main>{children}</main>
           <Toaster />
         </body>
