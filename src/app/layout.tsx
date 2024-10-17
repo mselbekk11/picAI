@@ -54,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Script>
 
       <html lang='en'>
-        <body className={cn(bg.className, 'bg-black')}>
+        <body className={cn(bg.className)}>
           <main>{children}</main>
           <Toaster />
         </body>

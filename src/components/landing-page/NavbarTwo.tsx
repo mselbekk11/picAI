@@ -5,14 +5,13 @@ import { Button } from '../ui/button';
 import ButtonCta from './ButtonCta';
 import Logo from '../Logo';
 
-// import Drawer from 'react-modern-drawer';
-// import ContactForm from './ContactForm';
-// import React from 'react';
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
 
 export default function NavbarTwo() {
   const navigation = [
-    { name: 'Services', href: '/#services' },
-    { name: 'Work', href: '/#showcase' },
+    { name: 'How it Works', href: '/#howitworks' },
+    { name: 'Pricing', href: '/#pricing' },
     { name: 'FAQ', href: '/#faq' },
   ];
 
@@ -37,24 +36,13 @@ export default function NavbarTwo() {
             <Link
               key={item.name}
               href={item.href}
-              className='text-base font-semibold text-white hover:text-[#215DFF]'>
+              className={`text-sm font-semibold text-white hover:text-[#ccc] ${inter.className}`}>
               {item.name}
             </Link>
           ))}
         </div>
         <div className='hidden lg:flex min-w-[120px]'>
           <ButtonCta className='w-full' label='Sign In' />
-
-          {/* <Drawer
-            open={isOpen}
-            size='40vw'
-            onClose={toggleDrawer}
-            direction='right'
-            className='hidden lg:block'
-          >
-            <ContactForm />
-          </Drawer> */}
-          {/* <ButtonOne text='Contact Now'  /> */}
         </div>
       </nav>
     </header>
