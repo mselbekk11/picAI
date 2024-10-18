@@ -1,53 +1,39 @@
-'use client';
-
 import { useState } from 'react';
 import { Radio, RadioGroup } from '@headlessui/react';
 import { Check } from 'lucide-react';
 import { SectionTitle } from './SectionTitle';
+import PricingButton from './PricingButton';
 
-const frequencies = [
-  { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
-  { value: 'annually', label: 'Annually', priceSuffix: '/year' },
-];
+// const frequencies = [
+//   { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
+//   { value: 'annually', label: 'Annually', priceSuffix: '/year' },
+// ];
 const tiers = [
   {
     name: 'Starter',
     id: 'tier-freelancer',
     href: '#',
-    price: { monthly: '$19', annually: '$199' },
+    price: '$16',
     description: 'For personal use only',
-    features: ['5 products', 'Up to 1,000 subscribers', 'Basic analytics', '48-hour support response time'],
+    features: ['1 custom model per month', '80 images per month', 'Highest quality Flux model'],
     mostPopular: false,
   },
   {
     name: 'Creator',
     id: 'tier-startup',
     href: '#',
-    price: { monthly: '$29', annually: '$299' },
+    price: '$39',
     description: 'Full, commercial ownership of images',
-    features: [
-      '25 products',
-      'Up to 10,000 subscribers',
-      'Advanced analytics',
-      '24-hour support response time',
-      'Marketing automations',
-    ],
+    features: ['3 custom models per month', '300 images per month', 'Highest quality Flux model'],
     mostPopular: true,
   },
   {
     name: 'Professional',
     id: 'tier-enterprise',
     href: '#',
-    price: { monthly: '$59', annually: '$599' },
+    price: '$89',
     description: 'Full, commercial ownership of images',
-    features: [
-      'Unlimited products',
-      'Unlimited subscribers',
-      'Advanced analytics',
-      '1-hour, dedicated support response time',
-      'Marketing automations',
-      'Custom reporting tools',
-    ],
+    features: ['5 custom models per month', '1000 images per month', 'Highest quality Flux model'],
     mostPopular: false,
   },
 ];
@@ -57,19 +43,17 @@ function classNames(...classes: (string | undefined | null | false)[]): string {
 }
 
 export default function PricingTwo() {
-  const [frequency, setFrequency] = useState(frequencies[0]);
-
   return (
     <div className='bg-black' id='pricing'>
       <div className='mx-auto max-w-7xl flex flex-col items-center py-28 md:py-28 text-center'>
         <SectionTitle
           loop='Pricing'
-          title='We handle just about everything'
+          title='Flexible Pricing to Fit Your Needs.'
           text='We handle everything from design to deployment to get your website shipped and ready to go!'
         />
       </div>
       <div className='mx-auto max-w-6xl px-6 lg:px-8'>
-        <div className='flex justify-center'>
+        {/* <div className='flex justify-center'>
           <fieldset aria-label='Payment frequency'>
             <RadioGroup
               value={frequency}
@@ -85,13 +69,13 @@ export default function PricingTwo() {
               ))}
             </RadioGroup>
           </fieldset>
-        </div>
+        </div> */}
         <div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {tiers.map((tier) => (
             <div
               key={tier.id}
               className={classNames(
-                tier.mostPopular ? 'bg-white/5 ring-2 ring-indigo-500' : 'ring-1 ring-white/10',
+                tier.mostPopular ? 'bg-[#090924] ring-2 ring-indigo-500' : 'ring-1 ring-white/10',
                 'rounded-3xl p-8 xl:p-10'
               )}>
               <div className='flex items-center justify-between gap-x-4'>
@@ -106,12 +90,10 @@ export default function PricingTwo() {
               </div>
               <p className='mt-4 text-sm leading-6 text-gray-300'>{tier.description}</p>
               <p className='mt-6 flex items-baseline gap-x-1'>
-                <span className='text-4xl font-bold tracking-tight text-white'>
-                  {tier.price[frequency.value as keyof typeof tier.price]}
-                </span>
-                <span className='text-sm font-semibold leading-6 text-gray-300'>{frequency.priceSuffix}</span>
+                <span className='text-4xl font-bold tracking-tight text-white'>{tier.price}</span>
+                {/* <span className='text-sm font-semibold leading-6 text-gray-300'>a month</span> */}
               </p>
-              <a
+              {/* <a
                 href={tier.href}
                 aria-describedby={tier.id}
                 className={classNames(
@@ -120,8 +102,9 @@ export default function PricingTwo() {
                     : 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white',
                   'mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
                 )}>
-                Buy plan
-              </a>
+                Buy {tier.name}
+              </a> */}
+              <PricingButton tiername={tier.name} mostPopular={tier.mostPopular} />
               <ul role='list' className='mt-8 space-y-3 text-sm leading-6 text-gray-300 xl:mt-10'>
                 {tier.features.map((feature) => (
                   <li key={feature} className='flex gap-x-3'>

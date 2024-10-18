@@ -24,7 +24,7 @@ export default function HeroTwo() {
             <div className='flex justify-center animate-slideFromDownAndFade [animation-delay:var(--animation-delay)]'>
               {/* <ButtonOne text='Contact Now' /> */}
 
-              <ButtonCta className='px-10 py-3 h-10' />
+              <ButtonCta className='px-10 py-6 h-10' />
             </div>
           </div>
         </div>

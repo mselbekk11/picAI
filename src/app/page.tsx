@@ -7,9 +7,8 @@ import Video from '@/components/landing-page/Video';
 import { testimonials } from '@/assets/data/data';
 import Transformations from '@/components/landing-page/Transformations';
 import PricingTwo from '@/components/landing-page/PricingTwo';
-import Faq from '@/components/landing-page/FAQ';
+import FaqsTwo from '@/components/landing-page/FaqsTwo';
 import CtaSection from '@/components/landing-page/CtaSection';
-import Footer from '@/components/landing-page/Footer';
 import FooterTwo from '@/components/landing-page/FooterTwo';
 
 export default async function Home() {
@@ -18,11 +17,11 @@ export default async function Home() {
       <NavbarTwo />
       <HeroTwo />
       <InfiniteMovingCards items={testimonials} direction='left' speed='slow' />
-      <Video />
       <Transformations />
+      <Video />
       {/* <Pricing /> */}
       <PricingTwo />
-      <Faq />
+      <FaqsTwo />
       <CtaSection />
       <FooterTwo />
     </main>

@@ -86,7 +86,7 @@ export const InfiniteMovingCards = ({
               background: 'linear-gradient(180deg, var(--slate-800), var(--slate-900)',
             }}
             key={item.name}>
-            <Image src={item.image} width={300} height={300} alt='logo' />
+            <Image src={item.image} width={300} height={300} alt='logo' className='rounded-lg' />
           </li>
         ))}
       </ul>

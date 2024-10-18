@@ -4,33 +4,33 @@ import { SectionTitle } from './SectionTitle';
 
 const faqs = [
   {
-    question: "What's the best thing about Switzerland?",
+    question: 'What types of AI image models can I train?',
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      'Our platform allows you to train high-quality AI image models for various purposes, including headshots, portraits, products, and brand assets. We use the highest quality Flux AI image model for training.',
   },
   {
-    question: "What's the best thing about Switzerland?",
+    question: 'How long does it take to train a custom AI model?',
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      'Training custom AI image models takes 10-15 minutes. Once finished, you can generate custom images with it in <30 seconds.',
   },
   {
-    question: "What's the best thing about Switzerland?",
+    question: 'How many images do I need to train a custom model?',
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      'Use shots with the subject centered in the frame, Include only one subject per image, Avoid accessories like sunglasses or hats, Ensure the subject is clearly visible in all images. For best results, we recommend using 5-10 high-quality images that follow these guidelines. Remember, the better your input images, the better your AI-generated results will be.',
   },
   {
-    question: "What's the best thing about Switzerland?",
+    question: 'Can I use the generated images commercially?',
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      'Yes, our Creator, Professional, and Enterprise plans offer full, commercial ownership of the images you generate. This means you can use the AI-generated images for your business needs without any restrictions.',
   },
   {
-    question: "What's the best thing about Switzerland?",
+    question: 'Do you offer support for using the platform?',
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      'Yes, we provide comprehensive support to help you succeed with our platform. Our team offers guidance and assistance to ensure you get the most out of our services.',
   },
 ];
 
-export default function Faq() {
+export default function FaqsTwo() {
   return (
     <div className='bg-black' id='faq'>
       <div className='mx-auto max-w-7xl flex flex-col items-center py-28 md:py-28 text-center'>
@@ -40,7 +40,7 @@ export default function Faq() {
           text='We handle everything from design to deployment to get your website shipped and ready to go!'
         />
       </div>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8 pb-28'>
+      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-4xl divide-y divide-white/10'>
           {/* <h2 className='text-2xl font-bold leading-10 tracking-tight text-white'>
             Frequently asked questions

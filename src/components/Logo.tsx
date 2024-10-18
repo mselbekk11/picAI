@@ -23,11 +23,12 @@ export default function Logo() {
   }, [isHomePage, theme]);
 
   return (
-    <Link href='https://www.builderkit.ai/#pricing'>
+    <Link href='/'>
       <div className='flex items-center gap-2 w-full justify-center'>
         {/* <Image src={logoSrc} width={150} height={128} alt='logo' /> */}
         <Aperture color='#af40e2' />
-        <h1 className={`text-2xl font-bold ${isHomePage || theme === 'dark' ? 'text-white' : 'text-black'}`}>
+        <h1
+          className={`text-2xl font-bold text-white ${isHomePage || theme === 'dark' ? 'text-white' : 'text-black'}`}>
           PicAI
         </h1>
       </div>
