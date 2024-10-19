@@ -1,4 +1,5 @@
 import ButtonCta from './ButtonCta';
+import ButtonShootingStarBorder from './ButtonShootingStarBorder';
 
 export default function CtaSection() {
   return (
@@ -12,7 +13,8 @@ export default function CtaSection() {
             Create photorealistic images of people with PicAI
           </p>
           <div className='mt-10 flex items-center justify-center gap-x-6'>
-            <ButtonCta className='px-10 py-6 h-10' />
+            {/* <ButtonCta className='px-10 py-6 h-10' /> */}
+            <ButtonShootingStarBorder label='Generate Images' />
           </div>
           <svg
             viewBox='0 0 1024 1024'

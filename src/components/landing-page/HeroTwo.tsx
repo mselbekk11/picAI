@@ -1,5 +1,8 @@
 import ButtonCta from './ButtonCta';
 import { Inter } from 'next/font/google';
+import { MovingBorderDemo } from './MovingBorderDemo';
+import ButtonShootingStarBorder from './ButtonShootingStarBorder';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +27,9 @@ export default function HeroTwo() {
             <div className='flex justify-center animate-slideFromDownAndFade [animation-delay:var(--animation-delay)]'>
               {/* <ButtonOne text='Contact Now' /> */}
 
-              <ButtonCta className='px-10 py-6 h-10' />
+              {/* <ButtonCta className='px-10 py-6 h-10' /> */}
+
+              <ButtonShootingStarBorder label='Generate Images' />
             </div>
           </div>
         </div>

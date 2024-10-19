@@ -17,7 +17,19 @@ export const testimonials = [
     quote: 'All that we see or seem is but a dream within a dream.',
     name: 'Edgar Allan Poe',
     title: 'A Dream Within a Dream',
+    image: '/luba-queen.png',
+  },
+  {
+    quote: 'All that we see or seem is but a dream within a dream.',
+    name: 'Edgar Allan Poe',
+    title: 'A Dream Within a Dream',
     image: '/morgan.png',
+  },
+  {
+    quote: 'All that we see or seem is but a dream within a dream.',
+    name: 'Edgar Allan Poe',
+    title: 'A Dream Within a Dream',
+    image: '/viking.png',
   },
   {
     quote:

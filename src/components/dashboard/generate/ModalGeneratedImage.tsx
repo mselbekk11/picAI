@@ -15,6 +15,9 @@ import { formatDate, sentenceCase } from '@/utils/utils';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import DeleteImageButton from './DeleteImageButton';
+import { TbDownload } from 'react-icons/tb';
+import downloadHeadshot from '@/utils/utils';
+import DownloadButton from './DownloadButton';
 
 interface ModalGeneratedImageProps {
   index: number;
@@ -34,13 +37,7 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
   return (
     <Dialog>
       <DialogTrigger>
-        <Image
-          src={imageUrl!}
-          alt=''
-          width={300}
-          height={450}
-          className='w-full h-[188px] object-cover rounded-md'
-        />
+        <Image src={imageUrl!} alt='' width={300} height={450} className='w-full object-cover rounded-md' />
       </DialogTrigger>
       <DialogContent className='w-11/12 rounded-lg p-4'>
         <DialogHeader className='h-10 border-b'>
@@ -75,9 +72,10 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
           </div>
           <DialogFooter className='grid grid-cols-2 gap-2'>
             <DeleteImageButton generationId={generation.id} imageIndex={index} />
-            <Link href={`/home/${generation.model_id}?form=true`} className=''>
+            {/* <Link href={`/home/${generation.model_id}?form=true`} className=''>
               <Button className='w-full'>Generate New</Button>
-            </Link>
+            </Link> */}
+            <DownloadButton imageUrl={imageUrl!} fileName={`output-${index + 1}.png`} />
           </DialogFooter>
         </div>
       </DialogContent>

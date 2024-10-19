@@ -11,14 +11,20 @@ import { useEffect, useState } from 'react';
 import { Aperture } from 'lucide-react';
 
 export default function Logo() {
-  const [logoSrc, setLogoSrc] = useState<string>('/light-logo.png');
+  // const [logoSrc, setLogoSrc] = useState<string>('/light-logo.png');
+  // useEffect(() => {
+  //   const src = isHomePage || theme === 'dark' ? '/light-logo.png' : '/dark-logo.png';
+  //   setLogoSrc(src);
+  // }, [isHomePage, theme]);
 
   const { theme } = useTheme();
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
+  const [logoSrc, setLogoSrc] = useState<string>('');
+
   useEffect(() => {
-    const src = isHomePage || theme === 'dark' ? '/light-logo.png' : '/dark-logo.png';
+    const src = isHomePage || theme === 'dark' ? 'text-white' : 'text-black';
     setLogoSrc(src);
   }, [isHomePage, theme]);
 
@@ -27,10 +33,7 @@ export default function Logo() {
       <div className='flex items-center gap-2 w-full justify-center'>
         {/* <Image src={logoSrc} width={150} height={128} alt='logo' /> */}
         <Aperture color='#af40e2' />
-        <h1
-          className={`text-2xl font-bold text-white ${isHomePage || theme === 'dark' ? 'text-white' : 'text-black'}`}>
-          PicAI
-        </h1>
+        <h1 className={`text-2xl font-bold ${logoSrc}`}>PicAI</h1>
       </div>
     </Link>
   );

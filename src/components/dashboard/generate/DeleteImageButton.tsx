@@ -3,6 +3,7 @@
 import { FC, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { Trash2 } from 'lucide-react';
 
 interface DeleteImageButtonProps {
   generationId: string;
@@ -44,6 +45,7 @@ const DeleteImageButton: FC<DeleteImageButtonProps> = ({ generationId, imageInde
 
   return (
     <Button onClick={handleDelete} disabled={isDeleting} variant='destructive' className='w-full'>
+      <Trash2 size={14} className='mr-2' />
       {isDeleting ? 'Deleting...' : 'Delete Image'}
     </Button>
   );

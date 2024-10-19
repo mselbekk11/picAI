@@ -11,6 +11,7 @@ import EmptyState from '@/assets/images/profile.png';
 import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceeded';
 import { Button } from '@/components/ui/button';
 import DeleteModalButton from '@/components/dashboard/generate/DeleteModalButton';
+import { Eye } from 'lucide-react';
 
 const Models = async () => {
   const supabase = supabaseServerClient();
@@ -63,7 +64,8 @@ const Models = async () => {
                         ) : (
                           <div className='grid grid-cols-2 gap-2'>
                             <Link href={`/home/${model.model_id}`}>
-                              <Button variant='outline' className='w-full'>
+                              <Button variant='secondary' size='sm' className='w-full'>
+                                <Eye size={12} className='mr-1' />
                                 View
                               </Button>
                             </Link>

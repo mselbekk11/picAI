@@ -61,6 +61,16 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)',
       },
       keyframes: {
+        flip: {
+          to: {
+            transform: 'rotate(360deg)',
+          },
+        },
+        rotate: {
+          to: {
+            transform: 'rotate(90deg)',
+          },
+        },
         scroll: {
           to: {
             transform: 'translate(calc(-50% - 0.5rem))',
@@ -76,6 +86,8 @@ module.exports = {
         },
       },
       animation: {
+        flip: 'flip 6s infinite steps(2, end)',
+        rotate: 'rotate 3s linear infinite both',
         scroll: 'scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',

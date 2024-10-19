@@ -18,7 +18,8 @@ const ButtonSignoutTwo: FC<ButtonSignoutProps> = () => {
       className='cursor-pointer text-default'
       onClick={async () => {
         await supabase.auth.signOut();
-        router.refresh();
+        // router.refresh();
+        router.push('/'); // I changed this from login to home
       }}>
       <FiLogOut className='size-5 mr-2' />
     </div>

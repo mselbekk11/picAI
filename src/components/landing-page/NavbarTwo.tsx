@@ -6,6 +6,7 @@ import ButtonCta from './ButtonCta';
 import Logo from '../Logo';
 
 import { Inter } from 'next/font/google';
+import LogoHomepage from '../LogoHomepage';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function NavbarTwo() {
@@ -26,7 +27,7 @@ export default function NavbarTwo() {
         <div className='min-w-[120px]'>
           {/* <Image src='/logo_black.png' alt='logo' width='35' height='100' /> */}
           {/* <p className='text-2xl font-bold text-[#af40e2]'>PicAi</p> */}
-          <Logo />
+          <LogoHomepage />
         </div>
         <div className='flex lg:hidden'>
           <MobileMenu />
