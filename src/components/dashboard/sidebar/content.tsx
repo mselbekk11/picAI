@@ -4,15 +4,17 @@ import { House } from 'lucide-react';
 import { Image } from 'lucide-react';
 import { Settings } from 'lucide-react';
 
+// <Eye size={12} className='mr-1' />
+
 export const sidebarRoutes = [
   {
     // icon: <RiLayoutGridFill className='size-5' />,
-    icon: <House className='size-5' />,
+    icon: <House size={14} />,
     label: 'Home',
     path: '/home',
   },
   {
-    icon: <Image className='size-5' />,
+    icon: <Image size={14} />,
     label: 'Images',
     path: '/images',
   },
@@ -21,7 +23,7 @@ export const sidebarRoutes = [
 export const bottomSidebarRoutes = [
   {
     // icon: <RiLayoutGridFill className='size-5' />,
-    icon: <Settings className='size-5' />,
+    icon: <Settings size={14} />,
     label: 'Account Settings',
     path: '/settings',
   },

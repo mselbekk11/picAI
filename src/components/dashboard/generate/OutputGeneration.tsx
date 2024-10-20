@@ -9,6 +9,7 @@ import { LuLoader } from 'react-icons/lu';
 import { Button } from '@/components/ui/button';
 import downloadHeadshot from '@/utils/utils';
 import { Download } from 'lucide-react';
+import ImagesSkeleton from '../loading-skeletons/ImageSkeleton';
 
 interface OutputGenerationProps {
   isPending: boolean;
@@ -24,19 +25,32 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
     <div className='w-full pl-0'>
       <div className='h-full'>
         {isPending ? (
-          <div className='flex flex-col justify-center items-center mb-16 mt-10'>
+          <div className='flex flex-col justify-center items-center'>
             <div className='flex flex-col items-center justify-center'>
-              <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
-              <p className='text-base font-medium text-center text-default mb-2'>
+              <p className='text-base font-medium text-center my-10 text-default'>
                 Your images will be ready in less than a minute. You can wait or find your generations later
                 in images.
               </p>
             </div>
-            <Image src={EmptyState} alt='Empty-state' className='animate-pulse' height={347} width={347} />
+            {/* <Image src={EmptyState} alt='Empty-state' className='animate-pulse' height={347} width={347} /> */}
+            <div className='h-[300px] grid grid-cols-1 lg:grid-cols-4 gap-4 w-full'>
+              <div className='bg-secondary rounded-md items-center justify-center flex animate-pulse'>
+                <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
+              </div>
+              <div className='h-[300px] bg-secondary rounded-md items-center justify-center flex animate-pulse'>
+                <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
+              </div>
+              <div className='h-[300px] bg-secondary rounded-md items-center justify-center flex animate-pulse'>
+                <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
+              </div>
+              <div className='h-[300px] bg-secondary rounded-md items-center justify-center flex animate-pulse'>
+                <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
+              </div>
+            </div>
           </div>
         ) : generatedImages?.length ? (
           <div className=''>
-            <p className='text-default text-lg font-semibold my-4'>Results</p>
+            <p className='text-base font-medium text-center my-10 text-default'>Results</p>
             <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 w-full'>
               {generatedImages?.map((imageUrl, index) => (
                 <div key={index} className='relative group'>
@@ -45,7 +59,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
                     alt=''
                     width={250}
                     height={250}
-                    className='border rounded-md mx-auto w-full'
+                    className='border rounded-md mx-auto w-full h-[300px]'
                     placeholder='blur'
                     blurDataURL={blurImageDataUrl}
                   />
@@ -65,10 +79,10 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
         ) : (
           <div>
             <div className='flex flex-col justify-center items-center'>
-              <p className='text-base font-medium text-center mb-5 mt-10 text-default'>
+              <p className='text-base font-medium text-center my-10 text-default'>
                 Your output will be displayed here
               </p>
-              <Image src={EmptyState} alt='Empty-state' height={347} width={347} />
+              {/* <Image src={EmptyState} alt='Empty-state' height={347} width={347} /> */}
             </div>
           </div>
         )}
