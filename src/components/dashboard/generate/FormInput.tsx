@@ -174,7 +174,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
                 />
               </InputWrapper>
 
-              <InputWrapper id='neg-prompt' label='Negative Prompt'>
+              {/* <InputWrapper id='neg-prompt' label='Negative Prompt'>
                 <Input
                   id='neg-prompt'
                   name='neg-prompt'
@@ -182,7 +182,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
                   value={formData['neg-prompt']}
                   onChange={handleInputChange}
                 />
-              </InputWrapper>
+              </InputWrapper> */}
             </div>
 
             <SubmitButton className='md:max-w-xs' formAction={handleGeneration} disabled={hasLimitExceeded}>

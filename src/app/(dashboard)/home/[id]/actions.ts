@@ -9,7 +9,7 @@ import axios from 'axios';
 import { headers } from 'next/headers';
 
 const ASTRIA_BASEURL = 'https://api.astria.ai';
-const FLUX1_DEV_TUNE_ID = '1743558'; // Hardcoded tune ID for Flux1.Dev
+// const FLUX1_DEV_TUNE_ID = '1743558'; // Hardcoded tune ID for Flux1.Dev
 const API_KEY = process.env.ASTRIA_API_KEY;
 
 // This function is used to train images based on the fine tuned model and user prompts.
@@ -31,7 +31,6 @@ export async function generateHeadshotFn(
     }
 
     const prompt = formData.get('prompt') as string;
-    const negativePrompt = formData.get('neg-prompt') as string;
 
     // Check if the prompt is empty. If it is, throw an error.
     if (!prompt) {
@@ -40,7 +39,6 @@ export async function generateHeadshotFn(
 
     const form = new FormData();
     form.append('prompt[text]', prompt);
-    form.append('prompt[negative_prompt]', negativePrompt);
     form.append('prompt[super_resolution]', 'true');
     form.append('prompt[face_correct]', 'true');
 
@@ -52,16 +50,12 @@ export async function generateHeadshotFn(
     form.append('prompt[callback]', webhookUrl);
 
     try {
-      const { data: generation } = await axios.post(
-        `${ASTRIA_BASEURL}/tunes/${FLUX1_DEV_TUNE_ID}/prompts`,
-        form,
-        {
-          headers: { 
-            Authorization: `Bearer ${API_KEY}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/${modelId}/prompts`, form, {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       console.log('Astria API response:', generation);
 
@@ -71,7 +65,6 @@ export async function generateHeadshotFn(
         .insert({
           user_id: user.id,
           prompt,
-          negative_prompt: negativePrompt,
           model_id: modelId,
           generation_id: generation.id,
         })
