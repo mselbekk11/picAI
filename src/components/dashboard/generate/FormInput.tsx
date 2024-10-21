@@ -72,13 +72,51 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
   const handleGeneration = async (data: FormData) => {
     setIsPending(true);
 
-    // Call the generateHeadshotFn function to generate headshots from server actions
-    const response = await generateHeadshotFn(model.model_id, data);
-    if (typeof response == 'string') {
-      errorToast(response);
+    try {
+      console.log('Starting handleGeneration');
+      console.log('model.model_id:', model.model_id);
+      console.log('FormData:', Object.fromEntries(data.entries()));
+
+      // Call the generateHeadshotFn function to generate headshots from server actions
+      let response;
+      try {
+        response = await generateHeadshotFn(model.model_id, data);
+        console.log('Response from generateHeadshotFn:', response);
+      } catch (error) {
+        console.error('Error calling generateHeadshotFn:', error);
+        throw error; // Re-throw the error to be caught by the outer try-catch
+      }
+
+      if (!response) {
+        console.error('No response received from generateHeadshotFn');
+        errorToast('Failed to generate headshot: No response received');
+        return;
+      }
+
+      console.log('Response type:', typeof response);
+      console.log('Response keys:', Object.keys(response));
+
+      if (typeof response === 'object') {
+        if ('error' in response) {
+          console.log('Error found in response:', response.error);
+          errorToast(response.error);
+        } else if ('id' in response && typeof response.id === 'string') {
+          console.log('ID found in response:', response.id);
+          setGenerationId(response.id);
+        } else {
+          console.error('Unexpected response format:', response);
+          errorToast('Failed to generate headshot: Unexpected response format');
+        }
+      } else {
+        console.error('Response is not an object:', response);
+        errorToast('Failed to generate headshot: Invalid response');
+      }
+    } catch (error) {
+      console.error('Error in handleGeneration:', error);
+      errorToast('An unexpected error occurred');
+    } finally {
       setIsPending(false);
-    } else {
-      setGenerationId(response.id);
+      console.log('handleGeneration completed');
     }
   };
 
@@ -121,7 +159,6 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
         <div className=''>
           <div className='mb-6'>
             <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
-            
           </div>
 
           <form className='flex flex-col justify-between px-1'>
