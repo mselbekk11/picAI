@@ -53,7 +53,7 @@ export default async function GenerateImage({ params, searchParams }: TypeParams
           </div>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mr-2'>
             <Link href='?form=true'>
-              <div className='w-full h-full flex items-center justify-center gap-1 bg-secondary border rounded-md'>
+              <div className='w-full h-full flex items-center justify-center gap-1 bg-secondary border rounded-md min-h-[306px]'>
                 <IoMdAdd />
                 <p className='text-sm font-medium'>Generate headshot</p>
               </div>

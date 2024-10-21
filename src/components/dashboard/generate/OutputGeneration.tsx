@@ -21,6 +21,8 @@ const blurImageDataUrl =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEXSURBVHgBVZDPSsNAEMa//dP8WVOheFToJejBKh7E4hMIXn0FwcfwrQSvPoFevFQUIdrE0NBTXRPTcbJrxc4yLHzz229nRtzd3lCy2YdJ+og5oyiG1hpSKwhICAEXWrGgdYBeEPLdg1TKp5AOEL8kaxqqc+Ci4tr8PcP11SUuzs/+IO/YAdq70HeLx4d7JIMBtmyNpq4RhKEHheQ+GArDCDGL6f4I6egQL08TlHmO7eHQg0RLgLgHfmCbBvOiwPQtg+2K/NMqZFM3WLYtiAgbxiCvKuzs7kGsBmETZ0RuIp6CtS+7wPHJGCaKYGLTkcz4o4/Gp8wIB05fn5FNuLfyA0VZIl0cwNpPtzZRzWYknDthPVj5J/0AA1VXn/cQBtkAAAAASUVORK5CYII=';
 
 const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImages }) => {
+  console.log('OutputGeneration rendered. isPending:', isPending, 'generatedImages:', generatedImages);
+
   return (
     <div className='w-full pl-0'>
       <div className='h-full'>
@@ -32,7 +34,6 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
                 in images.
               </p>
             </div>
-            {/* <Image src={EmptyState} alt='Empty-state' className='animate-pulse' height={347} width={347} /> */}
             <div className='h-[300px] grid grid-cols-1 lg:grid-cols-4 gap-4 w-full'>
               <div className='bg-secondary rounded-md items-center justify-center flex animate-pulse'>
                 <LuLoader className='animate-[spin_3s_linear_infinite] text-center mb-2' size={24} />
