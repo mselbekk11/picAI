@@ -33,7 +33,7 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     }
 
     const form = new FormData();
-    form.append('prompt[text]', prompt);
+    form.append('prompt[text]', `<lora:${modelId}:1> ${prompt}`);
     form.append('prompt[negative_prompt]', negativePrompt);
     form.append('prompt[super_resolution]', 'true');
     form.append('prompt[face_correct]', 'true');
@@ -43,7 +43,8 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     form.append('prompt[callback]', webhookUrl);
 
     // Making a POST request to the Astria API to generate images based on the user prompts and trained model
-    const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/${modelId}/prompts`, form, {
+    // Use the Flux1.dev tune ID for the API call
+    const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/1504944/prompts`, form, {
       headers: { Authorization: `Bearer ${API_KEY}` },
     });
 

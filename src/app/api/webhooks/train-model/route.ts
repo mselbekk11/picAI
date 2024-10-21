@@ -34,17 +34,7 @@ export async function POST(req: Request): Promise<NextResponse> {
       throw 'User not found.';
     }
 
-    console.log(`Model has been fintuned for Id: ${tune.id}`);
-
-    // TODO: send notif mail
-    // Notify user via email
-    // const resend = new Resend(resendApiKey);
-    // await resend.emails.send({
-    //   from: 'noreply@headshots.tryleap.ai',
-    //   to: user?.email ?? '',
-    //   subject: 'Your model was successfully trained!',
-    //   html: `<h2>We're writing to notify you that your model training was successful! 1 credit has been used from your account.</h2>`,
-    // });
+    console.log(`Model has been finetuned for Id: ${tune.id}`);
 
     const { error: modelUpdatedError } = await supabaseAdmin
       .from('headshot_models')
@@ -57,7 +47,9 @@ export async function POST(req: Request): Promise<NextResponse> {
 
     if (modelUpdatedError) {
       console.error({ modelUpdatedError });
+      throw modelUpdatedError.message;
     }
+
     return NextResponse.json({ message: 'success' }, { status: 200, statusText: 'Success' });
   } catch (err: any) {
     console.error(err.message);

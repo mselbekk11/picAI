@@ -12,6 +12,7 @@ import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceed
 import { Button } from '@/components/ui/button';
 import DeleteModalButton from '@/components/dashboard/generate/DeleteModalButton';
 import { Eye } from 'lucide-react';
+import { LuLoader } from 'react-icons/lu';
 
 const Models = async () => {
   const supabase = supabaseServerClient();
@@ -51,9 +52,12 @@ const Models = async () => {
                           <Badge
                             variant='green'
                             className={cn(
-                              'capitalize absolute top-4 left-4 rounded-lg',
-                              model.status === 'processing' && 'bg-orange-400/80 text-white'
+                              'capitalize absolute top-4 left-4 rounded-lg flex items-center gap-1',
+                              model.status === 'processing' && 'bg-[#af40e2] text-white'
                             )}>
+                            {model.status === 'processing' && (
+                              <LuLoader className='animate-[spin_3s_linear_infinite] text-center' size={12} />
+                            )}
                             {model.status}
                           </Badge>
                         </div>

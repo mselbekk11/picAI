@@ -5,9 +5,9 @@
 
 import EmailAuth from '@/components/auth/EmailAuth';
 import GoogleAuth from '@/components/auth/GoogleAuth';
+import Logo from '@/components/Logo';
 import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Aperture } from 'lucide-react';
 
 export default function Login() {
   return (
@@ -16,8 +16,9 @@ export default function Login() {
         <Card className='w-full sm:max-w-md p-6 text-center'>
           <div className='flex items-center gap-2 w-full justify-center mb-4'>
             {/* <Image src={logoSrc} width={150} height={128} alt='logo' /> */}
-            <Aperture color='#af40e2' />
-            <h1 className='text-2xl font-bold text-[#af40e2]'>PicAI</h1>
+            {/* <Aperture color='#af40e2' />
+            <h1 className='text-2xl font-bold text-[#af40e2]'>PicAI</h1> */}
+            <Logo />
           </div>
           <div className='text-2xl md:text-4xl font-medium mb-6 text-center space-y-2'>
             <p>AI Photo Generator </p>

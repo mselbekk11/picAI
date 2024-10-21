@@ -17,7 +17,8 @@ export async function finetuneModelFn(request: FormData) {
   const supabase = supabaseServerClient();
   const user = await getUserDetails();
 
-  const origin = headers().get('origin');
+  // const origin = headers().get('origin');
+  const origin = 'https://09bb-2601-640-8001-b470-9199-dc5a-3f8d-73ab.ngrok-free.app';
 
   try {
     if (user == null) {
@@ -34,13 +35,22 @@ export async function finetuneModelFn(request: FormData) {
 
     const formData = new FormData();
     formData.append('tune[title]', title);
-    // Hard coded tune id of Realistic Vision v5.1 from - https://www.astria.ai/gallery/tunes/690204/prompts
-    formData.append('tune[base_tune_id]', '690204');
+    formData.append('tune[base_tune_id]', '1504944');
+    formData.append('tune[model_type]', 'lora');
     formData.append('tune[name]', type);
+    // Log form data
+    Array.from(formData.entries()).forEach(([key, value]) => {
+      console.log(`${key}: ${value}`);
+    });
 
     // Appending images to the FormData object
-    images.forEach((file) => {
-      formData.append('tune[images][]', file);
+    images.forEach((file, index) => {
+      formData.append(`tune[images][]`, file);
+      if (typeof file === 'object' && 'name' in file) {
+        console.log(`Image ${index + 1}: ${file.name}`);
+      } else {
+        console.log(`Image ${index + 1}: [File name not available]`);
+      }
     });
 
     // Creating webhook URL for the Astria Api to send a POST request after the model training is complete
@@ -71,13 +81,18 @@ export async function finetuneModelFn(request: FormData) {
       type,
       images: tune.orig_images,
       eta: tune.eta,
+      status: 'processing', // Add this line
     });
 
     if (error) {
       throw error.message;
     }
   } catch (error) {
-    console.error(error);
+    if (axios.isAxiosError(error)) {
+      console.error('Axios error:', error.response?.data);
+      return `API Error: ${error.response?.data?.error || error.message}`;
+    }
+    console.error('Error:', error);
     return `${error}`;
   }
 }
