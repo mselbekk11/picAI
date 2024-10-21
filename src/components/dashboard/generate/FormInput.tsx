@@ -33,7 +33,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
 
   const [isPending, setIsPending] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormFields>({ prompt: '', 'neg-prompt': '' });
-  const [generationId, setGenerationId] = useState<string>();
+  const [generationId, setGenerationId] = useState<string | null>(null);
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [hasLimitExceeded, setHasLimitExceeded] = useState(false);
 
@@ -67,62 +67,70 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
     }));
   };
 
-  // Asynchronously triggered by form submission, this function sends data to the server to initiate headshot generation.
-  // It handles pre and post request states, displaying error messages or updating the generation ID upon success.
-  const handleGeneration = async (data: FormData) => {
-    setIsPending(true);
+  // Asynchronously triggered by form submission
+  const handleGeneration = useCallback(
+    async (data: FormData) => {
+      console.log('handleGeneration started, setting isPending to true');
+      setIsPending(true);
+      setGenerationId(null);
+      setGeneratedImages([]);
 
-    try {
-      console.log('Starting handleGeneration');
-      console.log('model.model_id:', model.model_id);
-      console.log('FormData:', Object.fromEntries(data.entries()));
-
-      // Call the generateHeadshotFn function to generate headshots from server actions
-      let response;
       try {
-        response = await generateHeadshotFn(model.model_id, data);
-        console.log('Response from generateHeadshotFn:', response);
-      } catch (error) {
-        console.error('Error calling generateHeadshotFn:', error);
-        throw error; // Re-throw the error to be caught by the outer try-catch
-      }
+        console.log('Starting handleGeneration');
+        console.log('model.model_id:', model.model_id);
+        console.log('FormData:', Object.fromEntries(data.entries()));
 
-      if (!response) {
-        console.error('No response received from generateHeadshotFn');
-        errorToast('Failed to generate headshot: No response received');
-        return;
-      }
-
-      console.log('Response type:', typeof response);
-      console.log('Response keys:', Object.keys(response));
-
-      if (typeof response === 'object') {
-        if ('error' in response) {
-          console.log('Error found in response:', response.error);
-          errorToast(response.error);
-        } else if ('id' in response && typeof response.id === 'string') {
-          console.log('ID found in response:', response.id);
-          setGenerationId(response.id);
-        } else {
-          console.error('Unexpected response format:', response);
-          errorToast('Failed to generate headshot: Unexpected response format');
+        // Call the generateHeadshotFn function to generate headshots from server actions
+        let response;
+        try {
+          response = await generateHeadshotFn(model.model_id, data);
+          console.log('Response from generateHeadshotFn:', response);
+        } catch (error) {
+          console.error('Error calling generateHeadshotFn:', error);
+          throw error; // Re-throw the error to be caught by the outer try-catch
         }
-      } else {
-        console.error('Response is not an object:', response);
-        errorToast('Failed to generate headshot: Invalid response');
+
+        if (!response) {
+          console.error('No response received from generateHeadshotFn');
+          errorToast('Failed to generate headshot: No response received');
+          return;
+        }
+
+        console.log('Response type:', typeof response);
+        console.log('Response keys:', Object.keys(response));
+
+        if (typeof response === 'object') {
+          if ('error' in response) {
+            console.log('Error found in response:', response.error);
+            errorToast(response.error);
+          } else if ('id' in response && typeof response.id === 'string') {
+            console.log('ID found in response:', response.id);
+            setGenerationId(response.id);
+            // Don't set isPending to false here
+          } else {
+            console.error('Unexpected response format:', response);
+            errorToast('Failed to generate headshot: Unexpected response format');
+            setIsPending(false);
+          }
+        } else {
+          console.error('Response is not an object:', response);
+          errorToast('Failed to generate headshot: Invalid response');
+          setIsPending(false);
+        }
+      } catch (error) {
+        console.error('Error in handleGeneration:', error);
+        errorToast('An unexpected error occurred');
+        setIsPending(false);
       }
-    } catch (error) {
-      console.error('Error in handleGeneration:', error);
-      errorToast('An unexpected error occurred');
-    } finally {
-      setIsPending(false);
-      console.log('handleGeneration completed');
-    }
-  };
+    },
+    [model.model_id]
+  );
 
   // Realtime database subscription to listen for changes in the generated images.
   // This subscription gets triggered only if the row is updated with new image URLs. It doesn't respond to insert or delete.
   useEffect(() => {
+    if (!generationId) return;
+
     const channel = supabase
       .channel('value-db-changes')
       .on(
@@ -133,23 +141,21 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
           table: 'headshot_generations',
         },
         async (payload: { new: { id: string; image_urls?: string[] } }) => {
-          // Update images state if the generation ID matches the payload and the image URLs are present
           if (payload.new.id === generationId && payload.new.image_urls) {
             setGeneratedImages(payload.new.image_urls);
             setIsPending(false);
-            // router.replace(`/home/${model.model_id}/${payload.new.id}`);
-            // router.refresh();
+            setGenerationId(null);
           }
         }
       )
       .subscribe();
 
-    // Clear the channel subscription when the component unmounts
-    return async () => {
-      await supabase.removeChannel(channel);
+    return () => {
+      supabase.removeChannel(channel);
     };
-    return () => {};
-  }, [generationId, supabase, model.model_id]);
+  }, [generationId, supabase]);
+
+  console.log('Rendering FormInput, isPending:', isPending);
 
   return (
     <div className=''>
@@ -161,7 +167,12 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
             <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
           </div>
 
-          <form className='flex flex-col justify-between px-1'>
+          <form
+            className='flex flex-col justify-between px-1'
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleGeneration(new FormData(e.currentTarget));
+            }}>
             <div className='flex flex-col gap-4 mb-8'>
               <InputWrapper id='prompt' label='Describe the image to be generated'>
                 <Textarea
@@ -185,15 +196,15 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
               </InputWrapper> */}
             </div>
 
-            <SubmitButton className='md:max-w-xs' formAction={handleGeneration} disabled={hasLimitExceeded}>
-              Generate
+            <SubmitButton className='md:max-w-xs' disabled={hasLimitExceeded || isPending}>
+              {isPending ? 'Generating...' : 'Generate'}
             </SubmitButton>
           </form>
         </div>
       </Card>
 
-      {/* Section to show generated results. It has two tabs output data & history */}
-      <OutputGeneration isPending={isPending} generatedImages={generatedImages} />
+      {/* Section to show generated results */}
+      <OutputGeneration isPending={isPending || !!generationId} generatedImages={generatedImages} />
     </div>
   );
 };
