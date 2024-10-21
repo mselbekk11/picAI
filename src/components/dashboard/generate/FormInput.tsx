@@ -121,6 +121,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
         <div className=''>
           <div className='mb-6'>
             <p className='font-semibold text-default'>Model: {sentenceCase(model.name)}</p>
+            
           </div>
 
           <form className='flex flex-col justify-between px-1'>

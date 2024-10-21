@@ -73,4 +73,5 @@ export async function generateHeadshotFn(modelId: string, formData: FormData) {
     }
     return errorMessage;
   }
+  
 }
