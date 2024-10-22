@@ -23,27 +23,26 @@ export default function NavbarTwo() {
 
   return (
     <header className='w-full bg-[#000] sticky top-0 z-50'>
-      <nav className=' mx-auto max-w-7xl flex justify-between py-4 px-4 items-center'>
+      <nav className='mx-auto max-w-7xl flex justify-between py-4 px-4 items-center'>
         <div className='min-w-[120px]'>
-          {/* <Image src='/logo_black.png' alt='logo' width='35' height='100' /> */}
-          {/* <p className='text-2xl font-bold text-[#af40e2]'>PicAi</p> */}
           <LogoHomepage />
         </div>
         <div className='flex lg:hidden'>
           <MobileMenu />
         </div>
-        <div className='hidden lg:flex gap-x-12'>
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`text-sm font-semibold text-white hover:text-[#ccc] ${inter.className}`}>
-              {item.name}
-            </Link>
-          ))}
-        </div>
-        <div className='hidden lg:flex min-w-[120px]'>
-          <ButtonCta className='w-full' label='Sign In' />
+        {/* Move the navigation links and sign-in button to the right */}
+        <div className='hidden lg:flex items-center gap-x-8'>
+          <div className='flex gap-x-8'>
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className={`text-sm font-semibold text-white hover:text-[#ccc] ${inter.className}`}>
+                {item.name}
+              </Link>
+            ))}
+          </div>
+          <ButtonCta className='w-auto' label='Sign In' />
         </div>
       </nav>
     </header>

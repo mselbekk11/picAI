@@ -10,7 +10,7 @@ interface ButtonShootingStarBorderProps {
 const ButtonShootingStarBorder: FC<ButtonShootingStarBorderProps> = async ({ label }) => {
   const user = await getUserDetails();
 
-  const buttonLabel = user == null && label ? label : user != null && label ? 'Sign in' : 'Generate Images';
+  // const buttonLabel = user == null && label ? label : user != null && label ? 'Sign in' : 'Generate Images';
 
   return (
     <Link href={user == null ? '/login' : '/home'}>
@@ -19,7 +19,7 @@ const ButtonShootingStarBorder: FC<ButtonShootingStarBorderProps> = async ({ lab
           <span className="spark mask-gradient absolute inset-0 h-[100%] w-[100%] animate-flip overflow-hidden rounded-lg [mask:linear-gradient(white,_transparent_50%)] before:absolute before:aspect-square before:w-[200%] before:rotate-[-90deg] before:animate-rotate before:bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] before:content-[''] before:[inset:0_auto_auto_50%] before:[translate:-50%_-15%]" />
         </span>
         <span className='backdrop absolute inset-[3px] rounded-lg bg-[#5454EC] transition-colors duration-200 group-hover:bg-[#4343bd]' />
-        <span className='z-10 py-0.5 text-base text-neutral-100'>{buttonLabel}</span>
+        <span className='z-10 py-0.5 text-base text-neutral-100'>{label}</span>
       </button>
     </Link>
   );
