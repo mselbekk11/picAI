@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Radio, RadioGroup } from '@headlessui/react';
-import { Check } from 'lucide-react';
-import { SectionTitle } from './SectionTitle';
-import PricingButton from './PricingButton';
+import { Check, Zap } from 'lucide-react';
+import { SectionTitle } from '@/components/landing-page/SectionTitle';
+import PricingButton from '@/components/landing-page/PricingButton';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 
 // const frequencies = [
 //   { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
@@ -42,34 +42,39 @@ function classNames(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function PricingTwo() {
+export default function Billing() {
   return (
-    <div className='bg-black' id='pricing'>
-      <div className='mx-auto max-w-7xl flex flex-col items-center py-28 md:py-28 text-center'>
-        <SectionTitle
-          loop='Pricing'
-          title='Flexible Pricing to Fit Your Needs.'
-          text='We handle everything from design to deployment to get your website shipped and ready to go!'
-        />
-      </div>
-      <div className='mx-auto max-w-6xl px-6 lg:px-8'>
-        {/* <div className='flex justify-center'>
-          <fieldset aria-label='Payment frequency'>
-            <RadioGroup
-              value={frequency}
-              onChange={setFrequency}
-              className='grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs font-semibold leading-5 text-white'>
-              {frequencies.map((option) => (
-                <Radio
-                  key={option.value}
-                  value={option}
-                  className='cursor-pointer rounded-full px-2.5 py-1 data-[checked]:bg-indigo-500'>
-                  {option.label}
-                </Radio>
-              ))}
-            </RadioGroup>
-          </fieldset>
-        </div> */}
+    <div className=''>
+      <Card className='mb-6 grid grid-cols-1 lg:grid-cols-2'>
+        <CardContent className='p-6'>
+          <div className='flex flex-col'>
+            <div className='mb-4'>
+              <p className='text-xs'>Current Subscription: </p>
+              <p className='text-lg font-medium'>Starter Plan - $16/mo</p>
+              <p className='text-xs text-slate-500'>Current Period: 10/23/2024 - 11/23/2024</p>
+            </div>
+            <div className='mb-4'>
+              <p className='text-xs'>Image Credits:</p>
+              <p className='text-lg font-medium'>76</p>
+            </div>
+            <div className='mb-4'>
+              <p className='text-xs'>Model Credits:</p>
+              <p className='text-lg font-medium'>0</p>
+            </div>
+          </div>
+        </CardContent>
+        <CardContent className='p-6'>
+          <div className='flex items-center justify-end gap-2'>
+            <Button variant='default' size='sm' className='ml-4'>
+              Upgrade Plan
+            </Button>
+            <Button variant='outline' size='sm'>
+              Manage Subscription
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      <div className='mx-auto w-full'>
         <div className='isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {tiers.map((tier) => (
             <div

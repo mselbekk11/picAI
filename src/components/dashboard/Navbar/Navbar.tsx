@@ -5,16 +5,18 @@ import Link from 'next/link';
 import NavTitle from './NavTitle';
 import { Button } from '@/components/ui/button';
 import NavCta from './NavCta';
+import Credits from './Credits';
 
 const Navbar = () => {
   return (
-    <div className='flex items-center justify-between my-6'>
+    <div className='flex items-center justify-between my-4'>
       <NavTitle />
 
       <div className='flex items-center gap-5'>
         <div className='flex items-center'>
           {/* <SelectTheme /> */}
-          <NavCta />
+          {/* <NavCta /> */}
+          <Credits />
 
           <div className='hidden md:flex items-center gap-3'></div>
         </div>

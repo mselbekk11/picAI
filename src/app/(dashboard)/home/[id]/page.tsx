@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { CardDescription } from '@/components/ui/card';
 import { formatDistanceToNow } from 'date-fns';
 import { sentenceCase } from '@/utils/utils';
+import ModalGeneratedImageWrapper from '@/components/dashboard/generate/ModalGeneratedImage';
 
 type TypeParams = {
   params: { id: string };
@@ -62,7 +63,7 @@ export default async function GenerateImage({ params, searchParams }: TypeParams
             {generations?.map((generation) => (
               <>
                 {generation.image_urls?.map((_, index) => (
-                  <ModalGeneratedImage key={index} index={index} generation={generation} />
+                  <ModalGeneratedImageWrapper key={index} index={index} generation={generation} />
                 ))}
               </>
             ))}

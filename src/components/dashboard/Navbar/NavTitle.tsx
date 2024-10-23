@@ -17,7 +17,9 @@ const NavTitle: FC<NavTitleProps> = () => {
           ? 'Pricing'
           : pathname === '/settings'
             ? 'Account Settings'
-            : 'Headshot Generator';
+            : pathname === '/billing'
+              ? 'Manage Billing'
+              : 'Headshot Generator';
 
   return <div className='text-lg font-semibold text-default'>{title}</div>;
 };
