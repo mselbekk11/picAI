@@ -24,7 +24,7 @@ const Models = async () => {
     .order('created_at', { ascending: false });
 
   return (
-    <div className='flex flex-col justify-between'>
+    <div className='flex flex-col p-6'>
       {models && models.length > 0 ? (
         <>
           <ModalLimitExceeded isModalOpen={models?.length >= 100} />

@@ -2,6 +2,7 @@ import { supabaseServerClient } from '@/utils/supabase/server';
 import EmptyState from '@/assets/images/profile.png';
 import Image from 'next/image';
 import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedImage';
+import NavTitle from '@/components/dashboard/Navbar/NavTitle';
 
 const Images = async () => {
   const supabase = supabaseServerClient();
@@ -14,7 +15,7 @@ const Images = async () => {
     .not('image_urls', 'is', null);
 
   return (
-    <div>
+    <div className='flex flex-col p-6'>
       {generations && generations.length > 0 ? (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-4'>
           {generations.map((generation) => (

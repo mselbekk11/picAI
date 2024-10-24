@@ -6,7 +6,7 @@ import { getUserDetails } from '@/utils/supabase/server';
 const Settings = async () => {
   const user = await getUserDetails();
   return (
-    <div className='mt-2'>
+    <div className='flex flex-col p-6'>
       <Card>
         <CardContent className='p-6'>
           <div className='flex flex-col'>

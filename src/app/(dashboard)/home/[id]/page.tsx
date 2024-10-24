@@ -39,11 +39,11 @@ export default async function GenerateImage({ params, searchParams }: TypeParams
     .eq('model_id', params.id);
 
   return (
-    <div>
+    <div className='flex flex-col p-6'>
       {searchParams?.form === 'true' ? (
         <FormInput model={model} />
       ) : (
-        <div>
+        <div className=''>
           <div className='flex mb-6'>
             <h2 className='text-md font-semibold mr-2'>
               Model: <span>{sentenceCase(model.name)}</span>

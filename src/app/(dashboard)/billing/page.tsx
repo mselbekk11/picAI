@@ -45,7 +45,7 @@ function classNames(...classes: (string | undefined | null | false)[]): string {
 
 export default function Billing() {
   return (
-    <div className=''>
+    <div className='flex flex-col p-6'>
       <Card className='mb-6 grid grid-cols-1 lg:grid-cols-2'>
         <CardContent className='p-6'>
           <div className='flex flex-col'>

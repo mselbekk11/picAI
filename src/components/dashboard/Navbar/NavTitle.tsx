@@ -21,7 +21,7 @@ const NavTitle: FC<NavTitleProps> = () => {
               ? 'Manage Billing'
               : 'Headshot Generator';
 
-  return <div className='text-lg font-semibold text-default'>{title}</div>;
+  return <div className='text-md text-default'>{title}</div>;
 };
 
 export default NavTitle;

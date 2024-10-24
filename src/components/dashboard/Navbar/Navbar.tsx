@@ -9,7 +9,7 @@ import Credits from './Credits';
 
 const Navbar = () => {
   return (
-    <div className='flex items-center justify-between my-4'>
+    <div className='flex items-center justify-between p-4 bg-muted/40 h-14 gap-4 border-b lg:h-[60px] lg:px-6'>
       <NavTitle />
 
       <div className='flex items-center gap-5'>
