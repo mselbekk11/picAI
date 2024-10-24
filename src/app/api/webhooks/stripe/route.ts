@@ -64,7 +64,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
   const {
     id: subscriptionId,
     status,
-    start_date,
+    current_period_start,
     items: { data: subscriptionItems },
     customer: customerId,
   } = subscription;
@@ -73,11 +73,12 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
 
   try {
     // Extract relevant details from the subscription object
-    const { interval, amount, product } = subscriptionItems[0].plan;
+    const { recurring, unit_amount, product } = subscriptionItems[0].price;
+    const interval = recurring?.interval;
 
-    const subscriptionType = config.stripe.plan[product as keyof typeof config.stripe.plan];
-    // Converting unix time to ISO format (multiply 1000 to convert it from sec to ms).
-    const startDate = new Date(start_date * 1000).toISOString();
+    const subscriptionType = config.stripe.plan[product as keyof typeof config.stripe.plan] || 'standard';
+    // Converting unix time to ISO format
+    const startDate = new Date(current_period_start * 1000).toISOString();
 
     // Retrieve customer details from Stripe
     const customer = await stripe.customers.retrieve(customerId as string);
@@ -88,9 +89,9 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
       .update({
         subscription_id: subscriptionId,
         interval: interval as EnumSubscriptionBillingCycle,
-        type: subscriptionType as 'standard' | 'premium' | 'free',
+        type: subscriptionType as 'free' | 'standard' | 'premium',
         start_date: startDate,
-        amount,
+        amount: unit_amount,
         active: status === 'active',
       })
       .eq('user_email', email!);
@@ -108,7 +109,7 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
 
 // Handles 'customer.subscription.updated' event: Updates the status of a subscription in the database.
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
-  const { id: subscriptionId, status, customer: customerId } = subscription;
+  const { id: subscriptionId, status, customer: customerId, current_period_start, items } = subscription;
 
   console.log(`[Subscription Updated] Updating subscription ${subscriptionId}`);
 
@@ -140,12 +141,22 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
         throw new Error(`Error finding user with email: ${email}`);
       }
 
+      const subscriptionItem = items.data[0];
+      const amount = subscriptionItem.price.unit_amount;
+      const interval = subscriptionItem.price.recurring?.interval;
+      const startDate = new Date(current_period_start * 1000).toISOString();
+      const product = subscriptionItem.price.product as string;
+      const subscriptionType = config.stripe.plan[product as keyof typeof config.stripe.plan] || 'standard';
+
       const { error: insertError } = await supabaseAdmin.from('subscriptions').insert({
         subscription_id: subscriptionId,
+        user_id: userData.id,
         user_email: email!,
-        user_id: userData.id, // Use the user_id from the users table
+        interval: interval as EnumSubscriptionBillingCycle,
+        type: subscriptionType as 'free' | 'standard' | 'premium',
+        start_date: startDate,
+        amount: amount,
         active: status === 'active',
-        type: 'standard', // Set a default type, adjust as needed
       });
 
       if (insertError) {
@@ -157,9 +168,22 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
       throw new Error(`Error checking subscription in database for id: ${subscriptionId}`);
     } else {
       // Update the existing subscription
+      const subscriptionItem = items.data[0];
+      const amount = subscriptionItem.price.unit_amount;
+      const interval = subscriptionItem.price.recurring?.interval;
+      const startDate = new Date(current_period_start * 1000).toISOString();
+      const product = subscriptionItem.price.product as string;
+      const subscriptionType = config.stripe.plan[product as keyof typeof config.stripe.plan] || 'standard';
+
       const { error: updateError } = await supabaseAdmin
         .from('subscriptions')
-        .update({ active: status === 'active' })
+        .update({
+          active: status === 'active',
+          amount: amount,
+          interval: interval as EnumSubscriptionBillingCycle,
+          start_date: startDate,
+          type: subscriptionType as 'free' | 'standard' | 'premium',
+        })
         .eq('subscription_id', subscriptionId);
 
       if (updateError) {
