@@ -3,6 +3,7 @@ import { SectionTitle } from '@/components/landing-page/SectionTitle';
 import PricingButton from '@/components/landing-page/PricingButton';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import PricingThree from '@/components/PricingThree';
 
 // const frequencies = [
 //   { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
@@ -75,7 +76,7 @@ export default function Billing() {
         </CardContent>
       </Card>
       <div className='mx-auto w-full'>
-        <div className='isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
+        {/* <div className='isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
           {tiers.map((tier) => (
             <div
               key={tier.id}
@@ -108,7 +109,8 @@ export default function Billing() {
               </ul>
             </div>
           ))}
-        </div>
+        </div> */}
+        <PricingThree />
       </div>
     </div>
   );
