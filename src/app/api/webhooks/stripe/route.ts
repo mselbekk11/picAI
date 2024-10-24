@@ -44,6 +44,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         await handleSubscriptionCreated(subscription);
         break;
       case 'customer.subscription.updated':
+      case 'invoice.paid':
+      case 'invoice.payment_succeeded':
         await handleSubscriptionUpdated(subscription);
         break;
     }
@@ -106,32 +108,64 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
 
 // Handles 'customer.subscription.updated' event: Updates the status of a subscription in the database.
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
-  const { id: subscriptionId, status } = subscription;
+  const { id: subscriptionId, status, customer: customerId } = subscription;
 
-  console.log(`[Subscription Updated] Updating subscription`);
+  console.log(`[Subscription Updated] Updating subscription ${subscriptionId}`);
 
   try {
+    // Retrieve customer details from Stripe
+    const customer = await stripe.customers.retrieve(customerId as string);
+    const email = (customer as Stripe.Customer).email;
+
     // Check if the subscription exists in the database
-    const { error } = await supabaseAdmin
+    const { data, error } = await supabaseAdmin
       .from('subscriptions')
-      .select('id')
+      .select('id, user_id')
       .eq('subscription_id', subscriptionId)
       .single();
 
-    if (error) {
+    if (error && error.code === 'PGRST116') {
+      // Subscription not found, create a new one
+      console.log(`Subscription not found, creating new subscription for ${email}`);
+
+      // First, try to find the user_id based on the email
+      const { data: userData, error: userError } = await supabaseAdmin
+        .from('users')
+        .select('id')
+        .eq('email', email ?? '')
+        .single();
+
+      if (userError) {
+        console.error(userError);
+        throw new Error(`Error finding user with email: ${email}`);
+      }
+
+      const { error: insertError } = await supabaseAdmin.from('subscriptions').insert({
+        subscription_id: subscriptionId,
+        user_email: email!,
+        user_id: userData.id, // Use the user_id from the users table
+        active: status === 'active',
+        type: 'standard', // Set a default type, adjust as needed
+      });
+
+      if (insertError) {
+        console.error(insertError);
+        throw new Error(`Creating new subscription for id: ${subscriptionId}`);
+      }
+    } else if (error) {
       console.error(error);
-      throw new Error(`Subscription not found supabase for id: ${subscriptionId}`);
-    }
+      throw new Error(`Error checking subscription in database for id: ${subscriptionId}`);
+    } else {
+      // Update the existing subscription
+      const { error: updateError } = await supabaseAdmin
+        .from('subscriptions')
+        .update({ active: status === 'active' })
+        .eq('subscription_id', subscriptionId);
 
-    // Update the subscription status in the database
-    const { error: updateError } = await supabaseAdmin
-      .from('subscriptions')
-      .update({ active: status === 'active' })
-      .eq('subscription_id', subscriptionId);
-
-    if (updateError) {
-      console.error(updateError);
-      throw new Error(`Updating subscription details for subscription id: ${subscriptionId}`);
+      if (updateError) {
+        console.error(updateError);
+        throw new Error(`Updating subscription details for subscription id: ${subscriptionId}`);
+      }
     }
 
     console.debug(`Subscription updated for id: ${subscriptionId}`);
