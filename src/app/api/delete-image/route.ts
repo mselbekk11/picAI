@@ -4,7 +4,7 @@ import { supabaseServerClient } from '@/utils/supabase/server';
 export async function POST(request: Request) {
   const { generationId, imageIndex } = await request.json();
 
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
 
   // Fetch the current image_urls
   const { data: generation, error: fetchError } = await supabase

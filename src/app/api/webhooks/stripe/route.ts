@@ -22,7 +22,7 @@ const stripe = new Stripe(SECRET_KEY!, {
 // Main function to handle POST requests from Stripe webhooks
 export async function POST(req: NextRequest): Promise<NextResponse> {
   // Retrieving the signature from the headers to validate the request
-  const signature = headers().get('stripe-signature') as string;
+  const signature = (await headers()).get('stripe-signature') as string;
   const requestData = await req.text();
 
   try {

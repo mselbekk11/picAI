@@ -19,7 +19,7 @@ type TypeParams = {
 };
 
 export default async function GenerateImage({ params, searchParams }: TypeParams) {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
 
   // Get all the previously generated models from the database
   const { data: models } = await supabase

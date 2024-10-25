@@ -2,8 +2,8 @@ import { Database } from '@/types/supabase';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-export const supabaseServerClient = () => {
-  const cookieStore = cookies();
+export const supabaseServerClient = async () => {
+  const cookieStore = await cookies();
 
   return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -37,7 +37,7 @@ export const supabaseServerClient = () => {
 };
 
 export const getUserDetails = async () => {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
 
   try {
     const {

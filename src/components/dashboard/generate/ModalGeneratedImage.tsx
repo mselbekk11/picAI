@@ -25,7 +25,7 @@ interface ModalGeneratedImageProps {
 }
 
 const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, generation }) => {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
   const { data: model } = await supabase
     .from('headshot_models')
     .select('id, name')

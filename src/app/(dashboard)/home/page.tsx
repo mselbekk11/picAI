@@ -15,7 +15,7 @@ import { Eye } from 'lucide-react';
 import { LuLoader } from 'react-icons/lu';
 
 const Models = async () => {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
 
   // Get all the previously generated models from the database
   const { data: models } = await supabase

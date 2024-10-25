@@ -3,7 +3,7 @@ import BillingClient from '@/components/ui/BillingClient';
 import { supabaseServerClient } from '@/utils/supabase/server';
 
 async function getSubscription(userId: string) {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
   const { data, error } = await supabase
     .from('subscriptions')
     .select('type, amount, interval, start_date')
@@ -24,7 +24,7 @@ async function getSubscription(userId: string) {
 }
 
 export default async function BillingPage() {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
   const {
     data: { user },
     error: userError,

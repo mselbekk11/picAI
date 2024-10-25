@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   const origin = requestUrl.origin;
 
   if (code) {
-    const supabase = supabaseServerClient();
+    const supabase = await supabaseServerClient();
     await supabase.auth.exchangeCodeForSession(code);
   }
 

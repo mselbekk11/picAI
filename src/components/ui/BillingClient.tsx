@@ -37,9 +37,9 @@ export default function BillingClient({ subscription }: BillingClientProps) {
                     }`
                   : 'Free Plan'}
               </p>
-              {subscription && subscription.start_date && (
+              {/* {subscription && subscription.start_date && (
                 <p className='text-xs text-slate-500'>Start Date: {formatDate(subscription.start_date)}</p>
-              )}
+              )} */}
             </div>
             <div className='mb-4'>
               <p className='text-xs'>Model Credits:</p>

@@ -14,7 +14,7 @@ const API_KEY = process.env.ASTRIA_API_KEY;
 
 // This function is used for model finetuning based on user-provided images.
 export async function finetuneModelFn(request: FormData) {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
   const user = await getUserDetails();
 
   // const origin = headers().get('origin');

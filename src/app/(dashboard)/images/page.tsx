@@ -5,7 +5,7 @@ import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedI
 import NavTitle from '@/components/dashboard/Navbar/NavTitle';
 
 const Images = async () => {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
 
   // Get all the previously generated models from the database
   const { data: generations } = await supabase

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { supabaseServerClient } from '@/utils/supabase/server';
 
 export async function DELETE(request: Request) {
-  const supabase = supabaseServerClient();
+  const supabase = await supabaseServerClient();
   const { modelId } = await request.json();
 
   if (!modelId) {

@@ -22,7 +22,7 @@ export async function generateHeadshotFn(
   console.log('formData:', Object.fromEntries(formData.entries()));
 
   try {
-    const supabase = supabaseServerClient();
+    const supabase = await supabaseServerClient();
     const user = await getUserDetails();
 
     if (!user) {
