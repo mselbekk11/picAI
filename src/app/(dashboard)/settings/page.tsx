@@ -18,10 +18,10 @@ const Settings = async () => {
               <p className='text-xs'>Email Address: </p>
               <p className='text-lg font-medium'>{user?.email}</p>
             </div>
-            <div className='mb-4'>
+            {/* <div className='mb-4'>
               <p className='text-xs'>Current Plan: </p>
               <p className='text-lg font-medium'>Free</p>
-            </div>
+            </div> */}
             <div className='mb-4'>
               <p className='text-xs mb-2'>Theme: </p>
               {/* <SelectTheme /> */}

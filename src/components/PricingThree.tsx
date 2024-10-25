@@ -5,6 +5,7 @@ import { Radio, RadioGroup } from '@headlessui/react';
 import { Check } from 'lucide-react';
 import ButtonPayment from './ButtonPayment';
 import { TypeSubscriptionPlan, TypeSubscriptionInterval } from '@/types/types';
+import { Card } from './ui/card';
 
 const frequencies = [
   { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
@@ -18,9 +19,9 @@ const tiers = [
     price: { monthly: '$19', annually: '$199' },
     description: 'Great for exploring AI images, for personal use only',
     features: [
+      'Royalty free ownership of images',
       '1 custom model per month',
       '80 images per month',
-      'Royalty free ownership of images',
       'Highest quality Flux model',
     ],
     featured: false,
@@ -75,32 +76,27 @@ export default function PricingThree() {
 
   return (
     <div className=''>
-      <div className='mx-auto max-w-7xl px-6 lg:px-8'>
-        <div className='mt-16 flex justify-center'>
+      <div className='mx-auto max-w-7xl'>
+        <div className='flex justify-center my-6'>
           <fieldset aria-label='Payment frequency'>
             <RadioGroup
               value={frequency}
               onChange={setFrequency}
-              className='grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200'>
+              className='grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset dark:ring-[#27272a] ring-[#e4e4e7] dark:bg-[#27272a66] bg-[#f4f4f566]'>
               {frequencies.map((option) => (
                 <Radio
                   key={option.value}
                   value={option}
-                  className='cursor-pointer rounded-full px-2.5 py-1 data-[checked]:bg-indigo-600 data-[checked]:text-white'>
+                  className='cursor-pointer rounded-full px-2.5 py-1 dark:data-[checked]:bg-[#fff] dark:data-[checked]:text-black data-[checked]:bg-[#38383a] data-[checked]:text-white'>
                   {option.label}
                 </Radio>
               ))}
             </RadioGroup>
           </fieldset>
         </div>
-        <div className='isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2'>
+        <div className='isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2'>
           {tiers.map((tier) => (
-            <div
-              key={tier.id}
-              className={classNames(
-                tier.featured ? 'bg-gray-900 ring-gray-900' : 'ring-gray-200',
-                'rounded-lg p-8 ring-1 xl:p-10'
-              )}>
+            <Card key={tier.id} className={classNames('rounded-lg p-8 xl:p-10')}>
               <h3 id={tier.id} className={classNames('text-lg font-semibold leading-8')}>
                 {tier.name}
               </h3>
@@ -135,7 +131,7 @@ export default function PricingThree() {
                   tier.frequency[frequency.value as keyof typeof tier.frequency] as TypeSubscriptionInterval
                 }
               />
-              <ul role='list' className={classNames('mt-8 space-y-3 text-sm leading-6 xl:mt-10')}>
+              <ul role='list' className={classNames('space-y-3 text-sm leading-6 ')}>
                 {tier.features.map((feature) => (
                   <li key={feature} className='flex gap-x-3'>
                     <Check aria-hidden='true' className={classNames('h-6 w-5 flex-none')} />
@@ -143,7 +139,7 @@ export default function PricingThree() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
           ))}
         </div>
       </div>

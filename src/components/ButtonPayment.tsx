@@ -47,11 +47,11 @@ const ButtonPayment: FC<ButtonPaymentProps> = ({ provider, tier, frequency }) =>
   return (
     <>
       <Button
-        variant={provider === 'stripe' ? 'default' : 'outline'}
+        // variant={provider === 'stripe' ? 'default' : 'outline'}
         size='lg'
         onClick={goToPaymentPage}
-        className='w-full'>
-        Pay with {provider === 'stripe' ? 'Stripe' : 'Lemon Squeezy'}
+        className='w-full my-10 bg-[#5454EC] transition-colors duration-200 hover:bg-[#4343bd] text-white'>
+        Subscribe
       </Button>
     </>
   );
