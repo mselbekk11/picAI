@@ -14,11 +14,13 @@ import { sentenceCase } from '@/utils/utils';
 import ModalGeneratedImageWrapper from '@/components/dashboard/generate/ModalGeneratedImage';
 
 type TypeParams = {
-  params: { id: string };
-  searchParams?: { form: string };
+  params: Promise<{ id: string }>;
+  searchParams?: Promise<{ form: string }>;
 };
 
-export default async function GenerateImage({ params, searchParams }: TypeParams) {
+export default async function GenerateImage(props: TypeParams) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const supabase = await supabaseServerClient();
 
   // Get all the previously generated models from the database
