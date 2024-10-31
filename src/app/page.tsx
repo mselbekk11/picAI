@@ -10,6 +10,7 @@ import PricingTwo from '@/components/landing-page/PricingTwo';
 import FaqsTwo from '@/components/landing-page/FaqsTwo';
 import CtaSection from '@/components/landing-page/CtaSection';
 import FooterTwo from '@/components/landing-page/FooterTwo';
+import PricingFour from '@/components/landing-page/PricingFour';
 
 export default async function Home() {
   return (
@@ -20,7 +21,8 @@ export default async function Home() {
       <Transformations />
       <Video />
       {/* <Pricing /> */}
-      <PricingTwo />
+      {/* <PricingTwo /> */}
+      <PricingFour />
       <FaqsTwo />
       <CtaSection />
       <FooterTwo />

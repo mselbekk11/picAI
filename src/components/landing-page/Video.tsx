@@ -13,7 +13,7 @@ export default function Video() {
           text='Here is a demonstration of how to create Models and then generate images, which you can download and share'
         />
       </div>
-      <div className='mx-auto max-w-3xl flex flex-col items-center pb-10 md:pb-10 text-center'>
+      <div className='mx-auto max-w-3xl flex flex-col items-center text-center'>
         <VideoOne />
       </div>
     </div>

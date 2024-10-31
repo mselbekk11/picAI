@@ -3,9 +3,10 @@
 import { useState } from 'react';
 import { Radio, RadioGroup } from '@headlessui/react';
 import { Check } from 'lucide-react';
-import ButtonPayment from './ButtonPayment';
-import { TypeSubscriptionPlan, TypeSubscriptionInterval } from '@/types/types';
-import { Card } from './ui/card';
+import { Card } from '@/components/ui/card';
+import Link from 'next/link';
+import { Button } from '../ui/button';
+import { SectionTitle } from './SectionTitle';
 
 const frequencies = [
   { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
@@ -29,6 +30,7 @@ const tiers = [
     provider: 'stripe',
     tier: 'standard',
     frequency: { monthly: 'monthly', annually: 'annually' },
+    mostPopular: false,
   },
   {
     name: 'Premium',
@@ -47,47 +49,38 @@ const tiers = [
     provider: 'stripe',
     tier: 'premium',
     frequency: { monthly: 'monthly', annually: 'annually' },
+    mostPopular: true,
   },
-  // {
-  //   name: 'Enterprise',
-  //   id: 'tier-enterprise',
-  //   href: '#',
-  //   price: 'Custom',
-  //   description: 'Dedicated support and infrastructure for your company.',
-  //   features: [
-  //     'Unlimited products',
-  //     'Unlimited subscribers',
-  //     'Advanced analytics',
-  //     '1-hour, dedicated support response time',
-  //     'Marketing automations',
-  //     'Custom reporting tools',
-  //   ],
-  //   featured: true,
-  //   cta: 'Contact sales',
-  // },
 ];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function PricingThree() {
+export default function PricingFour() {
   const [frequency, setFrequency] = useState(frequencies[0]);
 
   return (
-    <div className=''>
-      <div className='mx-auto max-w-7xl'>
+    <div className='bg-black' id='pricing'>
+      <div className='mx-auto max-w-7xl flex flex-col items-center py-28 md:py-28 text-center'>
+        <SectionTitle
+          loop='Pricing'
+          title='Flexible Pricing to Fit Your Needs.'
+          text='We handle everything from design to deployment to get your website shipped and ready to go!'
+        />
+      </div>
+      <div className='mx-auto max-w-5xl'>
         <div className='flex justify-center my-6'>
           <fieldset aria-label='Payment frequency'>
             <RadioGroup
               value={frequency}
               onChange={setFrequency}
-              className='grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset dark:ring-[#27272a] ring-[#e4e4e7] dark:bg-[#27272a66] bg-[#f4f4f566]'>
+              className='grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-[#232324]  bg-[#161617]'>
               {frequencies.map((option) => (
                 <Radio
                   key={option.value}
                   value={option}
-                  className='cursor-pointer rounded-full px-2.5 py-1 dark:data-[checked]:bg-[#fff] dark:data-[checked]:text-black data-[checked]:bg-[#38383a] data-[checked]:text-white'>
+                  className='cursor-pointer rounded-full px-2.5 py-1 data-[checked]:bg-white data-[checked]:text-black text-white'>
                   {option.label}
                 </Radio>
               ))}
@@ -96,7 +89,11 @@ export default function PricingThree() {
         </div>
         <div className='isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2'>
           {tiers.map((tier) => (
-            <Card key={tier.id} className={classNames('rounded-lg p-8 xl:p-10')}>
+            <Card
+              key={tier.id}
+              className={classNames(
+                'rounded-lg p-8 xl:p-10 bg-[#161617] text-white border-2 border-[#232324]'
+              )}>
               <h3 id={tier.id} className={classNames('text-lg font-semibold leading-8')}>
                 {tier.name}
               </h3>
@@ -113,24 +110,13 @@ export default function PricingThree() {
                   </span>
                 ) : null}
               </p>
-              {/* <a
-                href={tier.href}
-                aria-describedby={tier.id}
-                className={classNames(
-                  tier.featured
-                    ? 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white'
-                    : 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600',
-                  'mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-                )}>
-                {tier.cta}
-              </a> */}
-              <ButtonPayment
-                provider={tier.provider as 'stripe'}
-                tier={tier.tier as TypeSubscriptionPlan}
-                frequency={
-                  tier.frequency[frequency.value as keyof typeof tier.frequency] as TypeSubscriptionInterval
-                }
-              />
+              {/* <PricingButton tiername={tier.name} mostPopular={tier.mostPopular} /> */}
+              {/* <UserButtonWrapper tiername={tier.name} mostPopular={tier.mostPopular} /> */}
+              <Link href={'/login'}>
+                <Button className='w-full my-6 bg-[#5454EC] transition-colors duration-200 hover:bg-[#4343bd] text-white'>
+                  Buy {tier.name}
+                </Button>
+              </Link>
               <ul role='list' className={classNames('space-y-3 text-sm leading-6 ')}>
                 {tier.features.map((feature) => (
                   <li key={feature} className='flex gap-x-3'>
