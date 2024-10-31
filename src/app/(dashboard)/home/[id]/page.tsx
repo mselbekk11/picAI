@@ -12,6 +12,7 @@ import { CardDescription } from '@/components/ui/card';
 import { formatDistanceToNow } from 'date-fns';
 import { sentenceCase } from '@/utils/utils';
 import ModalGeneratedImageWrapper from '@/components/dashboard/generate/ModalGeneratedImage';
+import React from 'react';
 
 type TypeParams = {
   params: Promise<{ id: string }>;
@@ -63,11 +64,15 @@ export default async function GenerateImage(props: TypeParams) {
             </Link>
 
             {generations?.map((generation) => (
-              <>
+              <React.Fragment key={generation.id}>
                 {generation.image_urls?.map((_, index) => (
-                  <ModalGeneratedImageWrapper key={index} index={index} generation={generation} />
+                  <ModalGeneratedImageWrapper
+                    key={`${generation.id}-${index}`}
+                    index={index}
+                    generation={generation}
+                  />
                 ))}
-              </>
+              </React.Fragment>
             ))}
           </div>
         </div>

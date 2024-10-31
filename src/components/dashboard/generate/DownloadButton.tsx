@@ -12,7 +12,7 @@ interface DownloadButtonProps {
 
 const DownloadButton: FC<DownloadButtonProps> = ({ imageUrl, fileName }) => {
   return (
-    <Button variant='default' onClick={() => downloadHeadshot(imageUrl, fileName)} className='text-black'>
+    <Button variant='default' onClick={() => downloadHeadshot(imageUrl, fileName)} className=''>
       <Download size={14} className='mr-2' />
       Download
     </Button>

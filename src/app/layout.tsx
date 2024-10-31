@@ -8,7 +8,6 @@ import './globals.css';
 import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/utils';
-import NavbarTwo from '@/components/landing-page/NavbarTwo';
 
 const font = Inter({ subsets: ['latin'] });
 
@@ -54,7 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Script>
 
       <html lang='en'>
-        <body className={cn(bg.className)}>
+        <body className={cn(bg.className, '')}>
           <main>{children}</main>
           <Toaster />
         </body>

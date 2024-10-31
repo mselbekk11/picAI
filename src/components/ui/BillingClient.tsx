@@ -15,10 +15,10 @@ interface BillingClientProps {
 }
 
 // Helper function to format date consistently
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
-}
+// function formatDate(dateString: string): string {
+//   const date = new Date(dateString);
+//   return date.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
+// }
 
 export default function BillingClient({ subscription }: BillingClientProps) {
   return (
