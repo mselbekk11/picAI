@@ -6,7 +6,7 @@ import NavbarTwo from '@/components/landing-page/NavbarTwo';
 import Video from '@/components/landing-page/Video';
 import { testimonials } from '@/assets/data/data';
 import Transformations from '@/components/landing-page/Transformations';
-import PricingTwo from '@/components/landing-page/PricingTwo';
+// import PricingTwo from '@/components/landing-page/PricingTwo';
 import FaqsTwo from '@/components/landing-page/FaqsTwo';
 import CtaSection from '@/components/landing-page/CtaSection';
 import FooterTwo from '@/components/landing-page/FooterTwo';

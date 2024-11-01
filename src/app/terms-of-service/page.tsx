@@ -1,4 +1,3 @@
-import Footer from '@/components/landing-page/Footer';
 import FooterTwo from '@/components/landing-page/FooterTwo';
 import NavbarTwo from '@/components/landing-page/NavbarTwo';
 import React from 'react';
