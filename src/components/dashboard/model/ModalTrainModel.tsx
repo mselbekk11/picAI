@@ -224,7 +224,12 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                 Cancel
               </Button>
             </DialogClose>
-            <SubmitButton className='w-full' formAction={trainModel} disabled={hasLimitExceeded}>
+            <SubmitButton
+              className='w-full'
+              formAction={async (formData: FormData) => {
+                await trainModel(formData);
+              }}
+              disabled={hasLimitExceeded}>
               Train
             </SubmitButton>
           </DialogFooter>
