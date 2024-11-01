@@ -219,11 +219,14 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
           </div>
 
           <DialogFooter className='flex gap-4 sm:justify-start'>
-            <DialogClose className='w-full'>
+            {/* <DialogClose className='w-full'>
               <Button className='w-full' variant='outline'>
                 Cancel
               </Button>
-            </DialogClose>
+            </DialogClose> */}
+            <Button type='button' className='w-full' variant='outline' onClick={() => setOpenModal(false)}>
+              Cancel
+            </Button>
             <SubmitButton
               className='w-full'
               formAction={async (formData: FormData) => {
