@@ -19,7 +19,7 @@ export default function Credits() {
         <Image size={18} className='mr-1' color='#af40e2' />
         <div>{imageCredits}</div>
       </div>
-      {modelCredits ? (
+      {modelCredits && imageCredits ? (
         ''
       ) : (
         <Link href='/billing'>
