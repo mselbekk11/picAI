@@ -2,6 +2,7 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useCredits } from '@/context/CreditsContext';
 
 interface Subscription {
   type: 'free' | 'standard' | 'premium';
@@ -21,6 +22,8 @@ interface BillingClientProps {
 // }
 
 export default function BillingClient({ subscription }: BillingClientProps) {
+  const { modelCredits, imageCredits } = useCredits();
+
   return (
     <div className=''>
       <Card className='grid grid-cols-1 lg:grid-cols-2'>
@@ -43,11 +46,11 @@ export default function BillingClient({ subscription }: BillingClientProps) {
             </div>
             <div className='mb-4'>
               <p className='text-xs'>Model Credits:</p>
-              <p className='text-lg font-medium'>0</p>
+              <p className='text-lg font-medium'>{modelCredits}</p>
             </div>
             <div className='mb-4'>
               <p className='text-xs'>Image Credits:</p>
-              <p className='text-lg font-medium'>76</p>
+              <p className='text-lg font-medium'>{imageCredits}</p>
             </div>
           </div>
         </CardContent>
