@@ -218,6 +218,47 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
         console.error(updateError);
         throw new Error(`Updating subscription details for subscription id: ${subscriptionId}`);
       }
+
+      const creditAmounts = {
+        standard: { model: 1, image: 80 },
+        premium: { model: 3, image: 300 },
+      };
+
+      const credits = creditAmounts[subscriptionType as keyof typeof creditAmounts];
+
+      // Add the new credits using RPC functions
+      const { error: modelCreditError } = await supabaseAdmin.rpc('add_model_credits', {
+        user_id: data.user_id,
+        amount: credits.model,
+      });
+
+      if (modelCreditError) {
+        console.error(modelCreditError);
+        throw new Error(`Error adding model credits for user: ${data.user_id}`);
+      }
+
+      const { error: imageCreditError } = await supabaseAdmin.rpc('add_image_credits', {
+        user_id: data.user_id,
+        amount: credits.image,
+      });
+
+      if (imageCreditError) {
+        console.error(imageCreditError);
+        throw new Error(`Error adding image credits for user: ${data.user_id}`);
+      }
+
+      // Update the last reset date
+      const { error: resetDateError } = await supabaseAdmin
+        .from('user_credits')
+        .update({
+          last_reset_date: new Date().toISOString(),
+        })
+        .eq('user_id', data.user_id);
+
+      if (resetDateError) {
+        console.error(resetDateError);
+        throw new Error(`Error updating reset date for user: ${data.user_id}`);
+      }
     }
 
     console.debug(`Subscription updated for id: ${subscriptionId}`);

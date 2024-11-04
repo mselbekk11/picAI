@@ -227,6 +227,20 @@ export type Database = {
         Args: { user_id: string };
         Returns: boolean;
       };
+      add_model_credits: {
+        Args: {
+          user_id: string;
+          amount: number;
+        };
+        Returns: void;
+      };
+      add_image_credits: {
+        Args: {
+          user_id: string;
+          amount: number;
+        };
+        Returns: void;
+      };
     };
     Enums: {
       billingcycle: 'month' | 'year';
