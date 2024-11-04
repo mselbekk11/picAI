@@ -42,7 +42,7 @@ export default async function BillingPage() {
   return (
     <div className='flex flex-col p-6'>
       <BillingClient subscription={subscription} />
-      <PricingThree />
+      <PricingThree subscription={subscription} />
     </div>
   );
 }

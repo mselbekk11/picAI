@@ -7,6 +7,17 @@ import ButtonPayment from './ButtonPayment';
 import { TypeSubscriptionPlan, TypeSubscriptionInterval } from '@/types/types';
 import { Card } from './ui/card';
 
+interface Subscription {
+  type: 'free' | 'standard' | 'premium';
+  amount: number | null;
+  interval: 'month' | 'year' | null;
+  start_date: string | null;
+}
+
+interface PricingThreeProps {
+  subscription: Subscription | null;
+}
+
 const frequencies = [
   { value: 'monthly', label: 'Monthly', priceSuffix: '/month' },
   { value: 'annually', label: 'Annually', priceSuffix: '/year' },
@@ -71,7 +82,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function PricingThree() {
+export default function PricingThree({ subscription }: PricingThreeProps) {
   const [frequency, setFrequency] = useState(frequencies[0]);
 
   return (
@@ -113,24 +124,17 @@ export default function PricingThree() {
                   </span>
                 ) : null}
               </p>
-              {/* <a
-                href={tier.href}
-                aria-describedby={tier.id}
-                className={classNames(
-                  tier.featured
-                    ? 'bg-white/10 text-white hover:bg-white/20 focus-visible:outline-white'
-                    : 'bg-indigo-600 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600',
-                  'mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-                )}>
-                {tier.cta}
-              </a> */}
-              <ButtonPayment
-                provider={tier.provider as 'stripe'}
-                tier={tier.tier as TypeSubscriptionPlan}
-                frequency={
-                  tier.frequency[frequency.value as keyof typeof tier.frequency] as TypeSubscriptionInterval
-                }
-              />
+              {!subscription ? (
+                <ButtonPayment
+                  provider={tier.provider as 'stripe'}
+                  tier={tier.tier as TypeSubscriptionPlan}
+                  frequency={
+                    tier.frequency[frequency.value as keyof typeof tier.frequency] as TypeSubscriptionInterval
+                  }
+                />
+              ) : (
+                <div className='my-6 border-b border-2'></div>
+              )}
               <ul role='list' className={classNames('space-y-3 text-sm leading-6 ')}>
                 {tier.features.map((feature) => (
                   <li key={feature} className='flex gap-x-3'>

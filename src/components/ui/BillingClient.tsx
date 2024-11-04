@@ -33,7 +33,7 @@ export default function BillingClient({ subscription }: BillingClientProps) {
           <div className='flex flex-col'>
             <div className='mb-4'>
               <p className='text-xs'>Current Subscription: </p>
-              <p className='text-lg font-medium'>
+              <p className='text-lg font-medium capitalize'>
                 {subscription
                   ? `${subscription.type} plan - ${
                       subscription.amount !== null
@@ -56,18 +56,22 @@ export default function BillingClient({ subscription }: BillingClientProps) {
             </div>
           </div>
         </CardContent>
-        <CardContent className='p-6'>
-          <div className='flex items-center justify-end gap-2'>
-            <a href={customerPortalLink}>
-              <Button variant='default' size='sm' className='ml-4'>
-                Upgrade Plan
+        {subscription ? (
+          <CardContent className='p-6'>
+            <div className='flex items-center justify-end gap-2'>
+              <a href={customerPortalLink}>
+                <Button variant='default' size='sm' className='ml-4'>
+                  Upgrade Plan
+                </Button>
+              </a>
+              <Button variant='outline' size='sm'>
+                Manage Subscription
               </Button>
-            </a>
-            <Button variant='outline' size='sm'>
-              Manage Subscription
-            </Button>
-          </div>
-        </CardContent>
+            </div>
+          </CardContent>
+        ) : (
+          ''
+        )}
       </Card>
       <div className='mx-auto w-full'></div>
     </div>
