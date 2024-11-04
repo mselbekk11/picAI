@@ -24,6 +24,8 @@ interface BillingClientProps {
 export default function BillingClient({ subscription }: BillingClientProps) {
   const { modelCredits, imageCredits } = useCredits();
 
+  const customerPortalLink = 'https://billing.stripe.com/p/login/test_5kAbJFfd02YTdQQbII';
+
   return (
     <div className=''>
       <Card className='grid grid-cols-1 lg:grid-cols-2'>
@@ -56,9 +58,11 @@ export default function BillingClient({ subscription }: BillingClientProps) {
         </CardContent>
         <CardContent className='p-6'>
           <div className='flex items-center justify-end gap-2'>
-            <Button variant='default' size='sm' className='ml-4'>
-              Upgrade Plan
-            </Button>
+            <a href={customerPortalLink}>
+              <Button variant='default' size='sm' className='ml-4'>
+                Upgrade Plan
+              </Button>
+            </a>
             <Button variant='outline' size='sm'>
               Manage Subscription
             </Button>
