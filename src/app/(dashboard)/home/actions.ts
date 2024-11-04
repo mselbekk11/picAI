@@ -33,6 +33,30 @@ export async function finetuneModelFn(request: FormData) {
       throw 'Missing required fields.';
     }
 
+    // Check and deduct credits
+    const { data: credits, error: creditsError } = await supabase
+      .from('user_credits')
+      .select('model_credits')
+      .single();
+
+    if (creditsError || !credits || credits.model_credits < 1) {
+      throw 'Insufficient model credits';
+    }
+
+    // Deduct 1 model credit
+    const { data: deducted, error: deductError } = await supabase.rpc('deduct_model_credit', {
+      user_id: user.id,
+    });
+
+    if (deductError) {
+      console.error('Failed to deduct model credits:', deductError);
+      throw 'Failed to deduct model credits';
+    }
+
+    if (deducted === false) {
+      throw 'Insufficient credits';
+    }
+
     const formData = new FormData();
     formData.append('tune[title]', title);
     formData.append('tune[base_tune_id]', '1504944');

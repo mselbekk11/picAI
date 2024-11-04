@@ -7,6 +7,7 @@ import Sidebar from '@/components/dashboard/sidebar/Sidebar';
 import Navbar from '@/components/dashboard/Navbar/Navbar';
 import { Inter } from 'next/font/google';
 import { cn } from '@/utils/utils';
+import { CreditsProvider } from '@/context/CreditsContext';
 const font = Inter({ subsets: ['latin'] });
 
 type Props = {
@@ -25,18 +26,20 @@ export default async function Layout({ children }: Props) {
   return (
     // Wraps a ThemeProvider around the Navbar and children components. It allows user to switch between light and dark themes.
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
-      <div className={cn(font.className)}>
-        <div className='h-screen flex'>
-          <div className='w-80 hidden md:flex flex-col'>
-            <Sidebar />
-          </div>
+      <CreditsProvider>
+        <div className={cn(font.className)}>
+          <div className='h-screen flex'>
+            <div className='w-80 hidden md:flex flex-col'>
+              <Sidebar />
+            </div>
 
-          <div className='w-full overflow-auto'>
-            <Navbar />
-            <div className='max-w-7xl'>{children}</div>
+            <div className='w-full overflow-auto'>
+              <Navbar />
+              <div className='max-w-7xl'>{children}</div>
+            </div>
           </div>
         </div>
-      </div>
+      </CreditsProvider>
     </ThemeProvider>
   );
 }

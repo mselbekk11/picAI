@@ -179,12 +179,54 @@ export type Database = {
         };
         Relationships: [];
       };
+      user_credits: {
+        Row: {
+          id: string;
+          user_id: string;
+          model_credits: number;
+          image_credits: number;
+          last_reset_date: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          model_credits?: number;
+          image_credits?: number;
+          last_reset_date?: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          model_credits?: number;
+          image_credits?: number;
+          last_reset_date?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'user_credits_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: true;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      deduct_image_credit: {
+        Args: { user_id: string };
+        Returns: boolean;
+      };
+      deduct_model_credit: {
+        Args: { user_id: string };
+        Returns: boolean;
+      };
     };
     Enums: {
       billingcycle: 'month' | 'year';

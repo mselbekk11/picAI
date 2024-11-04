@@ -84,6 +84,18 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
     const customer = await stripe.customers.retrieve(customerId as string);
     const email = (customer as Stripe.Customer).email;
 
+    // Get user_id from database first
+    const { data: userData, error: userError } = await supabaseAdmin
+      .from('users')
+      .select('id')
+      .eq('email', email ?? '')
+      .single();
+
+    if (userError) {
+      console.error(userError);
+      throw new Error(`Error finding user with email: ${email}`);
+    }
+
     const { error } = await supabaseAdmin
       .from('subscriptions')
       .update({
@@ -102,6 +114,22 @@ async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
     }
 
     console.debug(`Subscription created for user: ${email}`);
+
+    // Define credit amounts based on plan
+    const creditAmounts = {
+      standard: { model: 1, image: 80 },
+      premium: { model: 3, image: 300 },
+    };
+
+    const credits = creditAmounts[subscriptionType as keyof typeof creditAmounts];
+
+    // Now use userData.id for the credits insertion
+    await supabaseAdmin.from('user_credits').upsert({
+      user_id: userData.id,
+      model_credits: credits.model,
+      image_credits: credits.image,
+      last_reset_date: new Date().toISOString(),
+    });
   } catch (error: any) {
     throw new Error(`${error.message}`);
   }

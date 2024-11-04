@@ -49,6 +49,30 @@ export async function generateHeadshotFn(
     const webhookUrl = `${origin}/api/webhooks/generate-images?user_id=${user.id}`;
     form.append('prompt[callback]', webhookUrl);
 
+    // Check and deduct credits
+    const { data: credits, error: creditsError } = await supabase
+      .from('user_credits')
+      .select('image_credits')
+      .single();
+
+    if (creditsError || !credits || credits.image_credits < 1) {
+      return { error: 'Insufficient image credits' };
+    }
+
+    // Deduct 1 image credit
+    const { data: deducted, error: deductError } = await supabase.rpc('deduct_image_credit', {
+      user_id: user.id,
+    });
+
+    if (deductError) {
+      console.error('Failed to deduct image credits:', deductError);
+      return { error: 'Failed to deduct image credits' };
+    }
+
+    if (deducted === false) {
+      return { error: 'Insufficient credits' };
+    }
+
     try {
       const { data: generation } = await axios.post(`${ASTRIA_BASEURL}/tunes/${modelId}/prompts`, form, {
         headers: {
