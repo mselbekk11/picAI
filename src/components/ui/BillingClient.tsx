@@ -84,14 +84,16 @@ export default function BillingClient({ subscription }: BillingClientProps) {
         {subscription ? (
           <CardContent className='p-6'>
             <div className='flex items-center justify-end gap-2'>
-              <a href={customerPortalLink}>
+              <a href={customerPortalLink} target='_blank' rel='noreferrer'>
                 <Button variant='default' size='sm' className='ml-4'>
                   Upgrade Plan
                 </Button>
               </a>
-              <Button variant='outline' size='sm'>
-                Manage Subscription
-              </Button>
+              <a href={customerPortalLink} target='_blank' rel='noreferrer'>
+                <Button variant='outline' size='sm'>
+                  Manage Subscription
+                </Button>
+              </a>
             </div>
           </CardContent>
         ) : (

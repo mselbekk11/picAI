@@ -17,9 +17,17 @@ export function CreditsProvider({ children }: { children: React.ReactNode }) {
   const [imageCredits, setImageCredits] = useState(0);
 
   const refreshCredits = async () => {
+    // Get the current user first
+    const {
+      data: { user },
+    } = await supabaseBrowserClient().auth.getUser();
+
+    if (!user) return; // Exit if no user is logged in
+
     const { data: credits } = await supabaseBrowserClient()
       .from('user_credits')
       .select('model_credits, image_credits')
+      .eq('user_id', user.id) // Filter by the current user's ID
       .single();
 
     if (credits) {

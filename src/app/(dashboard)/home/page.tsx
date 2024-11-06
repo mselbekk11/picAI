@@ -91,7 +91,7 @@ const Models = async () => {
           <p className='text-lg text-default text-center font-medium px-4 mb-7'>
             Get started by training your first model.
           </p>
-          <Image src={EmptyState} alt='Empty-state' height={347} width={347} className='mb-14' />
+          {/* <Image src={EmptyState} alt='Empty-state' height={347} width={347} className='mb-14' /> */}
           <ModalTrainModel />
         </div>
       )}
