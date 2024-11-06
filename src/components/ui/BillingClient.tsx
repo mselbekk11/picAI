@@ -16,10 +16,13 @@ interface BillingClientProps {
 }
 
 // Helper function to format date consistently
-// function formatDate(dateString: string): string {
-//   const date = new Date(dateString);
-//   return date.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
-// }
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, '0');
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`;
+}
 
 export default function BillingClient({ subscription }: BillingClientProps) {
   const { modelCredits, imageCredits } = useCredits();
@@ -45,6 +48,28 @@ export default function BillingClient({ subscription }: BillingClientProps) {
               {/* {subscription && subscription.start_date && (
                 <p className='text-xs text-slate-500'>Start Date: {formatDate(subscription.start_date)}</p>
               )} */}
+            </div>
+            <div className='mb-4'>
+              <p className='text-xs'>Current Period</p>
+              <p className='text-lg font-medium capitalize'>
+                {subscription && subscription.start_date ? (
+                  <>
+                    {formatDate(subscription.start_date)} -{' '}
+                    {(() => {
+                      if (!subscription.interval) return 'No end date';
+                      const endDate = new Date(subscription.start_date);
+                      if (subscription.interval === 'month') {
+                        endDate.setMonth(endDate.getMonth() + 1);
+                      } else if (subscription.interval === 'year') {
+                        endDate.setFullYear(endDate.getFullYear() + 1);
+                      }
+                      return formatDate(endDate.toISOString());
+                    })()}
+                  </>
+                ) : (
+                  'No active subscription'
+                )}
+              </p>
             </div>
             <div className='mb-4'>
               <p className='text-xs'>Model Credits:</p>
