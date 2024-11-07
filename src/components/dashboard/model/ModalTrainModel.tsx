@@ -28,6 +28,10 @@ import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
 import { FaPlus } from 'react-icons/fa6';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
+// import { getSubscription } from '@/app/(dashboard)/home/actions';
+import { useCredits } from '@/context/CreditsContext';
+import { Zap } from 'lucide-react';
+import Link from 'next/link';
 
 interface ModalTrainModelProps {
   buttonText?: string;
@@ -37,6 +41,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
   const [hasLimitExceeded, setHasLimitExceeded] = useState(false);
+  const { modelCredits, imageCredits } = useCredits();
 
   const router = useRouter();
 
@@ -218,7 +223,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             )}
           </div>
 
-          <DialogFooter className='flex gap-4 sm:justify-start'>
+          <DialogFooter className='flex gap-2 sm:justify-start'>
             {/* <DialogClose className='w-full'>
               <Button className='w-full' variant='outline'>
                 Cancel
@@ -227,14 +232,23 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             <Button type='button' className='w-full' variant='outline' onClick={() => setOpenModal(false)}>
               Cancel
             </Button>
-            <SubmitButton
-              className='w-full'
-              formAction={async (formData: FormData) => {
-                await trainModel(formData);
-              }}
-              disabled={hasLimitExceeded}>
-              Train
-            </SubmitButton>
+            {modelCredits && imageCredits ? (
+              <SubmitButton
+                className='w-full'
+                formAction={async (formData: FormData) => {
+                  await trainModel(formData);
+                }}
+                disabled={hasLimitExceeded}>
+                Train
+              </SubmitButton>
+            ) : (
+              <Link href='/billing' className='w-full'>
+                <Button variant='purple' size='sm' className='w-full' onClick={() => setOpenModal(false)}>
+                  <Zap size={16} className='mr-1' />
+                  Upgrade
+                </Button>
+              </Link>
+            )}
           </DialogFooter>
         </form>
       </DialogContent>

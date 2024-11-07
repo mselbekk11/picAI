@@ -120,3 +120,24 @@ export async function finetuneModelFn(request: FormData) {
     return `${error}`;
   }
 }
+
+// export async function getSubscription(userId: string) {
+//   const supabase = await supabaseServerClient();
+//   const { data, error } = await supabase
+//     .from('subscriptions')
+//     .select('type, amount, interval, start_date')
+//     .eq('user_id', userId);
+
+//   if (error) {
+//     console.error('Error fetching subscription:', error);
+//     return null;
+//   }
+
+//   if (data.length === 0) {
+//     console.log('No subscriptions found for user:', userId);
+//     return null;
+//   }
+
+//   console.log('Fetched subscription data:', data); // Log the fetched data for debugging
+//   return data;
+// }
