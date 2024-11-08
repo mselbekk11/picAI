@@ -87,7 +87,7 @@ export default function PricingThree({ subscription }: PricingThreeProps) {
 
   return (
     <div className=''>
-      <div className='mx-auto max-w-7xl'>
+      <div className='mx-auto w-full'>
         <div className='flex justify-center my-6'>
           <fieldset aria-label='Payment frequency'>
             <RadioGroup

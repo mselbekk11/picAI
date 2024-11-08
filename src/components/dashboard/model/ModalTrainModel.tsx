@@ -33,6 +33,19 @@ import { useCredits } from '@/context/CreditsContext';
 import { Zap } from 'lucide-react';
 import Link from 'next/link';
 
+import ImageOne from '../../../../public/1.png';
+import ImageTwo from '../../../../public/2.png';
+import ImageThree from '../../../../public/3.png';
+import ImageFour from '../../../../public/4.png';
+import ImageFive from '../../../../public/bad-1.png';
+import ImageSix from '../../../../public/bad-2.png';
+import ImageSeven from '../../../../public/bad-3.png';
+import ImageEight from '../../../../public/bad-4.png';
+import { Item } from '@radix-ui/react-dropdown-menu';
+
+const goodImages = [ImageOne, ImageTwo, ImageThree, ImageFour];
+const badImages = [ImageFive, ImageSix, ImageSeven, ImageEight];
+
 interface ModalTrainModelProps {
   buttonText?: string;
 }
@@ -154,103 +167,183 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
       <DialogTrigger className={cn(buttonVariants({ variant: 'default' }), 'w-full gap-2')}>
         <FaPlus className='size-4' /> {buttonText ?? 'Train Model'}
       </DialogTrigger>
-      <DialogContent className='rounded-lg'>
-        <DialogHeader>
-          <DialogTitle className='text-default font-semibold'>Finetune your model</DialogTitle>
-          <DialogDescription className='text-subtle text-sm mt-2'>
-            Train your model with images to generate headshots.
-          </DialogDescription>
-        </DialogHeader>
-
-        <form className='flex flex-col gap-6'>
-          <InputWrapper id='title' label='Title'>
-            <Input id='title' name='title' placeholder='e.g. Natalie Headshots' autoFocus />
-          </InputWrapper>
-
-          <InputWrapper label='Select Model'>
-            <Select name='type' defaultValue='man'>
-              <SelectTrigger className='w-full'>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value='man'>Man</SelectItem>
-                <SelectItem value='woman'>Woman</SelectItem>
-                <SelectItem value='unisex'>Unisex</SelectItem>
-              </SelectContent>
-            </Select>
-          </InputWrapper>
-
+      <DialogContent className='rounded-lg w-full max-w-7xl'>
+        <div className='grid gap-6 grid-cols-1 lg:grid-cols-2'>
           <div>
-            <InputWrapper
-              label='Images'
-              description='Upload 4-10 images of the person you want to generate headshots for. No nude.'
-              className='mb-4'>
-              <div
-                {...getRootProps()}
-                className={cn(
-                  'border-2 border-dashed rounded-lg py-4 text-center cursor-pointer hover:border-primary'
-                )}>
-                <Input {...getInputProps()} />
-                <div className='my-4 flex flex-col items-center'>
-                  <IoCloudUploadOutline className='size-5 mb-4' />
-                  <div>
-                    <span className='font-semibold text-primary mr-1'>Click to upload</span>
-                    <span className='text-subtle text-sm'>or drag and drop</span>
-                  </div>
-                  <div className='text-subtle text-xs mt-1'>PNG, JPG (max. 4MB)</div>
-                </div>
-              </div>
-            </InputWrapper>
+            <DialogHeader>
+              <DialogTitle className='text-default font-semibold'>Finetune your model</DialogTitle>
+              {/* <DialogDescription className='text-subtle text-sm mt-2'>
+                Train your model with images to generate headshots.
+              </DialogDescription> */}
+            </DialogHeader>
 
-            {/* Section to show the uploaded (selected) files */}
-            {images.length > 0 && (
-              <div className='max-h-32 md:max-h-56 flex gap-4 flex-wrap overflow-auto'>
-                {images.map((file) => (
-                  <div key={file.name} className='flex flex-col gap-1'>
-                    <Image
-                      src={URL.createObjectURL(file)}
-                      alt='model image'
-                      height={24}
-                      width={24}
-                      className='rounded-md size-20 md:size-24 object-cover'
-                    />
-                    <Button variant='outline' size={'sm'} className='w-full' onClick={() => removeFile(file)}>
-                      Remove
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+            <form className='flex flex-col gap-6 mt-4'>
+              <InputWrapper id='title' label='Title'>
+                <Input id='title' name='title' placeholder='e.g. Natalie Headshots' autoFocus />
+              </InputWrapper>
 
-          <DialogFooter className='flex gap-2 sm:justify-start'>
-            {/* <DialogClose className='w-full'>
+              <InputWrapper label='Select Model'>
+                <Select name='type' defaultValue='man'>
+                  <SelectTrigger className='w-full'>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value='man'>Man</SelectItem>
+                    <SelectItem value='woman'>Woman</SelectItem>
+                    <SelectItem value='unisex'>Unisex</SelectItem>
+                  </SelectContent>
+                </Select>
+              </InputWrapper>
+
+              <div>
+                <InputWrapper
+                  label='Images'
+                  description='Upload 4-10 images of the person you want to generate headshots for. No nude.'
+                  className='mb-4'>
+                  <div
+                    {...getRootProps()}
+                    className={cn(
+                      'border-2 border-dashed rounded-lg py-4 text-center cursor-pointer hover:border-primary'
+                    )}>
+                    <Input {...getInputProps()} />
+                    <div className='my-4 flex flex-col items-center'>
+                      <IoCloudUploadOutline className='size-5 mb-4' />
+                      <div>
+                        <span className='font-semibold text-primary mr-1'>Click to upload</span>
+                        <span className='text-subtle text-sm'>or drag and drop</span>
+                      </div>
+                      <div className='text-subtle text-xs mt-1'>PNG, JPG (max. 4MB)</div>
+                    </div>
+                  </div>
+                </InputWrapper>
+
+                {/* Section to show the uploaded (selected) files */}
+                {images.length > 0 && (
+                  <div className='max-h-32 md:max-h-56 flex gap-4 flex-wrap overflow-auto'>
+                    {images.map((file) => (
+                      <div key={file.name} className='flex flex-col gap-1'>
+                        <Image
+                          src={URL.createObjectURL(file)}
+                          alt='model image'
+                          height={24}
+                          width={24}
+                          className='rounded-md size-20 md:size-24 object-cover'
+                        />
+                        <Button
+                          variant='outline'
+                          size={'sm'}
+                          className='w-full'
+                          onClick={() => removeFile(file)}>
+                          Remove
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <DialogFooter className='flex gap-2 sm:justify-start'>
+                {/* <DialogClose className='w-full'>
               <Button className='w-full' variant='outline'>
                 Cancel
               </Button>
             </DialogClose> */}
-            <Button type='button' className='w-full' variant='outline' onClick={() => setOpenModal(false)}>
-              Cancel
-            </Button>
-            {modelCredits && imageCredits ? (
-              <SubmitButton
-                className='w-full'
-                formAction={async (formData: FormData) => {
-                  await trainModel(formData);
-                }}
-                disabled={hasLimitExceeded}>
-                Train
-              </SubmitButton>
-            ) : (
-              <Link href='/billing' className='w-full'>
-                <Button variant='purple' size='sm' className='w-full' onClick={() => setOpenModal(false)}>
-                  <Zap size={16} className='mr-1' />
-                  Upgrade
+                <Button
+                  type='button'
+                  className='w-full'
+                  variant='outline'
+                  onClick={() => setOpenModal(false)}>
+                  Cancel
                 </Button>
-              </Link>
-            )}
-          </DialogFooter>
-        </form>
+                {modelCredits && imageCredits ? (
+                  <SubmitButton
+                    className='w-full'
+                    formAction={async (formData: FormData) => {
+                      await trainModel(formData);
+                    }}
+                    disabled={hasLimitExceeded}>
+                    Train
+                  </SubmitButton>
+                ) : (
+                  <Link href='/billing' className='w-full'>
+                    <Button variant='purple' size='sm' className='w-full' onClick={() => setOpenModal(false)}>
+                      <Zap size={16} className='mr-1' />
+                      Upgrade
+                    </Button>
+                  </Link>
+                )}
+              </DialogFooter>
+            </form>
+          </div>
+          <div>
+            <div>
+              <DialogHeader>
+                <DialogTitle className='text-default font-semibold'>✅ Choose Good Pictures</DialogTitle>
+                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                  5-10 high quality samples, front facing, square aspect ratio, 1 person in frame, variety
+                </DialogDescription>
+                <div className='grid grid-cols-4 gap-4 w-full'>
+                  {/* <Image src={ImageOne} alt='example' height={24} width={24} />
+                <Image src={ImageTwo} alt='example' height={24} width={24} />
+                <Image src={ImageThree} alt='example' height={24} width={24} />
+                <Image src={ImageFour} alt='example' height={24} width={24} /> */}
+                  {goodImages.map((item, idx) => (
+                    <Image
+                      key={idx}
+                      src={item}
+                      alt='example'
+                      height={113}
+                      width={113}
+                      className='w-full rounded-lg'
+                    />
+                  ))}
+                </div>
+              </DialogHeader>
+            </div>
+            <div className='mt-6'>
+              <DialogHeader>
+                <DialogTitle className='text-default font-semibold'>❌ Examples of Bad Pictures</DialogTitle>
+                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                  Multiple Subjects, face covered, NSFW Images, blurry, uncropped, full length
+                </DialogDescription>
+                <div className='grid grid-cols-4 gap-4 w-full'>
+                  {/* <Image src={ImageOne} alt='example' height={24} width={24} />
+                <Image src={ImageTwo} alt='example' height={24} width={24} />
+                <Image src={ImageThree} alt='example' height={24} width={24} />
+                <Image src={ImageFour} alt='example' height={24} width={24} /> */}
+                  {badImages.map((item, idx) => (
+                    <Image
+                      key={idx}
+                      src={item}
+                      alt='example'
+                      height={113}
+                      width={113}
+                      className='w-full rounded-lg'
+                    />
+                  ))}
+                </div>
+              </DialogHeader>
+            </div>
+            <div className='mt-6'>
+              <DialogHeader>
+                <DialogTitle className='text-default font-semibold'>✅ Train your Model</DialogTitle>
+                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                  Train your model with images to generate headshots. Training takes around 30 minutes. Feel
+                  free to leave and come back later.
+                </DialogDescription>
+              </DialogHeader>
+            </div>
+            <div className='mt-6'>
+              <DialogHeader>
+                <DialogTitle className='text-default font-semibold'>✅ Generate Images</DialogTitle>
+                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                  Once your model is trained, you can generate images using prompts. Make sure to unclude the
+                  subject keyword in your prompts.
+                </DialogDescription>
+              </DialogHeader>
+            </div>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );

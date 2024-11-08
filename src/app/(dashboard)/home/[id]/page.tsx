@@ -55,9 +55,9 @@ export default async function GenerateImage(props: TypeParams) {
               (Expires: <span>{formatDistanceToNow(model.expires_at!)})</span>
             </h2>
           </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mr-2'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 mr-2'>
             <Link href='?form=true'>
-              <div className='w-full h-full flex items-center justify-center gap-1 bg-secondary border rounded-md min-h-[306px]'>
+              <div className='w-full h-full flex items-center justify-center gap-1 bg-secondary border rounded-md min-h-[272px]'>
                 <IoMdAdd />
                 <p className='text-sm font-medium'>Generate headshot</p>
               </div>
