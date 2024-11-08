@@ -50,7 +50,7 @@ const DeleteModalButton: React.FC<DeleteModalButtonProps> = ({ modelId }) => {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant='destructive' size='sm' className='w-full'>
-          <Trash2 size={12} className='mr-1' />
+          {/* <Trash2 size={12} className='mr-1' /> */}
           Delete
         </Button>
       </DialogTrigger>

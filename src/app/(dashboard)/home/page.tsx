@@ -69,7 +69,7 @@ const Models = async () => {
                           <div className='grid grid-cols-2 gap-2'>
                             <Link href={`/home/${model.model_id}`}>
                               <Button variant='secondary' size='sm' className='w-full'>
-                                <Eye size={12} className='mr-1' />
+                                {/* <Eye size={12} className='mr-1' /> */}
                                 View
                               </Button>
                             </Link>

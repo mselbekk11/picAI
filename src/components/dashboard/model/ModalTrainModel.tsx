@@ -167,8 +167,8 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
       <DialogTrigger className={cn(buttonVariants({ variant: 'default' }), 'w-full gap-2')}>
         <FaPlus className='size-4' /> {buttonText ?? 'Train Model'}
       </DialogTrigger>
-      <DialogContent className='rounded-lg w-full max-w-7xl'>
-        <div className='grid gap-6 grid-cols-1 lg:grid-cols-2'>
+      <DialogContent className='rounded-lg w-full max-w-7xl p-8'>
+        <div className='grid gap-8 grid-cols-1 lg:grid-cols-2'>
           <div>
             <DialogHeader>
               <DialogTitle className='text-default font-semibold'>Finetune your model</DialogTitle>
@@ -300,7 +300,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                 </div>
               </DialogHeader>
             </div>
-            <div className='mt-6'>
+            <div className='mt-8'>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>❌ Examples of Bad Pictures</DialogTitle>
                 <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
@@ -324,7 +324,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                 </div>
               </DialogHeader>
             </div>
-            <div className='mt-6'>
+            <div className='mt-8'>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>✅ Train your Model</DialogTitle>
                 <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
@@ -333,11 +333,11 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                 </DialogDescription>
               </DialogHeader>
             </div>
-            <div className='mt-6'>
+            <div className='mt-8'>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>✅ Generate Images</DialogTitle>
                 <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
-                  Once your model is trained, you can generate images using prompts. Make sure to unclude the
+                  Once your model is trained, you can generate images using prompts. Make sure to include the
                   subject keyword in your prompts.
                 </DialogDescription>
               </DialogHeader>
