@@ -210,9 +210,9 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
                       <IoCloudUploadOutline className='size-5 mb-4' />
                       <div>
                         <span className='font-semibold text-primary mr-1'>Click to upload</span>
-                        <span className='text-subtle text-sm'>or drag and drop</span>
+                        <span className='text-sm'>or drag and drop</span>
                       </div>
-                      <div className='text-subtle text-xs mt-1'>PNG, JPG (max. 4MB)</div>
+                      <div className='text-xs mt-1'>PNG, JPG (max. 4MB)</div>
                     </div>
                   </div>
                 </InputWrapper>
@@ -279,7 +279,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             <div>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>✅ Choose Good Pictures</DialogTitle>
-                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                <DialogDescription className='text-sm mt-2 text-gray-400'>
                   5-10 high quality samples, front facing, square aspect ratio, 1 person in frame, variety
                 </DialogDescription>
                 <div className='grid grid-cols-4 gap-4 w-full'>
@@ -303,7 +303,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             <div className='mt-8'>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>❌ Examples of Bad Pictures</DialogTitle>
-                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                <DialogDescription className='text-sm mt-2 text-gray-400'>
                   Multiple Subjects, face covered, NSFW Images, blurry, uncropped, full length
                 </DialogDescription>
                 <div className='grid grid-cols-4 gap-4 w-full'>
@@ -327,7 +327,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             <div className='mt-8'>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>✅ Train your Model</DialogTitle>
-                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                <DialogDescription className='text-sm mt-2 text-gray-400'>
                   Train your model with images to generate headshots. Training takes around 30 minutes. Feel
                   free to leave and come back later.
                 </DialogDescription>
@@ -336,7 +336,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
             <div className='mt-8'>
               <DialogHeader>
                 <DialogTitle className='text-default font-semibold'>✅ Generate Images</DialogTitle>
-                <DialogDescription className='text-subtle text-sm mt-2 text-gray-400'>
+                <DialogDescription className='text-sm mt-2 text-gray-400'>
                   Once your model is trained, you can generate images using prompts. Make sure to include the
                   subject keyword in your prompts.
                 </DialogDescription>
