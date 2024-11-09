@@ -1,9 +1,10 @@
 export const testimonials = [
+
   {
-    image: '/luba.png',
-    name: 'Luba',
-    quote: 'One',
-    title: 'One',
+    image: '/C.png',
+    name: 'LubaThree',
+    quote: 'Six',
+    title: 'Six',
   },
   {
     image: '/dan.png',
@@ -30,13 +31,19 @@ export const testimonials = [
     title: 'Five',
   },
   {
-    image: '/luba2.png',
-    name: 'LubaThree',
-    quote: 'Six',
-    title: 'Six',
+    image: '/luba.png',
+    name: 'Luba',
+    quote: 'One',
+    title: 'One',
   },
   {
-    image: '/morgan2.png',
+    image: '/D.png',
+    name: 'MorganTwo',
+    quote: 'Seven',
+    title: 'Seven',
+  },
+  {
+    image: '/E.png',
     name: 'MorganTwo',
     quote: 'Seven',
     title: 'Seven',
