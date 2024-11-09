@@ -174,19 +174,18 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
               handleGeneration(new FormData(e.currentTarget));
             }}>
             <div className='flex flex-col gap-4 mb-8'>
-              <InputWrapper id='prompt' label='Describe the image you want to be generated (prompt)'>
+              <InputWrapper id='prompt' label='Describe the images you want to generate (prompt)'>
                 <Textarea
                   id='prompt'
                   name='prompt'
-                  placeholder='model posing for a photo'
+                  placeholder='model man posing for a photo'
                   rows={6}
                   value={formData.prompt}
                   onChange={handleInputChange}
                 />
               </InputWrapper>
-              <p className='text-sm text-default'>
-                Make sure to write <b>Model</b> above, or if you want to create a photo without your model, do
-                not write it
+              <p className='text-sm text-gray-400'>
+                Make sure to write <b className='text-white'>model man</b> or <b className='text-white'>model woman</b> or <b className='text-white'>model unisex</b> at the beginning of your prompt
               </p>
 
               {/* <InputWrapper id='neg-prompt' label='Negative Prompt'>

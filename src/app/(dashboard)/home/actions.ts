@@ -62,6 +62,7 @@ export async function finetuneModelFn(request: FormData) {
     formData.append('tune[base_tune_id]', '1504944');
     formData.append('tune[model_type]', 'lora');
     formData.append('tune[name]', type);
+    formData.append('tune[token]', 'model');
     // Log form data
     Array.from(formData.entries()).forEach(([key, value]) => {
       console.log(`${key}: ${value}`);
