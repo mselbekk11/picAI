@@ -7,11 +7,9 @@ import { cn, sentenceCase } from '@/utils/utils';
 import { formatDistanceToNow } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import EmptyState from '@/assets/images/profile.png';
 import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceeded';
 import { Button } from '@/components/ui/button';
 import DeleteModalButton from '@/components/dashboard/generate/DeleteModalButton';
-import { Eye } from 'lucide-react';
 import { LuLoader } from 'react-icons/lu';
 
 const Models = async () => {
@@ -91,7 +89,6 @@ const Models = async () => {
           <p className='text-lg text-default text-center font-medium px-4 mb-7'>
             Get started by training your first model.
           </p>
-          {/* <Image src={EmptyState} alt='Empty-state' height={347} width={347} className='mb-14' /> */}
           <ModalTrainModel />
         </div>
       )}

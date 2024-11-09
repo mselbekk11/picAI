@@ -1,4 +1,3 @@
-import { SelectTheme } from '@/components/dashboard/Navbar/SelectTheme';
 import { SelectThemeTwo } from '@/components/dashboard/Navbar/SelectThemeTwo';
 import { Card, CardContent } from '@/components/ui/card';
 import { getUserDetails } from '@/utils/supabase/server';
@@ -22,13 +21,8 @@ const Settings = async () => {
               <p className='text-xs'>Contact Support: </p>
               <p className='text-lg font-medium'>mselbekk11@gmail.com</p>
             </div>
-            {/* <div className='mb-4'>
-              <p className='text-xs'>Current Plan: </p>
-              <p className='text-lg font-medium'>Free</p>
-            </div> */}
             <div className='mb-4'>
               <p className='text-xs mb-2'>Theme: </p>
-              {/* <SelectTheme /> */}
               <SelectThemeTwo />
             </div>
           </div>

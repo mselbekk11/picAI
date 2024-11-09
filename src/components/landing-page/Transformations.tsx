@@ -1,10 +1,6 @@
 import { SectionTitle } from './SectionTitle';
 
 import Image from 'next/image';
-import dan from '../../../public/dan.png';
-import morgan from '../../../public/morgan.png';
-import rory from '../../../public/rory.png';
-import luba from '../../../public/luba.png';
 import one from '../../../public/1.png';
 import two from '../../../public/2.png';
 import three from '../../../public/3.png';

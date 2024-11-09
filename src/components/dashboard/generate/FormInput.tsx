@@ -14,7 +14,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import OutputGeneration from './OutputGeneration';
-import { Input } from '@/components/ui/input';
 import { generateHeadshotFn } from '@/app/(dashboard)/home/[id]/actions';
 import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceeded';
 import { Card } from '@/components/ui/card';

@@ -4,11 +4,9 @@
 // It is designed to respond dynamically to the 'id' parameter in the URL path, which represents the model ID.
 
 import FormInput from '@/components/dashboard/generate/FormInput';
-import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedImage';
 import { supabaseServerClient } from '@/utils/supabase/server';
 import { IoMdAdd } from 'react-icons/io';
 import Link from 'next/link';
-import { CardDescription } from '@/components/ui/card';
 import { formatDistanceToNow } from 'date-fns';
 import { sentenceCase } from '@/utils/utils';
 import ModalGeneratedImageWrapper from '@/components/dashboard/generate/ModalGeneratedImage';

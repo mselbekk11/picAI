@@ -6,7 +6,6 @@
 'use server';
 
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
-import { headers } from 'next/headers';
 import axios from 'axios';
 
 const ASTRIA_BASEURL = 'https://api.astria.ai';

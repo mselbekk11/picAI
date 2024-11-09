@@ -12,7 +12,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
-import { Trash2 } from 'lucide-react';
 
 interface DeleteModalButtonProps {
   modelId: string;

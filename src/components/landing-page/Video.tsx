@@ -1,7 +1,5 @@
 import { SectionTitle } from './SectionTitle';
 import Image from 'next/image';
-import videosrc from '../../../public/video.png';
-import VideoOne from '../videos/VideoOne';
 import picai from '../../../public/picai.png';
 
 export default function Video() {
@@ -15,7 +13,6 @@ export default function Video() {
         />
       </div>
       <div className='mx-auto max-w-5xl flex flex-col items-center text-center'>
-        {/* <VideoOne /> */}
         <Image src={picai} width={1500} height={1500} alt='Image of software' className='w-full' />
       </div>
     </div>

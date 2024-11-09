@@ -1,4 +1,3 @@
-import ButtonCta from './ButtonCta';
 import ButtonShootingStarBorder from './ButtonShootingStarBorder';
 
 export default function CtaSection() {

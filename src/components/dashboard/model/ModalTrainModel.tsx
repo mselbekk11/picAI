@@ -6,7 +6,6 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -41,7 +40,6 @@ import ImageFive from '../../../../public/bad-1.png';
 import ImageSix from '../../../../public/bad-2.png';
 import ImageSeven from '../../../../public/bad-3.png';
 import ImageEight from '../../../../public/bad-4.png';
-import { Item } from '@radix-ui/react-dropdown-menu';
 
 const goodImages = [ImageOne, ImageTwo, ImageThree, ImageFour];
 const badImages = [ImageFive, ImageSix, ImageSeven, ImageEight];

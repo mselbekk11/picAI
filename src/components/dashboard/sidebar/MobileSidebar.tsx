@@ -4,8 +4,6 @@ import Logo from '@/components/Logo';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FaPlus } from 'react-icons/fa';
-import DropdownAccount from './DropdownAccount';
-import SidebarUpgradePlan from './SidebarUpgradePlan';
 import { sidebarRoutes } from './content';
 import MobileSidebarItem from './MobileSidebarItem';
 import LogoutButton from './LogoutButton';

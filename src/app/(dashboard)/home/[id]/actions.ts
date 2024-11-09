@@ -6,7 +6,6 @@
 
 import { getUserDetails, supabaseServerClient } from '@/utils/supabase/server';
 import axios from 'axios';
-import { headers } from 'next/headers';
 
 const ASTRIA_BASEURL = 'https://api.astria.ai';
 // const FLUX1_DEV_TUNE_ID = '1743558'; // Hardcoded tune ID for Flux1.Dev

@@ -1,7 +1,6 @@
 import { getUserDetails } from '@/utils/supabase/server';
 import { cn } from '@/utils/utils';
 import { buttonVariants } from '@/components/ui/button';
-import ButtonSignout from './ButtonSignout';
 import Image from 'next/image';
 import ButtonSignoutTwo from './ButtonSignoutTwo';
 

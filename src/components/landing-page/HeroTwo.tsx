@@ -1,8 +1,5 @@
-import ButtonCta from './ButtonCta';
 import { Inter } from 'next/font/google';
-import { MovingBorderDemo } from './MovingBorderDemo';
 import ButtonShootingStarBorder from './ButtonShootingStarBorder';
-import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,7 +8,7 @@ export default function HeroTwo() {
     <div className='px-4 home'>
       <div className='mx-auto max-w-7xl flex flex-col items-center pt-10 lg:py-28 text-center'>
         <div className='flex flex-col items-center w-full'>
-          <h1 className='text-2xl md:text-4xl lg:text-6xl font-semibold py-6 intro animate-slideFromDownAndFade text-[#fff]'>
+          <h1 className='text-2xl md:text-4xl lg:text-6xl font-semibold py-6 intro animate-slideFromDownAndFade text-white'>
             Create Stunning <br className='block lg:hidden' />
             <br className='lg:block' />
             <span className='animate'>AI Generated Images</span>

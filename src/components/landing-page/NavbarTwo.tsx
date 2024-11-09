@@ -1,9 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import MobileMenu from './MobileMenu';
-import { Button } from '../ui/button';
 import ButtonCta from './ButtonCta';
-import Logo from '../Logo';
 
 import { Inter } from 'next/font/google';
 import LogoHomepage from '../LogoHomepage';
@@ -22,7 +19,7 @@ export default function NavbarTwo() {
   // };
 
   return (
-    <header className='w-full bg-[#000] sticky top-0 z-50'>
+    <header className='w-full bg-black sticky top-0 z-50'>
       <nav className='mx-auto max-w-7xl flex justify-between py-4 px-4 items-center'>
         <div className='min-w-[120px]'>
           <LogoHomepage />

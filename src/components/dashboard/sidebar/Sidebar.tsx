@@ -1,6 +1,5 @@
 import Logo from '@/components/Logo';
 import SidebarItem from './SidebarItem';
-import DropdownAccount from './DropdownAccount';
 // import SidebarUpgradePlan from './SidebarUpgradePlan';
 import ModalTrainModel from '@/components/dashboard/model/ModalTrainModel';
 import { sidebarRoutes, bottomSidebarRoutes } from './content';

@@ -14,7 +14,7 @@ import PricingFour from '@/components/landing-page/PricingFour';
 
 export default async function Home() {
   return (
-    <main className='mx-auto bg-[#000] min-h-screen'>
+    <main className='mx-auto bg-black min-h-screen'>
       <NavbarTwo />
       <HeroTwo />
       <InfiniteMovingCards items={testimonials} direction='left' speed='slow' />

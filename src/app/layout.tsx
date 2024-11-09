@@ -9,7 +9,7 @@ import Script from 'next/script';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/utils/utils';
 
-const font = Inter({ subsets: ['latin'] });
+// const font = Inter({ subsets: ['latin'] });
 
 const bg = Bricolage_Grotesque({ subsets: ['latin'] });
 

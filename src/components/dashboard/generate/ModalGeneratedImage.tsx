@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogFooter,
   DialogHeader,
@@ -12,11 +11,7 @@ import { TypeHeadshotGeneration } from '@/types/types';
 import Image from 'next/image';
 import { supabaseServerClient } from '@/utils/supabase/server';
 import { formatDate, sentenceCase } from '@/utils/utils';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import DeleteImageButton from './DeleteImageButton';
-import { TbDownload } from 'react-icons/tb';
-import downloadHeadshot from '@/utils/utils';
 import DownloadButton from './DownloadButton';
 
 interface ModalGeneratedImageProps {

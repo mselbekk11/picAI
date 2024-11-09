@@ -98,7 +98,7 @@ export default function PricingThree({ subscription }: PricingThreeProps) {
                 <Radio
                   key={option.value}
                   value={option}
-                  className='cursor-pointer rounded-full px-2.5 py-1 dark:data-[checked]:bg-[#fff] dark:data-[checked]:text-black data-[checked]:bg-[#38383a] data-[checked]:text-white'>
+                  className='cursor-pointer rounded-full px-2.5 py-1 dark:data-[checked]:bg-white dark:data-[checked]:text-black data-[checked]:bg-[#38383a] data-[checked]:text-white'>
                   {option.label}
                 </Radio>
               ))}

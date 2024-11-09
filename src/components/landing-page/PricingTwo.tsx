@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Radio, RadioGroup } from '@headlessui/react';
 import { Check } from 'lucide-react';
 import { SectionTitle } from './SectionTitle';
 import PricingButton from './PricingButton';

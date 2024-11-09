@@ -2,8 +2,8 @@
 
 import { Caveat as CaveatFont } from 'next/font/google';
 const caveat = CaveatFont({ subsets: ['latin'] });
-import { Inter } from 'next/font/google';
-const inter = Inter({ subsets: ['latin'] });
+// import { Inter } from 'next/font/google';
+// const inter = Inter({ subsets: ['latin'] });
 
 interface SectionTitleProps {
   loop: string;

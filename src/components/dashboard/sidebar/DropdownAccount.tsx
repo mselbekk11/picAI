@@ -1,15 +1,7 @@
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import Image from 'next/image';
 import AccountSettings from './AccountSettings';
 import { getUserDetails } from '@/utils/supabase/server';
-import { AiOutlineQuestionCircle } from 'react-icons/ai';
-import Link from 'next/link';
-import { AiOutlineDollarCircle } from 'react-icons/ai';
 import dynamic from 'next/dynamic';
 import { cn } from '@/utils/utils';
 import { buttonVariants } from '@/components/ui/button';

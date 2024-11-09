@@ -6,7 +6,6 @@
 
 import Link from 'next/link';
 import { cn } from '@/utils/utils';
-import { getUserDetails } from '@/utils/supabase/server';
 import { FC } from 'react';
 
 interface ButtonCtaProps {
