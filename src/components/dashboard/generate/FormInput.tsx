@@ -36,6 +36,7 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
   const [generationId, setGenerationId] = useState<string | null>(null);
   const [generatedImages, setGeneratedImages] = useState<string[]>([]);
   const [hasLimitExceeded, setHasLimitExceeded] = useState(false);
+  const [isPromptValid, setIsPromptValid] = useState(true);
 
   const router = useRouter();
 
@@ -65,6 +66,13 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
       ...prev,
       [name]: value,
     }));
+
+    // Validate prompt if the changed field is 'prompt'
+    if (name === 'prompt') {
+      const requiredPrefix = `model ${model.type}`;
+      const isValid = value.trim().toLowerCase().startsWith(requiredPrefix);
+      setIsPromptValid(isValid);
+    }
   };
 
   // Asynchronously triggered by form submission
@@ -178,14 +186,22 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
                 <Textarea
                   id='prompt'
                   name='prompt'
-                  placeholder='model man posing for a photo'
+                  placeholder={`model ${model.type} posing for a photo`}
                   rows={6}
                   value={formData.prompt}
                   onChange={handleInputChange}
+                  className={!isPromptValid ? 'border-red-500' : ''}
                 />
               </InputWrapper>
+              {!isPromptValid && (
+                <p className='text-sm text-red-500'>
+                  Your prompt must start with &quot;model {model.type}&quot;
+                </p>
+              )}
+
               <p className='text-sm text-gray-400'>
-                Make sure to write <b className='text-white'>model man</b> or <b className='text-white'>model woman</b> or <b className='text-white'>model unisex</b> at the beginning of your prompt
+                Make sure to write <b className='text-white'>model {model.type}</b> at the beginning of your
+                prompt
               </p>
 
               {/* <InputWrapper id='neg-prompt' label='Negative Prompt'>
@@ -199,7 +215,9 @@ const FormInput: FC<FormInputProps> = ({ model }) => {
               </InputWrapper> */}
             </div>
 
-            <SubmitButton className='md:max-w-xs' disabled={hasLimitExceeded || isPending}>
+            <SubmitButton
+              className='md:max-w-xs'
+              disabled={hasLimitExceeded || isPending || !isPromptValid || !formData.prompt}>
               {isPending ? 'Generating...' : 'Generate'}
             </SubmitButton>
           </form>
