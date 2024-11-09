@@ -1,5 +1,4 @@
 export const testimonials = [
-
   {
     image: '/C.png',
     name: 'LubaThree',
@@ -44,8 +43,8 @@ export const testimonials = [
   },
   {
     image: '/E.png',
-    name: 'MorganTwo',
-    quote: 'Seven',
-    title: 'Seven',
+    name: 'E',
+    quote: 'Eight',
+    title: 'Eight',
   },
 ];
