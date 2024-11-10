@@ -12,6 +12,9 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/utils/utils';
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
 
 interface DeleteModalButtonProps {
   modelId: string;
@@ -53,7 +56,7 @@ const DeleteModalButton: React.FC<DeleteModalButtonProps> = ({ modelId }) => {
           Delete
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className={cn(inter.className)}>
         <DialogHeader>
           <DialogTitle>Are you sure you want to delete this model?</DialogTitle>
           <DialogDescription>

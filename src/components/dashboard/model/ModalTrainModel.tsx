@@ -32,6 +32,9 @@ import { useCredits } from '@/context/CreditsContext';
 import { Zap } from 'lucide-react';
 import Link from 'next/link';
 
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
+
 import ImageOne from '../../../../public/1.png';
 import ImageTwo from '../../../../public/2.png';
 import ImageThree from '../../../../public/3.png';
@@ -165,7 +168,7 @@ const ModalTrainModel: FC<ModalTrainModelProps> = ({ buttonText }) => {
       <DialogTrigger className={cn(buttonVariants({ variant: 'default' }), 'w-full gap-2')}>
         <FaPlus className='size-4' /> {buttonText ?? 'Train Model'}
       </DialogTrigger>
-      <DialogContent className='rounded-lg w-full max-w-7xl p-8'>
+      <DialogContent className={cn(inter.className, 'rounded-lg w-full max-w-7xl p-8')}>
         <div className='grid gap-8 grid-cols-1 lg:grid-cols-2'>
           <div>
             <DialogHeader>

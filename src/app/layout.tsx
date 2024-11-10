@@ -15,21 +15,21 @@ const bg = Bricolage_Grotesque({ subsets: ['latin'] });
 
 // Metadata for SEO
 export const metadata: Metadata = {
-  metadataBase: new URL('https://builderkit.ai'),
+  metadataBase: new URL('https://picai.so'),
   title: 'AI Photo Generator | PicAI',
-  description: 'Boilerplate for Headshot Generator',
+  description: 'Create Stunning AI Generated Images',
   openGraph: {
     type: 'website',
-    title: 'Headshot Generator - BuilderKit',
-    description: 'Boilerplate for Headshot Generator',
+    title: 'AI Photo Generator | PicAI',
+    description: 'Create Stunning AI Generated Images',
     images: '/og-image.png',
-    url: 'https://builderkit.ai',
+    url: 'https://picai.so',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Headshot Generator - BuilderKit',
-    description: 'Boilerplate for Headshot Generator',
-    images: '/og-image.png',
+    title: 'AI Photo Generator | PicAI',
+    description: 'Create Stunning AI Generated Images',
+    images: '/og-image-twitter.png',
   },
 };
 

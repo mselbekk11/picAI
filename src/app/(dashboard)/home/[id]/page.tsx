@@ -11,6 +11,8 @@ import { formatDistanceToNow } from 'date-fns';
 import { sentenceCase } from '@/utils/utils';
 import ModalGeneratedImageWrapper from '@/components/dashboard/generate/ModalGeneratedImage';
 import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 type TypeParams = {
   params: Promise<{ id: string }>;
@@ -45,34 +47,37 @@ export default async function GenerateImage(props: TypeParams) {
         <FormInput model={model} />
       ) : (
         <div className=''>
-          <div className='flex mb-6'>
-            <h2 className='text-md font-semibold mr-2'>
-              Model: <span>{sentenceCase(model.name)}</span>
-            </h2>
-            <h2 className='text-gray-400 text-md font-semibold'>
-              (Expires: <span>{formatDistanceToNow(model.expires_at!)})</span>
-            </h2>
-          </div>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 mr-2'>
+          <Card className='mb-6 p-6'>
+            <div className='flex mb-6'>
+              <h2 className='text-md font-semibold mr-2'>
+                Model: <span>{sentenceCase(model.name)}</span>
+              </h2>
+              <h2 className='text-gray-400 text-md font-semibold'>
+                (Expires: <span>{formatDistanceToNow(model.expires_at!)})</span>
+              </h2>
+            </div>
             <Link href='?form=true'>
-              <div className='w-full h-full flex items-center justify-center gap-1 bg-secondary border rounded-md min-h-[272px]'>
+              <Button className=''>
                 <IoMdAdd />
                 <p className='text-sm font-medium'>Generate headshot</p>
-              </div>
+              </Button>
             </Link>
-
-            {generations?.map((generation) => (
-              <React.Fragment key={generation.id}>
-                {generation.image_urls?.map((_, index) => (
-                  <ModalGeneratedImageWrapper
-                    key={`${generation.id}-${index}`}
-                    index={index}
-                    generation={generation}
-                  />
-                ))}
-              </React.Fragment>
-            ))}
-          </div>
+          </Card>
+          <Card className='p-6'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4'>
+              {generations?.map((generation) => (
+                <React.Fragment key={generation.id}>
+                  {generation.image_urls?.map((_, index) => (
+                    <ModalGeneratedImageWrapper
+                      key={`${generation.id}-${index}`}
+                      index={index}
+                      generation={generation}
+                    />
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </Card>
         </div>
       )}
     </div>

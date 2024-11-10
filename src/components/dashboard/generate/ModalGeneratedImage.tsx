@@ -13,6 +13,9 @@ import { supabaseServerClient } from '@/utils/supabase/server';
 import { formatDate, sentenceCase } from '@/utils/utils';
 import DeleteImageButton from './DeleteImageButton';
 import DownloadButton from './DownloadButton';
+import { cn } from '@/utils/utils';
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
 
 interface ModalGeneratedImageProps {
   index: number;
@@ -34,7 +37,7 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
       <DialogTrigger>
         <Image src={imageUrl!} alt='' width={300} height={450} className='w-full object-cover rounded-md' />
       </DialogTrigger>
-      <DialogContent className='w-11/12 rounded-lg p-4'>
+      <DialogContent className={cn(inter.className, 'w-11/12 rounded-lg p-4')}>
         <DialogHeader className='h-10 border-b'>
           <DialogTitle className='text-lg font-medium line-clamp-1'>
             {sentenceCase(generation.prompt)}

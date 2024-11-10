@@ -25,7 +25,7 @@ const Models = async () => {
     <div className='flex flex-col p-6'>
       {models && models.length > 0 ? (
         <>
-          <ModalLimitExceeded isModalOpen={models?.length >= 100} />
+          <ModalLimitExceeded isModalOpen={models?.length >= 1000} />
 
           <div className='flex flex-col gap-4'>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4'>
