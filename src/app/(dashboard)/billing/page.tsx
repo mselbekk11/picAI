@@ -1,5 +1,6 @@
 import PricingThree from '@/components/PricingThree';
 import BillingClient from '@/components/ui/BillingClient';
+import { Skeleton } from '@/components/ui/skeleton';
 import { supabaseServerClient } from '@/utils/supabase/server';
 
 async function getSubscription(userId: string) {
