@@ -31,12 +31,7 @@ import ImageEight from '../../../../public/bad-4.png';
 const goodImages = [ImageOne, ImageTwo, ImageThree, ImageFour];
 const badImages = [ImageFive, ImageSix, ImageSeven, ImageEight];
 
-interface ModalTrainModelProps {
-  buttonText?: string;
-}
-
-const TrainModel: FC<ModalTrainModelProps> = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+const TrainModel = () => {
   const [images, setImages] = useState<File[]>([]);
   const [hasLimitExceeded, setHasLimitExceeded] = useState(false);
   const { modelCredits, imageCredits } = useCredits();
@@ -133,7 +128,6 @@ const TrainModel: FC<ModalTrainModelProps> = () => {
       return;
     } else {
       toast({ description: 'Finetunning your model.' });
-      setOpenModal(false);
       router.push('/home'); // Changed from router.refresh() to router.push('/home')
     }
   };
@@ -228,7 +222,7 @@ const TrainModel: FC<ModalTrainModelProps> = () => {
               </SubmitButton>
             ) : (
               <Link href='/billing' className='w-full'>
-                <Button variant='purple' size='sm' className='w-full' onClick={() => setOpenModal(false)}>
+                <Button variant='purple' size='sm' className='w-full'>
                   <Zap size={16} className='mr-1' />
                   Upgrade
                 </Button>
