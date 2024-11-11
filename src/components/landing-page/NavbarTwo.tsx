@@ -25,7 +25,8 @@ export default function NavbarTwo() {
           <LogoHomepage />
         </div>
         <div className='flex lg:hidden'>
-          <MobileMenu />
+          {/* <MobileMenu /> */}
+          <ButtonCta className='w-auto' label='Sign In' />
         </div>
         {/* Move the navigation links and sign-in button to the right */}
         <div className='hidden lg:flex items-center gap-x-8'>

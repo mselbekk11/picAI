@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function FooterTwo() {
   return (
-    <div className='flex justify-between w-full max-w-6xl mx-auto pb-12'>
+    <div className='flex justify-between w-full max-w-6xl mx-auto pb-12 px-4'>
       <div className='text-white'>
         Made with 💙 by{' '}
         <a href='https://x.com/mselbekk1' target='_blank' rel='noopener noreferrer'>

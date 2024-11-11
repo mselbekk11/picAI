@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { AlignJustify, X } from 'lucide-react';
 import { Button } from '../ui/button';
+import ButtonCta from './ButtonCta';
 
 export default function MobileMenu() {
   // const [isOpen, setIsOpen] = React.useState(false);
@@ -17,8 +18,8 @@ export default function MobileMenu() {
   const mobileNav = useRef<HTMLDivElement>(null);
 
   const navigation = [
-    { name: 'Services', href: '/#services' },
-    { name: 'Work', href: '/#showcase' },
+    { name: 'How it Works', href: '/#howitworks' },
+    { name: 'Pricing', href: '/#pricing' },
     { name: 'FAQ', href: '/#faq' },
   ];
 
@@ -64,9 +65,9 @@ export default function MobileMenu() {
         onClick={() => setMobileNavOpen(!mobileNavOpen)}>
         <span className='sr-only'>Menu</span>
         {mobileNavOpen ? (
-          <X className='w-8 h-8 fill-current text-black' />
+          <X className='fill-current text-white' />
         ) : (
-          <AlignJustify className='w-8 h-8 fill-current text-black' />
+          <AlignJustify className='fill-current text-white' />
         )}
       </button>
 
@@ -74,19 +75,19 @@ export default function MobileMenu() {
       <nav
         id='mobile-nav'
         ref={mobileNav}
-        className='absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out mt-4'
+        className='absolute top-full z-20 left-0 w-full px-4 sm:px-6 overflow-hidden transition-all duration-300 ease-in-out'
         style={
           mobileNavOpen
             ? { maxHeight: mobileNav.current?.scrollHeight, opacity: 1 }
             : { maxHeight: 0, opacity: 0.8 }
         }>
-        <ul className='bg-white px-6 py-6 border-2 border-gray-200 flex flex-col items-center'>
+        <ul className='bg-black px-6 py-6 border-2 border-white flex flex-col items-center'>
           {navigation.map((item) => (
             <li key={item.name} className='pb-6'>
               <Link
                 key={item.name}
                 href={item.href}
-                className='text-base font-semibold text-gray-600'
+                className='text-base font-semibold text-white'
                 onClick={() => setMobileNavOpen(false)}>
                 {item.name}
               </Link>
@@ -94,11 +95,12 @@ export default function MobileMenu() {
           ))}
 
           <li>
-            <Link href='/contact'>
+            {/* <Link href='/contact'>
               <Button className='' onClick={() => setMobileNavOpen(false)}>
                 Contact Now
               </Button>
-            </Link>
+            </Link> */}
+            {/* <ButtonCta className='w-auto' label='Sign In' /> */}
           </li>
         </ul>
       </nav>

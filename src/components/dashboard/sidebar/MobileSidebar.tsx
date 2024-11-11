@@ -7,6 +7,7 @@ import { FaPlus } from 'react-icons/fa';
 import { sidebarRoutes } from './content';
 import MobileSidebarItem from './MobileSidebarItem';
 import LogoutButton from './LogoutButton';
+import ModalTrainModel from '../model/ModalTrainModel';
 
 const MobileSidebar = () => {
   return (
@@ -26,6 +27,7 @@ const MobileSidebar = () => {
                 <FaPlus className='mr-2' /> Train Model
               </Button>
             </Link>
+            {/* <ModalTrainModel buttonText='Train Model' /> */}
 
             <div className='space-y-1'>
               {sidebarRoutes.map((route, index) => (
