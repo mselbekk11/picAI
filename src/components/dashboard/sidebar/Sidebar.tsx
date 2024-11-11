@@ -4,6 +4,9 @@ import SidebarItem from './SidebarItem';
 import ModalTrainModel from '@/components/dashboard/model/ModalTrainModel';
 import { sidebarRoutes, bottomSidebarRoutes } from './content';
 import LogoutButton from './LogoutButton';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
 
 const Sidebar = () => {
   return (
@@ -15,7 +18,12 @@ const Sidebar = () => {
 
         <div className='p-3'>
           <div className='mb-3'>
-            <ModalTrainModel buttonText='Train Model' />
+            {/* <ModalTrainModel buttonText='Train Model' /> */}
+            <Link href='/train-model'>
+              <Button size='lg' className='w-full'>
+                <Plus className='mr-2' /> Train Model
+              </Button>
+            </Link>
           </div>
 
           <div className='space-y-3'>
