@@ -14,15 +14,10 @@ import { SubmitButton } from '@/components/SubmitButton';
 import { finetuneModelFn } from '@/app/(dashboard)/home/actions';
 import { useRouter } from 'next/navigation';
 import { toast } from '@/components/ui/use-toast';
-import { FaPlus } from 'react-icons/fa6';
 import { supabaseBrowserClient } from '@/utils/supabase/client';
-// import { getSubscription } from '@/app/(dashboard)/home/actions';
 import { useCredits } from '@/context/CreditsContext';
 import { Zap } from 'lucide-react';
 import Link from 'next/link';
-
-import { Inter } from 'next/font/google';
-const inter = Inter({ subsets: ['latin'] });
 
 import ImageOne from '../../../../public/1.png';
 import ImageTwo from '../../../../public/2.png';
@@ -154,7 +149,7 @@ const TrainModel: FC<ModalTrainModelProps> = () => {
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 p-6'>
-      <Card className='p-6'>
+      <Card className='p-6 order-last lg:order-first'>
         <CardTitle className='text-default font-semibold'>Finetune your model</CardTitle>
 
         <form className='flex flex-col gap-6 mt-4'>
@@ -218,15 +213,10 @@ const TrainModel: FC<ModalTrainModelProps> = () => {
             )}
           </div>
 
-          <CardFooter className='flex gap-2 sm:justify-start'>
-            {/* <DialogClose className='w-full'>
-              <Button className='w-full' variant='outline'>
-                Cancel
-              </Button>
-            </DialogClose> */}
-            <Button type='button' className='w-full' variant='outline' onClick={() => setOpenModal(false)}>
+          <CardFooter className='flex p-0'>
+            {/* <Button type='button' className='w-full' variant='outline' onClick={() => setOpenModal(false)}>
               Cancel
-            </Button>
+            </Button> */}
             {modelCredits && imageCredits ? (
               <SubmitButton
                 className='w-full'
