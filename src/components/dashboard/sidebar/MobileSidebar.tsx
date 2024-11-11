@@ -1,18 +1,17 @@
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { FaBars } from 'react-icons/fa6';
 import Logo from '@/components/Logo';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { FaPlus } from 'react-icons/fa';
-import { sidebarRoutes } from './content';
+import { sidebarRoutes, bottomSidebarRoutes } from './content';
 import MobileSidebarItem from './MobileSidebarItem';
 import LogoutButton from './LogoutButton';
-import ModalTrainModel from '../model/ModalTrainModel';
+import { Plus } from 'lucide-react';
 
 const MobileSidebar = () => {
   return (
     <Sheet>
-      <SheetTrigger className=' pr-4 hover:opacity-75 transition'>
+      <SheetTrigger className='hover:opacity-75 transition flex'>
         <FaBars />
       </SheetTrigger>
       <SheetContent side='left' className='p-5 pt-8'>
@@ -21,12 +20,14 @@ const MobileSidebar = () => {
             <div className='mb-6'>
               <Logo />
             </div>
+            <SheetClose asChild className='w-full'>
+              <Link href='/train-model'>
+                <Button size='lg' className='w-full mb-3'>
+                  <Plus className='mr-2' /> Train Model
+                </Button>
+              </Link>
+            </SheetClose>
 
-            <Link href='/home'>
-              <Button size='lg' className='w-full mb-3'>
-                <FaPlus className='mr-2' /> Train Model
-              </Button>
-            </Link>
             {/* <ModalTrainModel buttonText='Train Model' /> */}
 
             <div className='space-y-1'>
@@ -37,9 +38,10 @@ const MobileSidebar = () => {
           </div>
 
           <div className='space-y-3'>
-            {/* <SidebarUpgradePlan /> */}
+            {bottomSidebarRoutes.map((route, index) => (
+              <MobileSidebarItem key={index} route={route} />
+            ))}
 
-            {/* <DropdownAccount /> */}
             <LogoutButton />
           </div>
         </div>

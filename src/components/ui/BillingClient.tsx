@@ -35,7 +35,7 @@ export default function BillingClient({ subscription }: BillingClientProps) {
         <CardContent className='p-6'>
           <div className='flex flex-col'>
             <div className='mb-4'>
-              <p className='text-xs'>Current Subscription: </p>
+              <p className='text-xs text-gray-400'>Current Subscription: </p>
               <p className='text-lg font-medium capitalize'>
                 {subscription
                   ? `${subscription.type} plan - ${
@@ -50,7 +50,7 @@ export default function BillingClient({ subscription }: BillingClientProps) {
               )} */}
             </div>
             <div className='mb-4'>
-              <p className='text-xs'>Current Period</p>
+              <p className='text-xs text-gray-400'>Current Period</p>
               <p className='text-lg font-medium capitalize'>
                 {subscription && subscription.start_date ? (
                   <>
@@ -72,25 +72,25 @@ export default function BillingClient({ subscription }: BillingClientProps) {
               </p>
             </div>
             <div className='mb-4'>
-              <p className='text-xs'>Model Credits:</p>
+              <p className='text-xs text-gray-400'>Model Credits:</p>
               <p className='text-lg font-medium'>{modelCredits}</p>
             </div>
             <div className='mb-4'>
-              <p className='text-xs'>Image Credits:</p>
+              <p className='text-xs text-gray-400'>Image Credits:</p>
               <p className='text-lg font-medium'>{imageCredits}</p>
             </div>
           </div>
         </CardContent>
         {subscription ? (
-          <CardContent className='p-6'>
-            <div className='flex items-center justify-end gap-2'>
-              <a href={customerPortalLink} target='_blank' rel='noreferrer'>
-                <Button variant='default' size='sm' className='ml-4'>
+          <CardContent className='lg:p-6'>
+            <div className='flex w-full lg:justify-end gap-2'>
+              <a href={customerPortalLink} target='_blank' rel='noreferrer' className='w-full lg:w-auto'>
+                <Button variant='default' size='sm' className='w-full'>
                   Upgrade Plan
                 </Button>
               </a>
-              <a href={customerPortalLink} target='_blank' rel='noreferrer'>
-                <Button variant='outline' size='sm'>
+              <a href={customerPortalLink} target='_blank' rel='noreferrer' className='w-full lg:w-auto'>
+                <Button variant='outline' size='sm' className='w-full'>
                   Manage Subscription
                 </Button>
               </a>

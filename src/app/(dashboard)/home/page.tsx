@@ -11,6 +11,7 @@ import ModalLimitExceeded from '@/components/dashboard/generate/ModalLimitExceed
 import { Button } from '@/components/ui/button';
 import DeleteModalButton from '@/components/dashboard/generate/DeleteModalButton';
 import { LuLoader } from 'react-icons/lu';
+import { Plus } from 'lucide-react';
 
 const Models = async () => {
   const supabase = await supabaseServerClient();
@@ -22,13 +23,13 @@ const Models = async () => {
     .order('created_at', { ascending: false });
 
   return (
-    <div className='flex flex-col p-6'>
+    <div className='flex flex-col p-6 pb-24 md:pb-6'>
       {models && models.length > 0 ? (
         <>
           <ModalLimitExceeded isModalOpen={models?.length >= 1000} />
 
           <div className='flex flex-col gap-4'>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4'>
+            <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4'>
               {/* Display the generated models with status */}
               {models.map((model) => (
                 <Card key={model.id} className='border relative'>
@@ -45,7 +46,9 @@ const Models = async () => {
 
                     <div className='flex flex-col'>
                       <CardHeader>
-                        <CardTitle className='pb-2'>{sentenceCase(model.name)}</CardTitle>
+                        <CardTitle className='pb-2 text-sm md:text-base'>
+                          {sentenceCase(model.name)}
+                        </CardTitle>
                         <div className='text-sm flex justify-between mb-1 '>
                           <Badge
                             variant='green'
@@ -81,6 +84,14 @@ const Models = async () => {
                 </Card>
               ))}
             </div>
+          </div>
+          {/* Sticky bottom nav for mobile */}
+          <div className='fixed bottom-0 left-0 right-0 p-4 bg-background border-t md:hidden'>
+            <Link href='/train-model'>
+              <Button size='lg' className='w-full'>
+                <Plus className='mr-2' /> Train Model
+              </Button>
+            </Link>
           </div>
         </>
       ) : (

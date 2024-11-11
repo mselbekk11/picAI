@@ -32,7 +32,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
           Your images will be ready in less than a minute. You can wait or find your generations later in
           images.
         </p>
-        <div className='h-[300px] grid grid-cols-1 lg:grid-cols-4 gap-4 w-full max-w-7xl'>
+        <div className='h-[450px] lg:h-[300px] grid grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-7xl'>
           {[...Array(4)].map((_, index) => (
             <div
               key={index}
@@ -51,7 +51,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
         <div className='flex flex-col justify-center items-center'>
           <p className='text-base font-medium text-center my-10 text-default'>Results</p>
         </div>
-        <div className='grid grid-cols-1 lg:grid-cols-4 gap-4 w-full max-w-7xl mx-auto'>
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-7xl mx-auto'>
           {generatedImages?.map((imageUrl, index) => (
             <div key={index} className='relative group'>
               <Image
@@ -59,7 +59,7 @@ const OutputGeneration: FC<OutputGenerationProps> = ({ isPending, generatedImage
                 alt=''
                 width={250}
                 height={250}
-                className='border rounded-md mx-auto w-full h-[300px]'
+                className='border rounded-md mx-auto w-full'
                 placeholder='blur'
                 blurDataURL={blurImageDataUrl}
               />

@@ -3,6 +3,8 @@ import { cn } from '@/utils/utils';
 import { buttonVariants } from '@/components/ui/button';
 import Image from 'next/image';
 import ButtonSignoutTwo from './ButtonSignoutTwo';
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
 
 const LogoutButton = async () => {
   const user = await getUserDetails();
@@ -21,7 +23,7 @@ const LogoutButton = async () => {
           height={20}
           alt='avatar'
         />
-        <p className='font-semibold text-default'>{user?.user_metadata?.full_name} </p>
+        <p className={cn(inter.className, 'font-semibold text-default')}>{user?.user_metadata?.full_name} </p>
       </div>
       <ButtonSignoutTwo />
     </div>

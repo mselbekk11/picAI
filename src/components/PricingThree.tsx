@@ -105,7 +105,7 @@ export default function PricingThree({ subscription }: PricingThreeProps) {
             </RadioGroup>
           </fieldset>
         </div>
-        <div className='isolate mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2'>
+        <div className='isolate mx-auto grid grid-cols-1 gap-8 lg:grid-cols-2'>
           {tiers.map((tier) => (
             <Card key={tier.id} className={classNames('rounded-lg p-8 xl:p-10')}>
               <h3 id={tier.id} className={classNames('text-lg font-semibold leading-8')}>
