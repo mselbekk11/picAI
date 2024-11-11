@@ -153,7 +153,7 @@ const TrainModel: FC<ModalTrainModelProps> = () => {
   });
 
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 p-6'>
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-6 p-6'>
       <Card className='p-6'>
         <CardTitle className='text-default font-semibold'>Finetune your model</CardTitle>
 
