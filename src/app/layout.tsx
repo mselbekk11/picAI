@@ -57,6 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
           <Toaster />
         </body>
+        <Script src='https://scripts.simpleanalyticscdn.com/latest.js' />
       </html>
     </>
   );

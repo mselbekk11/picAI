@@ -64,7 +64,7 @@ const Models = async () => {
                         </div>
                         {model.status === 'processing' ? (
                           <Badge variant='secondary' className='w-fit text-xs font-normal mt-2'>
-                            Getting your model ready: {formatDistanceToNow(model.eta)}
+                            Model ready: {formatDistanceToNow(model.eta)}
                           </Badge>
                         ) : (
                           <div className='grid grid-cols-2 gap-2'>
