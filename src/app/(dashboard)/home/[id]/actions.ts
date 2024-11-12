@@ -42,7 +42,8 @@ export async function generateHeadshotFn(
     form.append('prompt[face_correct]', 'true');
 
     // Use the hardcoded origin instead of trying to get it from headers
-    const origin = 'https://09bb-2601-640-8001-b470-9199-dc5a-3f8d-73ab.ngrok-free.app';
+    // const origin = 'https://09bb-2601-640-8001-b470-9199-dc5a-3f8d-73ab.ngrok-free.app';
+    const origin = 'https://www.picai.so';
 
     // Creating webhook URL for the Astria Api to send a POST request after the image generation is complete
     const webhookUrl = `${origin}/api/webhooks/generate-images?user_id=${user.id}`;

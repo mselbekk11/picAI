@@ -17,7 +17,8 @@ export async function finetuneModelFn(request: FormData) {
   const user = await getUserDetails();
 
   // const origin = headers().get('origin');
-  const origin = 'https://09bb-2601-640-8001-b470-9199-dc5a-3f8d-73ab.ngrok-free.app';
+  // const origin = 'https://09bb-2601-640-8001-b470-9199-dc5a-3f8d-73ab.ngrok-free.app';
+  const origin = 'https://www.picai.so';
 
   try {
     if (user == null) {
