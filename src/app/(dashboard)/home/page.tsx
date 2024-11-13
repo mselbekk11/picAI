@@ -21,11 +21,15 @@ const Models = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  if (!user?.id) {
+    return null; // or handle the no-user case appropriately
+  }
+
   // Get all models belonging to the current user
   const { data: models } = await supabase
     .from('headshot_models')
     .select()
-    .eq('user_id', user?.id)
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false });
 
   return (

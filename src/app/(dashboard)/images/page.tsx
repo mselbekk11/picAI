@@ -9,11 +9,15 @@ const Images = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
+  if (!user?.id) {
+    return null; // or handle the no-user case appropriately
+  }
+
   // Get all the previously generated images for the current user
   const { data: generations } = await supabase
     .from('headshot_generations')
     .select()
-    .eq('user_id', user?.id)
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false })
     .not('image_urls', 'is', null);
 
