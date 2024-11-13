@@ -4,10 +4,16 @@ import ModalGeneratedImage from '@/components/dashboard/generate/ModalGeneratedI
 const Images = async () => {
   const supabase = await supabaseServerClient();
 
-  // Get all the previously generated models from the database
+  // Get the current user's session
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Get all the previously generated images for the current user
   const { data: generations } = await supabase
     .from('headshot_generations')
     .select()
+    .eq('user_id', user?.id)
     .order('created_at', { ascending: false })
     .not('image_urls', 'is', null);
 

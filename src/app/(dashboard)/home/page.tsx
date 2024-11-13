@@ -16,10 +16,16 @@ import { Plus } from 'lucide-react';
 const Models = async () => {
   const supabase = await supabaseServerClient();
 
-  // Get all the previously generated models from the database
+  // Get the current user's session
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Get all models belonging to the current user
   const { data: models } = await supabase
     .from('headshot_models')
     .select()
+    .eq('user_id', user?.id)
     .order('created_at', { ascending: false });
 
   return (
