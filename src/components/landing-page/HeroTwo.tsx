@@ -9,7 +9,7 @@ export default function HeroTwo() {
       <div className='mx-auto max-w-7xl flex flex-col items-center pt-10 lg:py-28 text-center'>
         <div className='flex flex-col items-center w-full'>
           <h1 className='text-2xl md:text-4xl lg:text-6xl font-semibold py-6 intro animate-slideFromDownAndFade text-white'>
-            Create Stunningg
+            Create Stunning
             <br className='block' />
             <span className='animate'>AI Generated Images</span>
           </h1>
