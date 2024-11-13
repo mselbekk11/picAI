@@ -23,14 +23,11 @@ const stripe = new Stripe(SECRET_KEY!, {
 export async function POST(req: NextRequest): Promise<NextResponse> {
   // Retrieving the signature from the headers to validate the request
   const signature = (await headers()).get('stripe-signature') as string;
-
-  // Get the raw body as a buffer instead of text
-  const rawBody = await req.arrayBuffer();
-  const requestBuffer = Buffer.from(rawBody);
+  const requestData = await req.text();
 
   try {
     // Validate and construct the event using Stripe's library
-    const event = stripe.webhooks.constructEvent(requestBuffer, signature, WEBHOOK_SECRET!);
+    const event = stripe.webhooks.constructEvent(requestData, signature, WEBHOOK_SECRET!);
     const {
       type: eventType,
       data: { object: eventObject },
