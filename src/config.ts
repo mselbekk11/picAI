@@ -6,12 +6,12 @@ const config = {
     discountParam: 'prefilled_promo_code',
     variant: {
       standard: {
-        monthly: 'price_1QKYk3G1rhEwI29XVueEdaS8',
-        annually: 'price_1QKYqKG1rhEwI29XBhV8L5nY',
+        monthly: '8wMeWt5EHbBMeTCaEE',
+        annually: '28o4hP2svcFQbHq001',
       },
       premium: {
-        monthly: 'price_1QKYsKG1rhEwI29XqgSZAcHh',
-        annually: 'price_1QKYuHG1rhEwI29XQmR3ODFU',
+        monthly: '00g6pXebd7lw7ra4gi',
+        annually: '3cscOl4AD21c26Q8wz',
       },
     },
     plan: {
