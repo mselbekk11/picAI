@@ -124,7 +124,7 @@ export default function PricingThree({ subscription }: PricingThreeProps) {
                   </span>
                 ) : null}
               </p>
-              {subscription && subscription.type === 'free' ? (
+              {!subscription || subscription.type === 'free' ? (
                 <ButtonPayment
                   provider={tier.provider as 'stripe'}
                   tier={tier.tier as TypeSubscriptionPlan}
