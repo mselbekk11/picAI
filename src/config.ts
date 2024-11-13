@@ -15,8 +15,8 @@ const config = {
       },
     },
     plan: {
-      prod_R5NSzdG2cqHtZL: 'standard',
-      prod_R5NbTDDiaigEI6: 'premium',
+      prod_RCyhHcr4HYXDds: 'standard',
+      prod_RCyqqDUsTKOEbw: 'premium',
     },
   },
 };
