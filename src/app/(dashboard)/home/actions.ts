@@ -37,7 +37,10 @@ export async function finetuneModelFn(request: FormData) {
     const { data: credits, error: creditsError } = await supabase
       .from('user_credits')
       .select('model_credits')
+      .eq('user_id', user.id)
       .single();
+
+    console.log('Credits check:', { credits, creditsError });
 
     if (creditsError || !credits || credits.model_credits < 1) {
       throw 'Insufficient model credits';
@@ -47,6 +50,9 @@ export async function finetuneModelFn(request: FormData) {
     const { data: deducted, error: deductError } = await supabase.rpc('deduct_model_credit', {
       user_id: user.id,
     });
+
+    // Add debug logging
+    console.log('Credit deduction:', { deducted, deductError });
 
     if (deductError) {
       console.error('Failed to deduct model credits:', deductError);

@@ -53,6 +53,7 @@ export async function generateHeadshotFn(
     const { data: credits, error: creditsError } = await supabase
       .from('user_credits')
       .select('image_credits')
+      .eq('user_id', user.id)
       .single();
 
     if (creditsError || !credits || credits.image_credits < 1) {

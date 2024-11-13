@@ -100,7 +100,12 @@ const Models = async () => {
           <p className='text-lg text-default text-center font-medium px-4 mb-7'>
             Get started by training your first model.
           </p>
-          <ModalTrainModel />
+          {/* <ModalTrainModel /> */}
+          <Link href='/train-model'>
+            <Button size='lg' className='w-full'>
+              <Plus className='mr-2' /> Train Model
+            </Button>
+          </Link>
         </div>
       )}
     </div>
