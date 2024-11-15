@@ -27,7 +27,7 @@ function formatDate(dateString: string): string {
 export default function BillingClient({ subscription }: BillingClientProps) {
   const { modelCredits, imageCredits } = useCredits();
 
-  const customerPortalLink = 'https://billing.stripe.com/p/login/test_5kAbJFfd02YTdQQbII';
+  const customerPortalLink = 'https://billing.stripe.com/p/login/28o3fT56T0fUaYweUU';
 
   return (
     <div className=''>
