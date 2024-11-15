@@ -1,5 +1,5 @@
 const config = {
-  // ...
+  // .......
   stripe: {
     baseUrl: 'https://buy.stripe.com',
     emailParam: 'prefilled_email',
