@@ -44,6 +44,11 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         await handleSubscriptionCreated(subscription);
         break;
       case 'customer.subscription.updated':
+        // Only handle updates if it's not a new subscription
+        if (subscription.status !== 'active' || subscription.current_period_end === subscription.created) {
+          await handleSubscriptionUpdated(subscription, eventType);
+        }
+        break;
       case 'invoice.paid':
       case 'invoice.payment_succeeded':
         await handleSubscriptionUpdated(subscription, eventType);
