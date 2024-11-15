@@ -44,8 +44,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
         await handleSubscriptionCreated(subscription);
         break;
       case 'customer.subscription.updated':
-        // Only handle updates if it's not a new subscription
-        if (subscription.status !== 'active' || subscription.current_period_end === subscription.created) {
+        // Skip if this is the initial "updated" event that comes with creation
+        // The creation event happens within seconds of the subscription being created
+        if (Math.abs(subscription.created - Date.now()/1000) > 60) {
           await handleSubscriptionUpdated(subscription, eventType);
         }
         break;
