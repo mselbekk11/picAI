@@ -17,7 +17,7 @@ export default async function Home() {
     <main className='mx-auto bg-black min-h-screen'>
       <NavbarTwo />
       <HeroTwo />
-      <InfiniteMovingCards items={testimonials} direction='left' speed='slow' />
+      <InfiniteMovingCards items={testimonials} direction='left' speed='normal' />
       <Transformations />
       <Video />
       {/* <Pricing /> */}

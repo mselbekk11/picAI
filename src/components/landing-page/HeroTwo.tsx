@@ -17,9 +17,13 @@ export default function HeroTwo() {
         <div className='w-full flex flex-col items-center'>
           <div className='py-6 max-w-2xl'>
             <h3
-              className={`text-sm md:text-base font-medium text-white pb-12 animate-slideFromDownAndFade [animation-delay:var(--animation-delay)] ${inter.className}`}>
+              className={`hidden lg:block text-sm md:text-base font-medium text-white pb-12 animate-slideFromDownAndFade [animation-delay:var(--animation-delay)] ${inter.className}`}>
               Transform your selfies into studio quality images using AI <br /> Perfect for social media,
               profile pictures, or just for fun!
+            </h3>
+            <h3
+              className={`block lg:hidden text-sm md:text-base font-medium text-white pb-12 animate-slideFromDownAndFade [animation-delay:var(--animation-delay)] ${inter.className}`}>
+              Transform your selfies into <br /> studio quality images using AI
             </h3>
             <div className='flex justify-center animate-slideFromDownAndFade [animation-delay:var(--animation-delay)]'>
               {/* <ButtonOne text='Contact Now' /> */}
