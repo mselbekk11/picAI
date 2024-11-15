@@ -24,11 +24,11 @@ export default function Login() {
             <p>AI Photo Generator </p>
             {/* <p className='text-lg'>by picAI.so</p> */}
           </div>
-          <h2 className='text-default text-sm mt-3 mb-9 font-medium'>Login or register with your email</h2>
+          {/* <h2 className='text-default text-sm mt-3 mb-9 font-medium'>Login or register with your email</h2> */}
           <div className='w-full sm:max-w-md flex flex-col gap-6 items-center'>
             <GoogleAuth />
-            <Separator className='w-3/4' />
-            <EmailAuth />
+            {/* <Separator className='w-3/4' />
+            <EmailAuth /> */}
           </div>
         </Card>
       </div>
