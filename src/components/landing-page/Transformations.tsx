@@ -21,7 +21,7 @@ export default function Transformations() {
       <div className='mx-auto max-w-7xl flex flex-col items-center py-28 md:py-28 text-center'>
         <SectionTitle
           loop='Transformations'
-          title='Uploads your selfies and get AI generated images'
+          title='Upload your selfies and get AI generated images'
           text='We handle everything from design to deployment to get your website shipped and ready to go!'
         />
       </div>
