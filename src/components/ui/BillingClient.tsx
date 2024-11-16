@@ -81,7 +81,7 @@ export default function BillingClient({ subscription }: BillingClientProps) {
             </div>
           </div>
         </CardContent>
-        {subscription ? (
+        {subscription && (subscription.type === 'standard' || subscription.type === 'premium') ? (
           <CardContent className='lg:p-6'>
             <div className='flex w-full lg:justify-end gap-2'>
               <a href={customerPortalLink} target='_blank' rel='noreferrer' className='w-full lg:w-auto'>
