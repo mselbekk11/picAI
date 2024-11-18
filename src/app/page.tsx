@@ -11,6 +11,7 @@ import FaqsTwo from '@/components/landing-page/FaqsTwo';
 import CtaSection from '@/components/landing-page/CtaSection';
 import FooterTwo from '@/components/landing-page/FooterTwo';
 import PricingFour from '@/components/landing-page/PricingFour';
+import AiBadge from '@/components/landing-page/AiBadge';
 
 export default async function Home() {
   return (
@@ -25,6 +26,7 @@ export default async function Home() {
       <PricingFour />
       <FaqsTwo />
       <CtaSection />
+      <AiBadge />
       <FooterTwo />
     </main>
   );
