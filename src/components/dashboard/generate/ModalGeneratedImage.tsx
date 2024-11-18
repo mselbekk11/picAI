@@ -58,7 +58,7 @@ const ModalGeneratedImage: FC<ModalGeneratedImageProps> = async ({ index, genera
             <p className='text-sm line-clamp-2'>{sentenceCase(generation.prompt)}</p>
           </div>
 
-          <div className='flex items-start gap-6'>
+          <div className='md:flex items-start gap-6 hidden'>
             <div>
               <p className='font-semibold'>Model Name</p>
               <p className='text-sm'>{model?.name}</p>
