@@ -14,28 +14,39 @@ import Light from '../assets/lottie/light.json';
 type AnimationData = typeof Dark;
 
 export default function Logo() {
-  // const [logoSrc, setLogoSrc] = useState<string>('/light-logo.png');
-  // useEffect(() => {
-  //   const src = isHomePage || theme === 'dark' ? '/light-logo.png' : '/dark-logo.png';
-  //   setLogoSrc(src);
-  // }, [isHomePage, theme]);
-
-  const { theme } = useTheme();
+  const { theme, systemTheme } = useTheme();
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
+  // Add mounted state to prevent hydration mismatch
+  const [mounted, setMounted] = useState(false);
   const [logoSrc, setLogoSrc] = useState<string>('');
   const [cameraSrc, setCameraSrc] = useState<AnimationData>();
 
+  // Handle mounting state
   useEffect(() => {
-    const src = isHomePage || theme === 'dark' ? 'text-white' : 'text-black';
-    setLogoSrc(src);
-  }, [isHomePage, theme]);
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    const csrc = isHomePage || theme === 'dark' ? Dark : Light;
+    if (!mounted) return;
+    // Get the current theme, fallback to system theme if undefined
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+    const src = isHomePage || currentTheme === 'dark' ? 'text-white' : 'text-black';
+    setLogoSrc(src);
+  }, [isHomePage, theme, systemTheme, mounted]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+    const csrc = isHomePage || currentTheme === 'dark' ? Dark : Light;
     setCameraSrc(csrc);
-  }, [isHomePage, theme]);
+  }, [isHomePage, theme, systemTheme, mounted]);
+
+  // Prevent wrong flash during hydration
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <Link href='/'>

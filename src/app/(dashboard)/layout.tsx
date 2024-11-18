@@ -33,9 +33,9 @@ export default async function Layout({ children }: Props) {
               <Sidebar />
             </div>
 
-            <div className='w-full overflow-auto'>
+            <div className='w-full flex flex-col'>
               <Navbar />
-              <div className='w-full'>{children}</div>
+              <div className='flex-1 overflow-auto'>{children}</div>
             </div>
           </div>
         </div>
