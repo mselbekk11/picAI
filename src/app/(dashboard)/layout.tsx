@@ -28,7 +28,7 @@ export default async function Layout({ children }: Props) {
     <ThemeProvider attribute='class' defaultTheme='system' enableSystem disableTransitionOnChange>
       <CreditsProvider>
         <div className={cn(font.className)}>
-          <div className='h-screen flex'>
+          <div className='min-h-screen flex'>
             <div className='w-80 hidden md:flex flex-col'>
               <Sidebar />
             </div>
