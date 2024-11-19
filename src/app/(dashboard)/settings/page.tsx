@@ -19,7 +19,7 @@ const Settings = async () => {
             </div>
             <div className='mb-4'>
               <p className='text-xs text-gray-400'>Contact Support: </p>
-              <p className='text-lg font-medium'>morgan.selbekk11@gmail.com</p>
+              <p className='text-lg font-medium'>mselbekk11@gmail.com</p>
             </div>
             <div className='mb-4'>
               <p className='text-xs mb-2 text-gray-400'>Theme: </p>
